@@ -1,0 +1,34 @@
+# Refresh yabai for fish shell
+ctrl + shift - r : id -u | xargs -I {} launchctl kickstart -k "gui/{}/homebrew.mxcl.yabai"
+
+
+ctrl + cmd - f : yabai -m window --toggle zoom-fullscreen
+ctrl + cmd - 6 : yabai -m window --toggle float
+ctrl + cmd - j : yabai -m window --focus south
+ctrl + cmd - l : yabai -m window --focus east
+ctrl + cmd - k : yabai -m window --focus north
+ctrl + cmd - h : yabai -m window --focus west
+ctrl + shift - j : yabai -m window --swap south
+ctrl + shift - l : yabai -m window --swap east
+ctrl + shift - k : yabai -m window --swap north
+ctrl + shift - h : yabai -m window --swap west
+ctrl + shift - m : yabai -m window --swap mouse
+ctrl + shift - t : yabai -m space --rotate 90
+shift + cmd - l : ~/.config/skhd/moveWindowRightAndFollowFocus.sh
+shift + cmd - h : ~/.config/skhd/moveWindowLeftAndFollowFocus.sh
+shift + cmd - i : ~/.config/skhd/moveWindowToLeftMonitorAndFollowFocus.sh
+shift + cmd - u : ~/.config/skhd/moveWindowToRightMonitorAndFollowFocus.sh
+
+ctrl + cmd - u : yabai -m display --focus prev || yabai -m display --focus last 
+ctrl + cmd - i : yabai -m display --focus next || yabai -m display --focus first 
+
+# open new terminal
+ctrl + cmd - t: printf '/Users/%s' (whoami) | xargs -I {} kitty --single-instance --directory={} 
+
+# toggle terminal
+# ctrl + ` : Can change the "`" by using "skhd -o"
+ctrl - 0x32: osascript ~/.config/skhd/apple-script/toggle-kitty.scpt
+
+
+# stack
+# ctrl + cmd + lshift - s : window=$(yabai -m query --windows --window | jq -r '.id') && yabai -m window east --stack $window || (yabai -m window $window --toggle float && yabai -m window $window --toggle float)
