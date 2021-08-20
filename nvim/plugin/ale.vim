@@ -10,4 +10,9 @@ let g:ale_completion_autoimport = 0
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 
-let g:ale_fixers = ['prettier', 'eslint']
+let g:ale_fixers = {
+  \ 'typescript': ['prettier', 'eslint'],
+  \ 'javascript': ['prettier', 'eslint'],
+  \ 'typescriptreact': ['prettier', 'eslint'],
+  \ 'javascriptreact': ['prettier', 'eslint'],
+  \}

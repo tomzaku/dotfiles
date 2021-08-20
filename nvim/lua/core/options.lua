@@ -30,7 +30,7 @@ local function load_options()
     backup         = false;
     writebackup    = false;
     undofile       = true;
-    swapfile       = false;
+    swapfile       = true;
     directory      = global.cache_dir .. "swag/";
     undodir        = global.cache_dir .. "undo/";
     backupdir      = global.cache_dir .. "backup/";
