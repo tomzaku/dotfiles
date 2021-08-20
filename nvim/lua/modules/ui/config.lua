@@ -107,39 +107,11 @@ function config.nvim_tree()
       folders = 1,
       files = 1,
    }
-  -- vim.g.nvim_tree_bindings = {
-  --     { key = {"<Leader>F","n"}, cb = ":NvimTreeFindFile" }
-  -- }
-
---   local tree_cb = require'nvim-tree.config'.nvim_tree_callback
--- 
---   vim.g.nvim_tree_follow = 1
---   vim.g.nvim_tree_auto_open = 1
---   vim.g.nvim_tree_hide_dotfiles = 1
---   vim.nvim_tree_ignore = { '.git', 'node_modules', '.cache' }
---   vim.g.nvim_tree_indent_markers = 0
---   vim.g.nvim_tree_gitignore = 1
---   vim.g.nvim_tree_bindings = {
---     ["h"] = tree_cb("close_node"),
---     ["l"] = tree_cb("edit"),
---     ["s"] = tree_cb("vsplit"),
---     ["i"] = tree_cb("split")
---   }
---   vim.g.nvim_tree_icons = {
---     default =  '',
---     symlink =  '',
---     git = {
---      unstaged = "✚",
---      staged =  "✚",
---      unmerged =  "≠",
---      renamed =  "≫",
---      untracked = "★",
---     },
---   }
 end
 
 
 function config._gitsigns()
+  vim.api.nvim_command('hi GitSignsCurrentLineBlame term=bold cterm=bold guibg=#0C0C0C')
   if not packer_plugins['plenary.nvim'].loaded then
     vim.cmd [[packadd plenary.nvim]]
   end
@@ -151,22 +123,10 @@ function config._gitsigns()
       topdelete = {hl ='GitGutterDeleteChange',text = '▔'},
       changedelete = {hl = 'GitGutterChange', text = '▎'},
     },
---     keymaps = {
---        -- Default keymap options
---        noremap = true,
---        buffer = true,
---        ['n ]g'] = { expr = true, "&diff ? ']g' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'"},
---        ['n [g'] = { expr = true, "&diff ? '[g' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'"},
---        ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
---        ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
---        ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
---        ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
---        ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
---        -- Text objects
---        ['o ih'] = ':<C-U>lua require"gitsigns".text_object()<CR>',
---        ['x ih'] = ':<C-U>lua require"gitsigns".text_object()<CR>'
---      },
-     current_line_blame = true
+    current_line_blame_opts ={
+      delay = 500,
+    },
+     current_line_blame = true,
   }
 end
 

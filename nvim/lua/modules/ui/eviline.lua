@@ -50,6 +50,14 @@ function Slice(tbl, first, last, step)
   return sliced
 end
 
+function VisibleLsp ()
+  local tbl = {['dashboard'] = true,['']=true}
+  if tbl[vim.bo.filetype] then
+    return false
+  end
+  return true
+end
+
 function GetPath()
   local path = vim.fn.expand('%:p')
   if vim.fn.empty(path) == 1 then return '' end
@@ -272,18 +280,13 @@ addSections(
     {
       name = "leftRightLsp",
       provider = string_provider(icons.sep.left),
-      highlight = {colors.blue, colors.gray}
+      highlight = {colors.blue, colors.gray},
+      condition = VisibleLsp,
     },
     {
       name = "GetLspClient",
       provider = "GetLspClient",
-      condition = function ()
-        local tbl = {['dashboard'] = true,['']=true}
-        if tbl[vim.bo.filetype] then
-          return false
-        end
-        return true
-      end,
+      condition = VisibleLsp,
       icon = icons.lsp,
       highlight = {colors.bg,colors.blue,'bold'}
 
@@ -291,8 +294,8 @@ addSections(
     {
       name = "fileRightLsp",
       provider = string_provider(icons.sep.right),
-      condition = condition.buffer_not_empty,
-      highlight = {colors.blue, colors.bg_active}
+      highlight = {colors.blue, colors.bg_active},
+      -- condition = VisibleLsp
     },
   }
 )

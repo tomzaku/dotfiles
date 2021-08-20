@@ -1,4 +1,2 @@
-git:
-  paging:
-    colorArg: always
-    pager: diff-so-fancy
+os:
+  editCommand: "nvim"

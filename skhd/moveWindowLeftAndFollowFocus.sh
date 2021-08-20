@@ -1,7 +1,8 @@
 #!/bin/dash
 # curWindowId="$(jq -re ".id" <<<$(yabai -m query --windows --window))"
 xx=$(yabai -m query --windows --window)
-curWindowId="$(echo $xx | jq -re ".id")"
+# get id
+curWindowId="$(echo $xx | sed -E 's/.*"id":"?([^,"]*)"?.*/\1/')"
 
 focusWindow() {
     $(yabai -m window --focus $1) # $1 is the first argument passed in (window id).
