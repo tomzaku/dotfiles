@@ -43,6 +43,9 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     update_in_insert = false,
 })
 
+require'lspconfig'.pylsp.setup{}
+
+
 lspconfig.gopls.setup {
   cmd = {"gopls","--remote=auto"},
   -- on_attach = enhance_attach,
