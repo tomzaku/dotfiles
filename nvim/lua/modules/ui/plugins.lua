@@ -58,8 +58,9 @@ ui['lukas-reineke/indent-blankline.nvim'] = {
 -- BUGS: Lagging when save file.
 ui['kyazdani42/nvim-tree.lua'] = {
   cmd = {'NvimTreeToggle','NvimTreeOpen', 'NvimTreeFindFile'},
+  -- config = function() require'nvim-tree'.setup {} end
   config = conf.nvim_tree,
-  -- requires = {'kyazdani42/nvim-web-devicons'}
+  requires = {'kyazdani42/nvim-web-devicons'}
 }
 -- End File explorer
 

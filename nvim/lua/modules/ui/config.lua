@@ -99,6 +99,7 @@ function config.dashboard()
 end
 
 function config.nvim_tree()
+  require'nvim-tree'.setup {}
   -- Will slow if we handle a big directory and has git.
   vim.g.nvim_tree_git_hl = 0
   vim.g.nvim_tree_gitignore = 0

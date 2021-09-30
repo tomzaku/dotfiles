@@ -26,8 +26,9 @@ ctrl + cmd - i : yabai -m display --focus next || yabai -m display --focus first
 ctrl + cmd - t: printf '/Users/%s' (whoami) | xargs -I {} kitty --single-instance --directory={} 
 
 # toggle terminal
+# Bug: Lagging when toggle
 # ctrl + ` : Can change the "`" by using "skhd -o"
-ctrl - 0x32: osascript ~/.config/skhd/apple-script/toggle-kitty.scpt
+# ctrl - 0x32: osascript ~/.config/skhd/apple-script/toggle-kitty.scpt
 
 
 # stack

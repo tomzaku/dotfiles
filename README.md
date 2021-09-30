@@ -8,7 +8,13 @@
 - Kitty: fd (brew install fd).
 - Install prettier as global for autoformat.
 
+```
+brew install ripgrep
+brew install fzf
+```
+
 ## Installation
+
 
 ```bash
 # install tmux package management
@@ -33,8 +39,6 @@ ln -s ~/Projects/dotfiles/yabai ~/.config/yabai
 ln -s ~/Projects/dotfiles/skhd ~/.config/skhd
 ln -s ~/Projects/dotfiles/limelight ~/.config/limelight
 ln -s ~/Projects/dotfiles/kitty ~/.config/kitty
-ln -s ~/Projects/dotfiles/Ubersicht/widgets ~/Library/Application\ Support/Übersicht/widgets
-
 ```
 
 ## Feature
