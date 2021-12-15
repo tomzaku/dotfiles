@@ -92,3 +92,5 @@ lspconfig.jsonls.setup{}
 lspconfig.cssls.setup{}
 lspconfig.html.setup{}
 lspconfig.hls.setup{}
+lspconfig.svelte.setup{}
+

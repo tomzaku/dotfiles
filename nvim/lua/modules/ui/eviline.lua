@@ -63,7 +63,7 @@ function GetPath()
   if vim.fn.empty(path) == 1 then return '' end
   local splitPath = Split(path, '/')
   local lastIndex = #splitPath
-  local shortPath = Slice(splitPath, lastIndex - 5, lastIndex)
+  local shortPath = Slice(splitPath, lastIndex - 3, lastIndex)
   return table.concat(shortPath, '/')
 end
 

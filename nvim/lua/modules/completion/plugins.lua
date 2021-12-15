@@ -65,11 +65,29 @@ completion['dense-analysis/ale'] = {
 
 
 -- Comment
-completion['terrortylor/nvim-comment'] = {
-  config = function()
-    require('nvim_comment').setup()
-  end
+completion['numToStr/Comment.nvim'] = {
+  config = function ()
+    require('Comment').setup{
+      pre_hook = function(ctx)
+        local U = require 'Comment.utils'
+        local type = ctx.ctype == U.ctype.line and '__default' or '__multiline'
+        return require('ts_context_commentstring.internal').calculate_commentstring {
+          key = type,
+        }
+    end,
+    }
+  end,
+  after = 'nvim-treesitter',
+  requires = {
+    'nvim-treesitter/nvim-treesitter',
+    'JoosepAlviste/nvim-ts-context-commentstring'
+  }
 }
+-- completion['terrortylor/nvim-comment'] = {
+--   config = function()
+--     require('nvim_comment').setup()
+--   end
+-- }
 
 completion['JoosepAlviste/nvim-ts-context-commentstring'] = {
   after = 'nvim-treesitter',
@@ -79,7 +97,10 @@ completion['JoosepAlviste/nvim-ts-context-commentstring'] = {
         enable = true
       }
     }
-  end
+  end,
+  requires = {
+    'nvim-treesitter/nvim-treesitter',
+  }
 }
 
 completion['metakirby5/codi.vim'] = {}
