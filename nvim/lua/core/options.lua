@@ -94,7 +94,7 @@ local function load_options()
     relativenumber = true;
 
     -- GUI config
-    guifont        = "Hack Nerd Font,Fira Code Nerd Font, Hack Nerd Font mono:h12"
+    -- guifont        = "Hack Nerd Font,Fira Code Nerd Font, Hack Nerd Font mono:h12"
   }
 
   local bw_local  = {

@@ -4,7 +4,8 @@
 - fzf: search files.
 - npx.
 - Ubersicht.
-- Font: MesloLGS NF, Hack.
+- Font: MesloLGS NF, Hack, Victor Mono
+https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/VictorMono
 - Kitty: fd (brew install fd).
 - Install prettier as global for autoformat.
 
