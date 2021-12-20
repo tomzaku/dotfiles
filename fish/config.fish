@@ -39,7 +39,7 @@ end
 
 function vw
   storeVpnEnv
-  set -l info "2\n$VPN_USERNAME\n$VPN_PASSWORD\n$1"
+  set -l info "$VPN_USERNAME\n$VPN_PASSWORD\n$1"
   printf $info | /opt/cisco/anyconnect/bin/vpn -s connect $VPN_DOMAIN
   removeVpnEnv
 end

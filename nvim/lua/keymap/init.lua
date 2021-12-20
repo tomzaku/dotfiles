@@ -60,7 +60,7 @@ local plug_map = {
     -- Find and replace
     ["n|<Leader>s"]      = map_cu("<cmd>lua require('spectre').open_visual({select_word=true})<CR>"),
     ["v|<Leader>s"]      = map_cu("<cmd>lua require('spectre').open_visual()<CR>"),
-    ["n|<Leader>S"]      = map_cu("<cmd>lua require('spectre').open_visual({path = vim.fn.expand('%:h').. '/*'})<CR>"),
+    ["n|<Leader>S"]      = map_cu("<cmd>lua require('spectre').open_visual({path = vim.fn.expand('%:h').. '/**/*'})<CR>"),
     -- Plugin Telescope
     ["n|<Leader>bb"]     = map_cu('Telescope buffers'):with_noremap():with_silent(),
     ["n|<Leader>fa"]     = map_cu('lua require("telescope.builtin").grep_string({ search = "" })'):with_noremap():with_silent(),

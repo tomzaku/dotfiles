@@ -284,12 +284,18 @@ addSections(
       condition = VisibleLsp,
     },
     {
+      name = "fileName",
+      provider = current_file_name_provider,
+      condition = condition.buffer_not_empty,
+      -- highlight = {colors.blue, colors.gray},
+      highlight = {colors.bg,colors.blue,'bold'}
+    },
+    {
       name = "GetLspClient",
       provider = "GetLspClient",
       condition = VisibleLsp,
-      icon = icons.lsp,
+      -- icon = icons.lsp,
       highlight = {colors.bg,colors.blue,'bold'}
-
     },
     {
       name = "fileRightLsp",
@@ -332,12 +338,12 @@ addSections(
       highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.base02},
       provider = 'FileIcon',
     },
-    {
-      name = "fileName",
-      provider = current_file_name_provider,
-      condition = condition.buffer_not_empty,
-      highlight = {colors.base07, colors.base02},
-    },
+    -- {
+    --   name = "fileName",
+    --   provider = current_file_name_provider,
+    --   condition = condition.buffer_not_empty,
+    --   highlight = {colors.base07, colors.base02},
+    -- },
     {
       name = "GetPath",
       provider = GetPath,
