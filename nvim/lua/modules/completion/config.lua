@@ -4,6 +4,11 @@ function config.nvim_lsp()
   require('modules.completion.lspconfig')
 end
 
+function config.lsp_saga()
+  local saga = require 'lspsaga'
+  saga.init_lsp_saga()
+end
+
 function config.nvim_compe()
   require'compe'.setup {
     enabled = true;

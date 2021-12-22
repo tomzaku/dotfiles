@@ -8,6 +8,10 @@ completion['neovim/nvim-lspconfig'] = {
 
 completion['glepnir/lspsaga.nvim'] = {
   cmd = 'Lspsaga',
+  config = conf.lsp_saga,
+  requires = {
+    {'neovim/nvim-lspconfig', opt = true},
+  }
 }
 
 completion["folke/lsp-trouble.nvim"] = {

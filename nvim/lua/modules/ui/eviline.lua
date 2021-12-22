@@ -83,7 +83,7 @@ local colors = {
   cyan = '#008080',
   darkblue = '#0277BD',
   green = '#00796B',
-  orange = '#E65100',
+  orange = '#BA3600',
   violet = '#a9a1e1',
   magenta = '#c678dd',
   blue = '#40C4FF';
@@ -117,7 +117,7 @@ local modes = {
   c = {"COMMAND", colors.darkblue},
   r = {"PROMPT", colors.brown},
   ["!"] = {"EXTERNAL", colors.orange},
-  t = {"TERMINAL", colors.orange}
+  t = {"TERMINAL", colors.darkblue}
 }
 
 local get_vim_mode_style = function()

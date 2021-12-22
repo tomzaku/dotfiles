@@ -22,6 +22,7 @@ local plug_map = {
     ["n|<leader>lr"]     = map_cr("LspRestart"):with_noremap():with_silent():with_nowait(),
     ["n|<C-f>"]          = map_cmd("<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>"):with_silent():with_noremap():with_nowait(),
     ["n|<C-b>"]          = map_cmd("<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>"):with_silent():with_noremap():with_nowait(),
+    ["n|K"]          = map_cmd("<cmd>lua require('lspsaga.hover').render_hover_doc()<<CR>"):with_silent():with_noremap():with_nowait(),
     ["n|[e"]             = map_cr('Lspsaga diagnostic_jump_next'):with_noremap():with_silent(),
     ["n|]e"]             = map_cr('Lspsaga diagnostic_jump_prev'):with_noremap():with_silent(),
     ["n|K"]              = map_cr("Lspsaga hover_doc"):with_noremap():with_silent(),
