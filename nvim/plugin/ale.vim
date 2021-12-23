@@ -10,7 +10,7 @@ let g:ale_completion_autoimport = 0
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 let g:ale_javascript_prettier_use_local_config = 1
-
+let g:ale_javascript_eslint_executable = '/Users/tomzaku/Projects/shopee_react_native/pc/node_modules/.bin/bb8-lint'
 let g:ale_fixers = {
   \ 'typescript': ['prettier', 'eslint'],
   \ 'javascript': ['prettier', 'eslint'],
