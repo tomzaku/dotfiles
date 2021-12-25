@@ -1,7 +1,6 @@
+" Toggle the terminal 
 nnoremap <silent> <leader>g :FloatermShowOrNew lazygit<CR>
-nnoremap <silent> <leader>tr :FloatermShowOrNew rg<CR>
 
-" Maybe PR this into floaterm?
 command! -nargs=* -complete=customlist,floaterm#cmdline#complete -bang -range
 \   FloatermShowOrNew call floaterm#show_or_new(<bang>0, [visualmode(), <range>, <line1>, <line2>], <q-args>)
 

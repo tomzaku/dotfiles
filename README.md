@@ -82,10 +82,8 @@ ln -s ~/Projects/dotfiles/kitty ~/.config/kitty
     `<shift>K`: definition popup
 
   - Search
-
-    `<leader>s`: search & replace current word
-
-    `<leader>S`: search at this current directory
+    
+    `<leader>s`: Search menu
 
   - Quicklist
 
@@ -99,7 +97,7 @@ ln -s ~/Projects/dotfiles/kitty ~/.config/kitty
 
     `<leader>ff`: open file explorer
 
-    `<leader>fa`: search words projects
+    `<leader>fw`: search words projects
 
 ![https://raw.githubusercontent.com/tomzaku/dotfiles/master/showcase/editor.png](https://raw.githubusercontent.com/tomzaku/dotfiles/master/showcase/editor.png)
 
