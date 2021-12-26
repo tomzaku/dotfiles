@@ -9,18 +9,21 @@ local formatting = null_ls.builtins.formatting
 -- local diagnostics = null_ls.builtins.diagnostics
 
 null_ls.setup({
-	debug = false,
+	debug = true,
 	sources = {
 		formatting.prettier,
 		formatting.black,
 		formatting.stylua,
-    formatting.eslint,
-    formatting.stylelint,
+		-- formatting.eslint.with({
+		-- 	extra_args = { "--resolve-plugins-relative-to=(yarn global dir)" },
+		-- }),
+		formatting.eslint,
+		formatting.stylelint,
 	},
+	on_attach = function(client)
+		-- auto formatting on save
+		if client.resolved_capabilities.document_formatting then
+			vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+		end
+	end,
 })
-
-
--- auto formatting on save
--- vim.api.nvim_command([[
---   autocmd BufWritePre * lua vim.lsp.buf.formatting()
--- ]])
