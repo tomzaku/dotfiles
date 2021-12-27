@@ -87,7 +87,13 @@ local mappings = {
 	["E"] = { "<cmd>NvimTreeFindFile<cr>", "Explorer File" },
 	["w"] = { "<cmd>w!<CR>", "Save" },
 	["q"] = { "<cmd>q!<CR>", "Quit" },
-	["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
+
+	c = {
+		name = "Copy",
+		f = { '<cmd>let @+ = expand("%:p")<cr><cmd>echo expand("%:p")<cr>', "Copy full path" },
+		p = { '<cmd>let @+ = expand(@%)<cr><cmd>echo expand(@%)<cr>', "Copy project path" },
+	},
+	-- ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
 	["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 	-- ["f"] = {
 	--   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",

@@ -76,6 +76,9 @@ packer.startup(function(use)
 	use("kdav5758/TrueZen.nvim")
 	use("christoomey/vim-tmux-navigator")
 	use("rmagatti/auto-session")
+	--tabbar
+	-- use("romgrk/barbar.nvim")
+	use("akinsho/bufferline.nvim")
 
 	-- Colorschemes
 	use("glepnir/zephyr-nvim") -- theme
@@ -107,6 +110,11 @@ packer.startup(function(use)
 
 	-- Telescope
 	use("nvim-telescope/telescope.nvim")
+  -- FZF sorter for telescope written in c
+  use({
+    "nvim-telescope/telescope-fzf-native.nvim", 
+    run = "make"
+  })
 
 	-- Treesitter
 	use({
@@ -157,3 +165,6 @@ require("plugin.auto-session")
 require("plugin.which-key")
 require("plugin.accelerated-jk")
 require("plugin.autopairs")
+-- tabbar
+require("plugin.barbar")
+require("plugin.bufferline")

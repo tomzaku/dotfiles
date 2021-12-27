@@ -89,7 +89,7 @@ local colors = {
 	violet = "#a9a1e1",
 	magenta = "#c678dd",
 	blue = "#40C4FF",
-	red = "#B71C1C",
+	red = "#FF5151",
 	gray = "#263238",
 }
 
@@ -252,12 +252,12 @@ addSections("left", {
 		highlight = { require("galaxyline.provider_fileinfo").get_file_icon_color, colors.base02 },
 		provider = "FileIcon",
 	},
-	{
-		name = "fileName",
-		provider = current_file_name_provider,
-		condition = condition.buffer_not_empty,
-		highlight = { colors.base07, colors.base02 },
-	},
+	-- {
+	-- 	name = "fileName",
+	-- 	provider = current_file_name_provider,
+	-- 	condition = condition.buffer_not_empty,
+	-- 	highlight = { colors.base07, colors.base02 },
+	-- },
 	{
 		name = "GetPath",
 		provider = GetPath,
@@ -281,6 +281,19 @@ addSections("right", {
 		name = "LinePercent",
 		provider = "LinePercent",
 		highlight = { colors.fg, colors.gray, "bold" },
+	},
+	{
+		name = "DiagnosticError",
+		provider = "DiagnosticError",
+		icon = "  ",
+		highlight = { colors.red, colors.gray },
+	},
+	-- createSpaceSection(colors.gray),
+	{
+		name = "DiagnosticWarn",
+		provider = "DiagnosticWarn",
+		icon = "   ",
+		highlight = { colors.yellow, colors.gray },
 	},
 	{
 		name = "leftRightLsp",
