@@ -13,7 +13,7 @@ end
 
 function format.lsp_before_save()
   local defs = {}
-  local ext = vim.fn.expand('%:e')
+  local ext = vim.fn.expand('%:e');
 
   -- This config for 'prettier/vim-prettier' plugin
   table.insert(defs,{"BufWritePre", '*.tsx,*.ts,*.scss,*.css',

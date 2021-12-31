@@ -4,7 +4,7 @@ function TableConcat(t1, t2)
 	end
 	return t1
 end
-function Split(inputstr, sep)
+function split(inputstr, sep)
 	if sep == nil then
 		sep = "%s"
 	end

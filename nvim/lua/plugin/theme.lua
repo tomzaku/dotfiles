@@ -8,3 +8,9 @@ vim.cmd('vnoremap <C-C> "*y')
 vim.cmd [[let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"]]
 vim.cmd [[let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"]]
 vim.cmd [[highlight Comment cterm=italic gui=italic]]
+
+
+-- SignColumn
+vim.cmd [[highlight SignColumn ctermbg=NONE guibg=NONE]]
+vim.cmd [[highlight ColorColumn ctermbg=0 guibg=NONE]] -- maximum chars col
+-- vim.cmd [[highlight TabLine gui=NONE guibg=#282828 guifg=#abb2bf    cterm=NONE term=NONE ctermfg=black ctermbg=white]]

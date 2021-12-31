@@ -5,6 +5,7 @@ end
 
 require("plugin.lsp.handlers").setup()
 require("plugin.lsp.lsp-installer")
-require("plugin.lsp.nvim-lspconfig")
+-- require("plugin.lsp.nvim-lspconfig")
 require("plugin.lsp.null-ls")
+require("plugin.lsp.trouble")
 -- require("plugin.lsp.lspsaga")

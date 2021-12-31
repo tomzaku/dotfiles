@@ -10,6 +10,7 @@ local icons = {
 	goat = "🐐",
 	knight = "♞",
 	clubs = "♣︎",
+	edit = " ",
 	sep = {
 		left = "",
 		right = "",
@@ -27,10 +28,14 @@ local icons = {
 	},
 	-- git = ""
 	git = " ",
-	lsp = " ",
+	lsp = {
+    working = " ",
+    idle = " "
+  },
+
 }
 
-function Split(inputstr, sep)
+local split = function (inputstr, sep)
 	if sep == nil then
 		sep = "%s"
 	end
@@ -41,7 +46,7 @@ function Split(inputstr, sep)
 	return t
 end
 
-function Slice(tbl, first, last, step)
+local slice = function (tbl, first, last, step)
 	local sliced = {}
 
 	for i = first or 1, last or #tbl, step or 1 do
@@ -51,7 +56,7 @@ function Slice(tbl, first, last, step)
 	return sliced
 end
 
-function VisibleLsp()
+local get_visible_lsp = function ()
 	local tbl = { ["dashboard"] = true, [""] = true }
 	if tbl[vim.bo.filetype] then
 		return false
@@ -59,28 +64,39 @@ function VisibleLsp()
 	return true
 end
 
-function GetPath()
+local get_is_not_visible_lsp = function ()
+  return not get_visible_lsp()
+end
+
+local get_path = function()
 	local path = vim.fn.expand("%:p")
 	if vim.fn.empty(path) == 1 then
 		return ""
 	end
-	local splitPath = Split(path, "/")
+	local splitPath = split(path, "/")
 	local lastIndex = #splitPath
-	local shortPath = Slice(splitPath, lastIndex - 3, lastIndex)
+	local shortPath = slice(splitPath, lastIndex - 3, lastIndex)
 	return table.concat(shortPath, "/")
 end
 
-function HideGalaxyLine()
+
+local should_hide_galaxy_line = function ()
 	local path = vim.fn.expand("%:p")
 	if string.find(path, "NvimTree") then
 		return false
 	end
-	return true
+	return condition.buffer_not_empty()
 end
+
+-- function should_hide_galaxy_line_and_empty_file()
+-- 	return should_hide_galaxy_line() and condition.buffer_not_empty()
+-- end
 
 local colors = {
 	bg = "#202328",
 	fg = "#bbc2cf",
+  error = "#EA3323",
+  warn = "#F3A83B",
 	yellow = "#7D7400",
 	cyan = "#008080",
 	darkblue = "#0277BD",
@@ -150,7 +166,7 @@ local file_readonly = function(readonly_icon)
 	return ""
 end
 
-local current_file_name_provider = function()
+local show_editting_file = function()
 	local file = get_filename()
 	if vim.fn.empty(file) == 1 then
 		return ""
@@ -158,10 +174,9 @@ local current_file_name_provider = function()
 	if string.len(file_readonly()) ~= 0 then
 		return file_readonly()
 	end
-	local icon = " "
 	if vim.bo.modifiable then
 		if vim.bo.modified then
-			return icon
+			return "  " .. icons.edit
 		end
 	end
 	return ""
@@ -213,6 +228,25 @@ local createSpaceSection = function(color)
 	}
 end
 
+
+local get_lsp_client = function (msg)
+  msg = msg or 'no active lsp'
+  local buf_ft = vim.api.nvim_buf_get_option(0,'filetype')
+  local clients = vim.lsp.get_active_clients()
+  if next(clients) == nil then
+    return msg
+  end
+
+  for i = #clients, 1, -1 do
+    local client = clients[i]
+    local filetypes = client.config.filetypes
+    if filetypes and vim.fn.index(filetypes,buf_ft) ~= -1 then
+      return icons.lsp.working .. client.name
+    end
+  end
+  return msg
+end
+
 addSections("left", {
 	{
 		name = "ViModeLeftCap",
@@ -247,22 +281,34 @@ addSections("left", {
 	},
 	createSpaceSection(colors.bg_active),
 	{
+		name = "PathLeftCap",
+		provider = string_provider(icons.sep.left),
+		highlight = { colors.gray, colors.base02 },
+		condition = get_visible_lsp,
+	},
+	{
 		name = "FileIcon",
 		condition = condition.buffer_not_empty,
-		highlight = { require("galaxyline.provider_fileinfo").get_file_icon_color, colors.base02 },
+		highlight = { require("galaxyline.provider_fileinfo").get_file_icon_color, colors.gray },
 		provider = "FileIcon",
 	},
-	-- {
-	-- 	name = "fileName",
-	-- 	provider = current_file_name_provider,
-	-- 	condition = condition.buffer_not_empty,
-	-- 	highlight = { colors.base07, colors.base02 },
-	-- },
 	{
 		name = "GetPath",
-		provider = GetPath,
+		provider = get_filename,
 		condition = condition.buffer_not_empty,
-		highlight = { colors.fg, colors.base02, "bold" },
+		highlight = { colors.fg, colors.gray, "bold" },
+	},
+	{
+		name = "ShowEdittingFile",
+		provider = show_editting_file,
+		condition = condition.buffer_not_empty,
+		highlight = { colors.base07, colors.gray },
+	},
+	{
+		name = "PathRightCap",
+		provider = string_provider(icons.sep.right),
+		highlight = { colors.gray, colors.base02 },
+		condition = get_visible_lsp,
 	},
 })
 
@@ -286,32 +332,32 @@ addSections("right", {
 		name = "DiagnosticError",
 		provider = "DiagnosticError",
 		icon = "  ",
-		highlight = { colors.red, colors.gray },
+		highlight = { colors.error, colors.gray },
 	},
 	-- createSpaceSection(colors.gray),
 	{
 		name = "DiagnosticWarn",
 		provider = "DiagnosticWarn",
 		icon = "   ",
-		highlight = { colors.yellow, colors.gray },
+		highlight = { colors.warn, colors.gray },
 	},
 	{
 		name = "leftRightLsp",
 		provider = string_provider(icons.sep.left),
 		highlight = { colors.blue, colors.gray },
-		condition = VisibleLsp,
+		condition = get_visible_lsp,
 	},
-	{
-		name = "fileName",
-		provider = current_file_name_provider,
-		condition = condition.buffer_not_empty,
-		-- highlight = {colors.blue, colors.gray},
-		highlight = { colors.bg, colors.blue, "bold" },
-	},
+	-- {
+	-- 	name = "fileName",
+	-- 	provider = show_editting_file,
+	-- 	condition = condition.buffer_not_empty,
+	-- 	-- highlight = {colors.blue, colors.gray},
+	-- 	highlight = { colors.bg, colors.blue, "bold" },
+	-- },
 	{
 		name = "GetLspClient",
-		provider = "GetLspClient",
-		condition = VisibleLsp,
+		provider = get_lsp_client,
+		condition = get_visible_lsp,
 		-- icon = icons.lsp,
 		highlight = { colors.bg, colors.blue, "bold" },
 	},
@@ -319,8 +365,14 @@ addSections("right", {
 		name = "fileRightLsp",
 		provider = string_provider(icons.sep.right),
 		highlight = { colors.blue, colors.bg_active },
-		-- condition = VisibleLsp
+		condition = get_visible_lsp
 	},
+  {
+    name = "fileRightNoLsp",
+		provider = string_provider(icons.sep.right),
+		highlight = { colors.gray, colors.bg_active },
+		condition = get_is_not_visible_lsp
+  }
 })
 
 addSections("short_line_left", {
@@ -328,12 +380,12 @@ addSections("short_line_left", {
 	{
 		name = "viModeLeftCap",
 		provider = string_provider(icons.sep.left),
-		condition = HideGalaxyLine,
+		condition = should_hide_galaxy_line,
 		highlight = { colors.gray, colors.base02 },
 	},
 	{
 		name = "viMode",
-		condition = HideGalaxyLine,
+		condition = should_hide_galaxy_line,
 		provider = function()
 			local modeStyle = get_vim_mode_style()
 			return icons.sep.space .. modeStyle[1] .. icons.sep.space
@@ -342,7 +394,7 @@ addSections("short_line_left", {
 	},
 	{
 		name = "viModeRightCap",
-		condition = HideGalaxyLine,
+		condition = should_hide_galaxy_line,
 		provider = string_provider(icons.sep.right),
 		highlight = { colors.gray, colors.base02 },
 	},
@@ -361,8 +413,8 @@ addSections("short_line_left", {
 	-- },
 	{
 		name = "GetPath",
-		provider = GetPath,
-		condition = condition.buffer_not_empty,
+		provider = get_filename,
+		condition = should_hide_galaxy_line,
 		highlight = { colors.fg, colors.base02, "bold" },
 	},
 })

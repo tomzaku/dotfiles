@@ -109,8 +109,8 @@ bufferline.setup({
 			guibg = { attribute = "bg", highlight = "Normal" },
 		},
 		tab = {
-			guifg = { attribute = "fg", highlight = "TabLine" },
-			guibg = { attribute = "bg", highlight = "TabLine" },
+			guifg = { attribute = "fg", highlight = "NONE" },
+			guibg = { attribute = "bg", highlight = "NONE" },
 		},
 		tab_close = {
 			-- guifg = {attribute='fg',highlight='LspDiagnosticsDefaultError'},

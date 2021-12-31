@@ -76,11 +76,12 @@ packer.startup(function(use)
 	use("kdav5758/TrueZen.nvim")
 	use("christoomey/vim-tmux-navigator")
 	use("rmagatti/auto-session")
-
+  use 'ggandor/lightspeed.nvim' -- motion
 	use({
 		"iamcco/markdown-preview.nvim",
 		run = "cd app && yarn install",
 	})
+  use 'andweeb/presence.nvim' -- discord Rich Presence
 	--tabbar
 	-- use("romgrk/barbar.nvim")
 	use("akinsho/bufferline.nvim")
@@ -128,6 +129,7 @@ packer.startup(function(use)
 	})
 	use("JoosepAlviste/nvim-ts-context-commentstring")
 	use("kyazdani42/nvim-tree.lua")
+  use("p00f/nvim-ts-rainbow") -- rainbow parentheses.
 
 	-- Git
 	use("lewis6991/gitsigns.nvim")
@@ -173,3 +175,4 @@ require("plugin.autopairs")
 -- tabbar
 require("plugin.barbar")
 require("plugin.bufferline")
+require("plugin.lightspeed")

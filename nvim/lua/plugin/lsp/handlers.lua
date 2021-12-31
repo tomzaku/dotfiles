@@ -8,7 +8,6 @@ M.setup = function()
 		{ name = "DiagnosticSignHint", text = "" },
 		{ name = "DiagnosticSignInfo", text = "" },
 	}
-
 	for _, sign in ipairs(signs) do
 		vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 	end
@@ -93,7 +92,7 @@ M.on_attach = function(client, bufnr)
 	end
 	lsp_keymaps(bufnr)
 
-	-- lsp_highlight_document(client)
+	lsp_highlight_document(client)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
