@@ -76,6 +76,11 @@ packer.startup(function(use)
 	use("kdav5758/TrueZen.nvim")
 	use("christoomey/vim-tmux-navigator")
 	use("rmagatti/auto-session")
+
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = "cd app && yarn install",
+	})
 	--tabbar
 	-- use("romgrk/barbar.nvim")
 	use("akinsho/bufferline.nvim")
@@ -110,11 +115,11 @@ packer.startup(function(use)
 
 	-- Telescope
 	use("nvim-telescope/telescope.nvim")
-  -- FZF sorter for telescope written in c
-  use({
-    "nvim-telescope/telescope-fzf-native.nvim", 
-    run = "make"
-  })
+	-- FZF sorter for telescope written in c
+	use({
+		"nvim-telescope/telescope-fzf-native.nvim",
+		run = "make",
+	})
 
 	-- Treesitter
 	use({
