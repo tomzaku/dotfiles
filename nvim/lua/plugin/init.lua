@@ -31,13 +31,7 @@ if not status_ok then
 end
 
 -- Have packer use a popup window
-packer.init({
-	display = {
-		open_fn = function()
-			return require("packer.util").float({ border = "rounded" })
-		end,
-	},
-})
+packer.init({ })
 
 -- Install your plugins here
 packer.startup(function(use)
@@ -83,8 +77,8 @@ packer.startup(function(use)
 	})
   use 'andweeb/presence.nvim' -- discord Rich Presence
 	--tabbar
-	-- use("romgrk/barbar.nvim")
 	use("akinsho/bufferline.nvim")
+  use("folke/todo-comments.nvim")
 
 	-- Colorschemes
 	use("glepnir/zephyr-nvim") -- theme
@@ -176,3 +170,4 @@ require("plugin.autopairs")
 require("plugin.barbar")
 require("plugin.bufferline")
 require("plugin.lightspeed")
+require("plugin.todo-comments")

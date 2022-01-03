@@ -6,10 +6,6 @@ end
 local condition = require("galaxyline.condition")
 
 local icons = {
-	duck = "🦆",
-	goat = "🐐",
-	knight = "♞",
-	clubs = "♣︎",
 	edit = " ",
 	sep = {
 		left = "",
@@ -230,7 +226,7 @@ end
 
 
 local get_lsp_client = function (msg)
-  msg = msg or 'no active lsp'
+  msg = msg or icons.lsp.idle .. 'no active lsp'
   local buf_ft = vim.api.nvim_buf_get_option(0,'filetype')
   local clients = vim.lsp.get_active_clients()
   if next(clients) == nil then
@@ -294,7 +290,7 @@ addSections("left", {
 	},
 	{
 		name = "GetPath",
-		provider = get_filename,
+		provider = get_path,
 		condition = condition.buffer_not_empty,
 		highlight = { colors.fg, colors.gray, "bold" },
 	},

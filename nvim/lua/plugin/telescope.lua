@@ -27,7 +27,7 @@ telescope.setup({
 		layout_strategy = "vertical",
 		-- width = 0.75,
 		-- results_width = 0.75,
-		-- sorting_strategy = 'ascending',
+		sorting_strategy = 'ascending',
 		-- file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
 		-- grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
 		-- qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
