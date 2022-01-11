@@ -27,8 +27,11 @@ local function load_options()
 		-- clipboard      = "unnamedplus";
 		wildignorecase = true,
 		wildignore = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**",
-		backup = false,
-		writebackup = false,
+		backup = true,
+    -- Make backup before overwriting the current buffer
+		writebackup = true,
+    -- Overwrite the original backup file
+    backupcopy = "yes",
 		undofile = true,
 		swapfile = true,
 		directory = global.cache_dir .. "swag/",
@@ -115,6 +118,7 @@ local function load_options()
 		signcolumn = "yes",
 		conceallevel = 2,
 		concealcursor = "niv",
+    fillchars = "",
 	}
 
 	if global.is_mac then

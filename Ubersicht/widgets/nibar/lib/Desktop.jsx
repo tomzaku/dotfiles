@@ -1,11 +1,13 @@
-import styles from "./styles.jsx";
+// Component
 import * as Icon from './Icon.jsx'
+
+import styles from "./styles.jsx";
 
 const containerStyle = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  height: 20,
+  height: 30,
   fontSize: 15,
   // paddingLeft: 6,
 };
@@ -64,7 +66,7 @@ const renderSpace = (index, focused, visible, windows, isMonitor, minIndex) => {
     contentStyle.color = styles.colors.fg;
   }
   const status = focused || visible ? 'active' : 'deactive'
-  const color = status === 'active' ? '#40FF00' : '#AEAEAE'
+  const color = status === 'active' ? '#619CAB' : '#AEAEAE'
   const IconComponent = isMonitor 
     ? (monitorIconMap[index - minIndex + 1] ? monitorIconMap[index - minIndex + 1][status] : SpaceDefault)
     : (iconMap[index] ? iconMap[index][status] : SpaceDefault)

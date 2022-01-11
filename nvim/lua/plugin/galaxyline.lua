@@ -244,6 +244,7 @@ local get_lsp_client = function (msg)
 end
 
 addSections("left", {
+	createSpaceSection(colors.base02),
 	{
 		name = "ViModeLeftCap",
 		useNameAsId = true,
@@ -301,8 +302,7 @@ addSections("left", {
 		highlight = { colors.base07, colors.gray },
 	},
 	{
-		name = "PathRightCap",
-		provider = string_provider(icons.sep.right),
+		name = "PathRightCap", provider = string_provider(icons.sep.right),
 		highlight = { colors.gray, colors.base02 },
 		condition = get_visible_lsp,
 	},
@@ -408,13 +408,37 @@ addSections("short_line_left", {
 	--   highlight = {colors.base07, colors.base02},
 	-- },
 	{
+		name = "PathLeftCap",
+		provider = string_provider(icons.sep.left),
+		highlight = { colors.gray, colors.base02 },
+		condition = should_hide_galaxy_line,
+	},
+  {
+		name = "FileIcon",
+		condition = should_hide_galaxy_line,
+		highlight = { require("galaxyline.provider_fileinfo").get_file_icon_color, colors.gray },
+		provider = "FileIcon",
+	},
+	{
 		name = "GetPath",
 		provider = get_filename,
 		condition = should_hide_galaxy_line,
-		highlight = { colors.fg, colors.base02, "bold" },
+		highlight = { colors.fg, colors.gray, "bold" },
+	},
+	{
+		name = "ShowEdittingFile",
+		provider = show_editting_file,
+		condition = should_hide_galaxy_line,
+		highlight = { colors.base07, colors.gray },
+	},
+	{
+		name = "PathRightCap",
+		provider = string_provider(icons.sep.right),
+		highlight = { colors.gray, colors.base02 },
+		condition = should_hide_galaxy_line,
 	},
 })
 
 addSections("short_line_right", {
-	createSpaceSection(colors.base02),
+	-- createSpaceSection(colors.base02),
 })

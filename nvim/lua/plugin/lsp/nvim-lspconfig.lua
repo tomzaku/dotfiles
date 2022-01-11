@@ -1,14 +1,14 @@
 -- Wont used since we have LspInstall
 
 
--- local api = vim.api
--- local util = require 'lspconfig/util'
--- local global = require 'core.global'
--- local status_ok, lspconfig = pcall(require, "lspconfig")
--- if not status_ok then
---   return
--- end
---
+local api = vim.api
+local util = require 'lspconfig/util'
+local global = require 'core.global'
+local status_ok, lspconfig = pcall(require, "lspconfig")
+if not status_ok then
+  return
+end
+
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- capabilities.textDocument.completion.completionItem.snippetSupport = true
 --
@@ -38,55 +38,51 @@
 --     -- Disable a feature
 --     update_in_insert = false,
 -- })
---
--- lspconfig.pylsp.setup{}
---
---
--- lspconfig.gopls.setup {
---   cmd = {"gopls","--remote=auto"},
---   -- on_attach = enhance_attach,
---   capabilities = capabilities,
---   init_options = {
---     usePlaceholders=true,
---     completeUnimported=true,
---   }
--- }
---
--- lspconfig.sumneko_lua.setup {
---   cmd = {
---     global.home.."/workstation/lua-language-server/bin/macOS/lua-language-server",
---     "-E",
---     global.home.."/workstation/lua-language-server/main.lua"
---   };
---   settings = {
---     Lua = {
---       diagnostics = {
---         enable = true,
---         globals = {"vim","packer_plugins"}
---       },
---       runtime = {version = "LuaJIT"},
---       workspace = {
---         library = vim.list_extend({[vim.fn.expand("$VIMRUNTIME/lua")] = true},{}),
---       },
---     },
---   }
--- }
---
---
--- lspconfig.tsserver.setup {
---   filetypes = {
---     "javascript",
---     "javascriptreact",
---     "typescript",
---     "typescriptreact",
---     "typescript.tsx"
---   };
--- }
---
---
--- lspconfig.jsonls.setup{}
--- lspconfig.cssls.setup{}
--- lspconfig.html.setup{}
--- lspconfig.hls.setup{}
--- lspconfig.svelte.setup{}
---
+
+lspconfig.pylsp.setup{}
+
+
+lspconfig.gopls.setup {
+  cmd = {"gopls","--remote=auto"},
+  -- on_attach = enhance_attach,
+  capabilities = capabilities,
+  init_options = {
+    usePlaceholders=true,
+    completeUnimported=true,
+  }
+}
+
+lspconfig.sumneko_lua.setup {
+  settings = {
+    Lua = {
+      diagnostics = {
+        enable = true,
+        globals = {"vim","packer_plugins"}
+      },
+      runtime = {version = "LuaJIT"},
+      workspace = {
+        library = vim.list_extend({[vim.fn.expand("$VIMRUNTIME/lua")] = true},{}),
+      },
+    },
+  }
+}
+
+
+lspconfig.tsserver.setup {
+  root_dir = function() return vim.loop.cwd() end,
+  filetypes = {
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx"
+  };
+}
+
+
+lspconfig.jsonls.setup{}
+lspconfig.cssls.setup{}
+lspconfig.html.setup{}
+lspconfig.hls.setup{}
+lspconfig.svelte.setup{}
+

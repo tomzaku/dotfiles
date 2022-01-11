@@ -82,7 +82,7 @@ const container = css`
   padding: 10px;
   overflow: hidden;
   font-family: Helvetica Neue;
-  bottom: 26px;
+  bottom: 36px;
   left: 6px;
   position: fixed;
 
