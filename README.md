@@ -125,3 +125,10 @@ ln -s ~/Projects/dotfiles/kitty ~/.config/kitty
   - Using **tide** theme: async rendering
 
 Special thank to the open source community: kkga(nibar), Raphael(nvim)
+
+---
+
+if you have an issue about max files in vim: 
+
+sudo launchctl load -w /Library/LaunchDaemons/limit.maxfiles.plist
+
