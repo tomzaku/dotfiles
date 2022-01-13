@@ -14,6 +14,19 @@ function split(inputstr, sep)
 	end
 	return t
 end
+local function splitByNumberChar(inputstr, number) 
+  local t = {}
+  local length = inputstr:len()
+  local i = 0
+  while (i<length)
+  do
+    local nextIndex = i+number
+    table.insert(t, string.sub(inputstr, i, nextIndex))
+    i = nextIndex
+  end
+  table.insert(t, '   ')
+  return t
+end
 function os.capture(cmd, raw)
 	local f = assert(io.popen(cmd, "r"))
 	local s = assert(f:read("*a"))
@@ -29,8 +42,8 @@ end
 local home = os.getenv("HOME")
 local fortune = os.capture("fortune -s")
 -- vim.g.dashboard_custom_footer = TableConcat({''}, Split(fortune, '   '))
-vim.g.dashboard_custom_footer = { fortune }
--- vim.g.dashboard_footer_icon = '🐬 '
+-- vim.g.dashboard_custom_footer = { fortune }
+vim.g.dashboard_custom_footer = splitByNumberChar(fortune, 60)
 -- vim.g.dashboard_preview_command = 'cat'
 vim.g.dashboard_custom_header = {
 	"",
