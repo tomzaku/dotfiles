@@ -41,6 +41,7 @@ ln -s ~/Projects/dotfiles/yabai ~/.config/yabai
 ln -s ~/Projects/dotfiles/skhd ~/.config/skhd
 ln -s ~/Projects/dotfiles/limelight ~/.config/limelight
 ln -s ~/Projects/dotfiles/kitty ~/.config/kitty
+ln -s ~/Projects/dotfiles/lazygit/config.yml ~/Library/Application\ Support/lazygit/config.yml
 ```
 
 ## Feature
