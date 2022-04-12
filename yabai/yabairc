@@ -36,7 +36,7 @@ yabai -m config mouse_modifier               fn
 yabai -m config mouse_action1                move
 yabai -m config mouse_action2                resize
 yabai -m config mouse_drop_action            swap
-yabai -m config external_bar all:0:20
+yabai -m config external_bar all:0:30
 
 
 # float system preferences. Most of these just diable Yabai form resizing them.

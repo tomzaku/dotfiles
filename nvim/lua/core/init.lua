@@ -50,20 +50,13 @@ local leader_map = function()
 end
 
 local load_core =function()
-  local pack = require('core.pack')
+  require('plugin')
   createdir()
   disable_distribution_plugins()
   leader_map()
 
-  pack.ensure_plugins()
   require('core.options')
   require('core.mapping')
-  require('keymap')
-  require('core.event')
-
-  pack.load_compile()
 end
 
 load_core()
-
--- require('iamcco/markdown-preview.nvim')

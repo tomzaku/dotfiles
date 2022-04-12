@@ -4,8 +4,9 @@
 - fzf: search files.
 - npx.
 - Ubersicht.
-- Font: MesloLGS NF, Hack, Victor Mono
+- Font: MesloLGS NF, Hack, Victor Mono, Symbols Nerd Font (Icon)
 https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/VictorMono
+https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/Symbols-2048-em%20Nerd%20Font%20Complete.ttf
 - Kitty: fd (brew install fd).
 - Install prettier as global for autoformat.
 
@@ -40,6 +41,7 @@ ln -s ~/Projects/dotfiles/yabai ~/.config/yabai
 ln -s ~/Projects/dotfiles/skhd ~/.config/skhd
 ln -s ~/Projects/dotfiles/limelight ~/.config/limelight
 ln -s ~/Projects/dotfiles/kitty ~/.config/kitty
+ln -s ~/Projects/dotfiles/lazygit/config.yml ~/Library/Application\ Support/lazygit/config.yml
 ```
 
 ## Feature
@@ -82,10 +84,8 @@ ln -s ~/Projects/dotfiles/kitty ~/.config/kitty
     `<shift>K`: definition popup
 
   - Search
-
-    `<leader>s`: search & replace current word
-
-    `<leader>S`: search at this current directory
+    
+    `<leader>s`: Search menu
 
   - Quicklist
 
@@ -99,7 +99,7 @@ ln -s ~/Projects/dotfiles/kitty ~/.config/kitty
 
     `<leader>ff`: open file explorer
 
-    `<leader>fa`: search words projects
+    `<leader>fw`: search words projects
 
 ![https://raw.githubusercontent.com/tomzaku/dotfiles/master/showcase/editor.png](https://raw.githubusercontent.com/tomzaku/dotfiles/master/showcase/editor.png)
 
@@ -126,3 +126,10 @@ ln -s ~/Projects/dotfiles/kitty ~/.config/kitty
   - Using **tide** theme: async rendering
 
 Special thank to the open source community: kkga(nibar), Raphael(nvim)
+
+---
+
+if you have an issue about max files in vim: 
+
+sudo launchctl load -w /Library/LaunchDaemons/limit.maxfiles.plist
+
