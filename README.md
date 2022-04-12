@@ -4,9 +4,12 @@
 - fzf: search files.
 - npx.
 - Ubersicht.
-- Font: MesloLGS NF, Hack, Victor Mono, Symbols Nerd Font (Icon)
+- Font: Symbol Nerd Font, MesloLGS NF, Hack, Victor Mono, Symbols Nerd Font (Icon)
+
 https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/VictorMono
+
 https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/Symbols-2048-em%20Nerd%20Font%20Complete.ttf
+
 - Kitty: fd (brew install fd).
 - Install prettier as global for autoformat.
 
