@@ -103,6 +103,8 @@ local colors = {
 	blue = "#40C4FF",
 	red = "#FF5151",
 	gray = "#263238",
+  lightgray = "#344149",
+  darkergray = "#182124" 
 }
 
 -- shorten lines for these filetypes
@@ -274,15 +276,15 @@ addSections("left", {
 			vim.api.nvim_command("hi GalaxyViModeRightCap guifg=" .. modeStyle[2])
 			return icons.sep.right
 		end,
-		highlight = { colors.base02, colors.bg_active },
+		highlight = { colors.base02, colors.gray },
 	},
-	createSpaceSection(colors.bg_active),
-	{
-		name = "PathLeftCap",
-		provider = string_provider(icons.sep.left),
-		highlight = { colors.gray, colors.base02 },
-		condition = get_visible_lsp,
-	},
+	createSpaceSection(colors.gray),
+	-- {
+	-- 	name = "PathLeftCap",
+	-- 	provider = string_provider(icons.sep.left),
+	-- 	highlight = { colors.gray, colors.base02 },
+	-- 	condition = get_visible_lsp,
+	-- },
 	{
 		name = "FileIcon",
 		condition = condition.buffer_not_empty,
@@ -303,7 +305,7 @@ addSections("left", {
 	},
 	{
 		name = "PathRightCap", provider = string_provider(icons.sep.right),
-		highlight = { colors.gray, colors.base02 },
+		highlight = { colors.gray, colors.darkergray },
 		condition = get_visible_lsp,
 	},
 })
@@ -312,7 +314,7 @@ addSections("right", {
 	{
 		name = "leftRightLsp",
 		provider = string_provider(icons.sep.left),
-		highlight = { colors.gray, colors.base02 },
+		highlight = { colors.gray, colors.darkergray },
 	},
 	{
 		name = "LineColumn",
@@ -377,7 +379,7 @@ addSections("short_line_left", {
 		name = "viModeLeftCap",
 		provider = string_provider(icons.sep.left),
 		condition = should_hide_galaxy_line,
-		highlight = { colors.gray, colors.base02 },
+		highlight = { colors.lightgray, colors.base02 },
 	},
 	{
 		name = "viMode",
@@ -386,15 +388,15 @@ addSections("short_line_left", {
 			local modeStyle = get_vim_mode_style()
 			return icons.sep.space .. modeStyle[1] .. icons.sep.space
 		end,
-		highlight = { colors.base02, colors.gray, "bold" },
+		highlight = { colors.base02, colors.lightgray, "bold" },
 	},
 	{
 		name = "viModeRightCap",
 		condition = should_hide_galaxy_line,
 		provider = string_provider(icons.sep.right),
-		highlight = { colors.gray, colors.base02 },
+		highlight = { colors.lightgray, colors.gray },
 	},
-	createSpaceSection(colors.bg_active),
+	createSpaceSection(colors.gray),
 	-- {
 	--   name = "FileIcon",
 	--   condition = condition.buffer_not_empty,
@@ -407,12 +409,12 @@ addSections("short_line_left", {
 	--   condition = condition.buffer_not_empty,
 	--   highlight = {colors.base07, colors.base02},
 	-- },
-	{
-		name = "PathLeftCap",
-		provider = string_provider(icons.sep.left),
-		highlight = { colors.gray, colors.base02 },
-		condition = should_hide_galaxy_line,
-	},
+	-- {
+	-- 	name = "PathLeftCap",
+	-- 	provider = string_provider(icons.sep.left),
+	-- 	highlight = { colors.gray, colors.base02 },
+	-- 	condition = should_hide_galaxy_line,
+	-- },
   {
 		name = "FileIcon",
 		condition = should_hide_galaxy_line,
