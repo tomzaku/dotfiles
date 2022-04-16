@@ -91,7 +91,7 @@ local mappings = {
 	c = {
 		name = "Copy",
 		f = { '<cmd>let @+ = expand("%:p")<cr><cmd>echo expand("%:p")<cr>', "Copy full path" },
-		p = { '<cmd>let @+ = expand(@%)<cr><cmd>echo expand(@%)<cr>', "Copy project path" },
+		p = { '<cmd>let @+ = fnamemodify(expand("%"), ":~:.")<cr><cmd>echo fnamemodify(expand("%"), ":~:.")', "Copy project path" },
 	},
 	-- ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
 	["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
@@ -110,7 +110,7 @@ local mappings = {
 		-- w = { "<cmd> lua require('telescope.builtin').grep_string({ search = vim.fn.input('Grep For > ')})<cr>", "Search word" },
 		s = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Search current world" },
 		S = {
-			"<cmd>lua require('spectre').open_visual({path = vim.fn.expand('%:h').. '/**/*'})<CR>",
+			"<cmd>lua require('spectre').open_visual({path = vim.fn.fnamemodify(vim.fn.expand('%:h').. '/**/*', ':~:.')})<CR>",
 			"Search directory",
 		},
 		b = { "<cmd>Telescope file_browser<cr>", "File browser" },
