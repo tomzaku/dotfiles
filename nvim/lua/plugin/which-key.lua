@@ -91,7 +91,7 @@ local mappings = {
 	c = {
 		name = "Copy",
 		f = { '<cmd>let @+ = expand("%:p")<cr><cmd>echo expand("%:p")<cr>', "Copy full path" },
-		p = { '<cmd>let @+ = fnamemodify(expand("%"), ":~:.")<cr><cmd>echo fnamemodify(expand("%"), ":~:.")', "Copy project path" },
+		p = { '<cmd>let @+ = fnamemodify(expand("%"), ":~:.")<cr><cmd>echo fnamemodify(expand("%"), ":~:.")<cr>', "Copy project path" },
 	},
 	-- ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
 	["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
