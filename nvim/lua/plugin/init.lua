@@ -102,7 +102,8 @@ packer.startup(function(use)
 
 	-- LSP
 	use("neovim/nvim-lspconfig") -- enable LSP
-	-- use("glepnir/lspsaga.nvim") -- UI
+	-- use("glepnir/lspsaga.nvim") -- UI - not update having issue
+  use { 'tami5/lspsaga.nvim' }
 	use("folke/lsp-trouble.nvim") -- window for error
 	use("williamboman/nvim-lsp-installer") -- simple to use language server installer
 	use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for: plugin/lsp/setting/jsonls.lua
