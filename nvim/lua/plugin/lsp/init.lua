@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 require("plugin.lsp.nvim-lspconfig")
--- require("plugin.lsp.handlers").setup()
+require("plugin.lsp.handlers").setup()
 require("plugin.lsp.lsp-installer")
 require("plugin.lsp.null-ls")
 require("plugin.lsp.trouble")

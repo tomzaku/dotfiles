@@ -12,7 +12,8 @@ vim.api.nvim_exec(
 )
 
 lib.setup({
-	ensure_installed = "maintained",
+	-- ensure_installed = "maintained",
+  ensure_installed = "all",
 	sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
 
 	highlight = {

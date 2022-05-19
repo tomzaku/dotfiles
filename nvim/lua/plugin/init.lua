@@ -84,6 +84,9 @@ packer.startup(function(use)
 	use("glepnir/zephyr-nvim") -- theme
 	use("aonemd/kuroi.vim") -- theme
 
+  -- Terminal image
+  use("edluffy/hologram.nvim")
+
 	-- cmp plugins
 	use("hrsh7th/nvim-cmp") -- The completion plugin
 	use("hrsh7th/vim-vsnip")
