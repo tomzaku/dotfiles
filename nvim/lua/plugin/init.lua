@@ -31,7 +31,7 @@ if not status_ok then
 end
 
 -- Have packer use a popup window
-packer.init({ })
+packer.init({})
 
 -- Install your plugins here
 packer.startup(function(use)
@@ -47,6 +47,7 @@ packer.startup(function(use)
 	use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight -- Having bugs
 	use("folke/which-key.nvim")
 	use("metakirby5/codi.vim")
+	use("kamykn/spelunker.vim")
 	-- use "Raimondi/delimitMate" --  insert mode auto-completion for quotes, parens, brackets, etc. doesn't powerful since it doesn't use treesister
 	use("xiyaowong/accelerated-jk.nvim")
 	use({
@@ -70,22 +71,22 @@ packer.startup(function(use)
 	use("kdav5758/TrueZen.nvim")
 	use("christoomey/vim-tmux-navigator")
 	use("rmagatti/auto-session")
-  use 'ggandor/lightspeed.nvim' -- motion
+	use("ggandor/lightspeed.nvim") -- motion
 	use({
 		"iamcco/markdown-preview.nvim",
 		run = "cd app && yarn install",
 	})
-  use 'andweeb/presence.nvim' -- discord Rich Presence
+	use("andweeb/presence.nvim") -- discord Rich Presence
 	--tabbar
 	use("akinsho/bufferline.nvim")
-  use("folke/todo-comments.nvim")
+	use("folke/todo-comments.nvim")
 
 	-- Colorschemes
 	use("glepnir/zephyr-nvim") -- theme
 	use("aonemd/kuroi.vim") -- theme
 
-  -- Terminal image
-  use("edluffy/hologram.nvim")
+	-- Terminal image
+	use("edluffy/hologram.nvim")
 
 	-- cmp plugins
 	use("hrsh7th/nvim-cmp") -- The completion plugin
@@ -106,7 +107,7 @@ packer.startup(function(use)
 	-- LSP
 	use("neovim/nvim-lspconfig") -- enable LSP
 	-- use("glepnir/lspsaga.nvim") -- UI - not update having issue
-  use { 'tami5/lspsaga.nvim' }
+	use({ "tami5/lspsaga.nvim" })
 	use("folke/lsp-trouble.nvim") -- window for error
 	use("williamboman/nvim-lsp-installer") -- simple to use language server installer
 	use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for: plugin/lsp/setting/jsonls.lua
@@ -127,7 +128,7 @@ packer.startup(function(use)
 	})
 	use("JoosepAlviste/nvim-ts-context-commentstring")
 	use("kyazdani42/nvim-tree.lua")
-  use("p00f/nvim-ts-rainbow") -- rainbow parentheses.
+	use("p00f/nvim-ts-rainbow") -- rainbow parentheses.
 
 	-- Git
 	use("lewis6991/gitsigns.nvim")
@@ -177,3 +178,4 @@ require("plugin.lightspeed")
 require("plugin.todo-comments")
 require("plugin.backup")
 require("plugin.presence")
+require("plugin.spelunker-vim")

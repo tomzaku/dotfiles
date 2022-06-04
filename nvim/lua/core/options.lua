@@ -28,18 +28,18 @@ local function load_options()
 		wildignorecase = true,
 		wildignore = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**",
 		backup = true,
-    -- Make backup before overwriting the current buffer
+		-- Make backup before overwriting the current buffer
 		writebackup = true,
-    -- Overwrite the original backup file
-    backupcopy = "yes",
+		-- Overwrite the original backup file
+		backupcopy = "yes",
 		undofile = true,
 		swapfile = true,
 		directory = global.cache_dir .. "swag/",
 		undodir = global.cache_dir .. "undo/",
 		backupdir = global.cache_dir .. "backup/",
 		viewdir = global.cache_dir .. "view/",
-		spellfile = global.cache_dir .. "spell/en.uft-8.add",
-		-- spell          = true;
+		spellfile = global.vim_path .. "/spell/en.uft-8.add",
+		-- spell = true,
 		history = 2000,
 		shada = "!,'300,<50,@100,s10,h",
 		backupskip = "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim",
@@ -118,7 +118,7 @@ local function load_options()
 		signcolumn = "yes",
 		conceallevel = 2,
 		concealcursor = "niv",
-    fillchars = "",
+		fillchars = "",
 	}
 
 	if global.is_mac then

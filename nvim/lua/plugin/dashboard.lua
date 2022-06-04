@@ -74,7 +74,7 @@ vim.g.dashboard_custom_header = {
 vim.g.dashboard_default_executive = "telescope"
 vim.g.dashboard_custom_section = {
 	last_session = {
-		description = { "  Recently laset session                  SPC s l" },
+		description = { "  Recently latest session                  SPC s l" },
 		command = "SessionLoad",
 	},
 	find_history = {

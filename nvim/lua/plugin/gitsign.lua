@@ -13,7 +13,10 @@ lib.setup {
     changedelete = {hl = 'GitGutterChange', text = '▎'},
   },
   current_line_blame_opts ={
-    delay = 500,
+    delay = 300,
+  },
+  current_line_blame_formatter_opts = {
+    relative_time = true
   },
    current_line_blame = true,
 }
