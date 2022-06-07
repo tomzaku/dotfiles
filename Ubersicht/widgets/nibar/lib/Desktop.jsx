@@ -1,5 +1,5 @@
 // Component
-import * as Icon from './Icon.jsx'
+import * as Icon from "./Icon.jsx";
 
 import styles from "./styles.jsx";
 
@@ -18,16 +18,18 @@ const desktopStyle = {
   // padding: "0 12px 0 0",
   width: 30,
   alignItems: "center",
-  justifyContent: "center"
+  justifyContent: "center",
 };
 
-const iconMap = [undefined, {
+const iconMap = [
+  undefined,
+  {
     active: Icon.ChatFilled,
     deactive: Icon.Chat,
   },
   {
     active: Icon.CodeFilled,
-    deactive: Icon.Code
+    deactive: Icon.Code,
   },
   {
     active: Icon.TerminalFilled,
@@ -35,7 +37,7 @@ const iconMap = [undefined, {
   },
   {
     active: Icon.WebFilled,
-    deactive: Icon.Web
+    deactive: Icon.Web,
   },
   {
     active: Icon.GameFilled,
@@ -43,19 +45,19 @@ const iconMap = [undefined, {
   },
   {
     active: Icon.AppFilled,
-    deactive: Icon.App
-  }
-]
+    deactive: Icon.App,
+  },
+];
 
 const monitorIconMap = [
   undefined,
   {
     active: Icon.WebFilled,
-    deactive: Icon.Web
+    deactive: Icon.Web,
   },
-]
+];
 
-const SpaceDefault = ({ index, color }) => <div style={{color}}>{index}</div>
+const SpaceDefault = ({ index, color }) => <div style={{ color }}>{index}</div>;
 
 const renderSpace = (index, focused, visible, windows, isMonitor, minIndex) => {
   let contentStyle = JSON.parse(JSON.stringify(desktopStyle));
@@ -65,14 +67,18 @@ const renderSpace = (index, focused, visible, windows, isMonitor, minIndex) => {
   } else if (visible == 1) {
     contentStyle.color = styles.colors.fg;
   }
-  const status = focused || visible ? 'active' : 'deactive'
-  const color = status === 'active' ? '#619CAB' : '#AEAEAE'
-  const IconComponent = isMonitor 
-    ? (monitorIconMap[index - minIndex + 1] ? monitorIconMap[index - minIndex + 1][status] : SpaceDefault)
-    : (iconMap[index] ? iconMap[index][status] : SpaceDefault)
+  const status = focused || visible ? "active" : "deactive";
+  const color = status === "active" ? "#619CAB" : "#AEAEAE";
+  const IconComponent = isMonitor
+    ? monitorIconMap[index - minIndex + 1]
+      ? monitorIconMap[index - minIndex + 1][status]
+      : SpaceDefault
+    : iconMap[index]
+      ? iconMap[index][status]
+      : SpaceDefault;
   return (
     <div style={contentStyle}>
-     <IconComponent color={color} index={index} />
+      <IconComponent color={color} index={index} />
     </div>
   );
 };
@@ -81,17 +87,23 @@ const render = ({ output }) => {
   if (typeof output === "undefined") return null;
 
   const spaces = [];
-  const isMonitor = output.map(o => o.index).filter(i => i === 1).length === 0
-  const minIndex = Math.min(...output.map(o => o.index))
+  const isMonitor =
+    output.map((o) => o.index).filter((i) => i === 1).length === 0;
+  const minIndex = Math.min(...output.map((o) => o.index));
   output.forEach(function(space) {
-    spaces.push(renderSpace(space.index, space.focused, space.visible, space.windows, isMonitor, minIndex));
+    spaces.push(
+      renderSpace(
+        space.index,
+        space["has-focus"],
+        space["is-visible"],
+        space.windows,
+        isMonitor,
+        minIndex
+      )
+    );
   });
 
-  return (
-    <div style={containerStyle}>
-      {spaces}
-    </div>
-  );
+  return <div style={containerStyle}>{spaces}</div>;
 };
 
 export default render;
