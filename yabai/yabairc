@@ -40,7 +40,7 @@ yabai -m config normal_window_opacity        0.90
 
 # Border
 yabai -m config window_shadow                float
-yabai -m config window_border                on
+# yabai -m config window_border                on
 yabai -m config window_border_width          6
 # [0xAARRGGBB]
 # https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4
@@ -85,7 +85,6 @@ yabai -m rule --add app="Fantastical" manage=off
 yabai -m rule --add app="^Spotify$" manage=off
 # yabai -m rule --add app="^iTerm2$" manage=off
 yabai -m rule --add app="^Flux$" manage=off
-# yabai -m rule --add app="^kitty$" manage=off
 yabai -m rule --add app="^Time Out$" manage=off
 yabai -m rule --add app="^Discord$" manage=off
 yabai -m rule --add app="^perl_client_app$" manage=off
@@ -96,6 +95,7 @@ yabai -m rule --add app="^Logi Options$" manage=off
 yabai -m rule --add app="^Cisco Webex Start$" manage=off
 yabai -m rule --add app="^QuickTime Player" manage=off
 yabai -m rule --add app="^Private Internet Access$" manage=off
+yabai -m rule --add app="^kitty" border=on
 
 
 # general space settings
@@ -108,13 +108,6 @@ yabai -m config window_gap                   16
 
 
 
-# Limelight addon (Kill it and start it each time Yabai starts)
-# Doesn't work Monterey
-# killall limelight &>/dev/null
-# limelight &>/dev/null &
-
-
-
 # For nibar
 
 yabai -m signal --add event=space_changed \
@@ -124,11 +117,3 @@ yabai -m signal --add event=space_changed \
 yabai -m signal --add event=display_changed \
     action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-spaces-jsx\"'"
 
-yabai -m signal --add event=window_focused \
-    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-windows-jsx\"'"
-yabai -m signal --add event=window_destroyed \
-    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-windows-jsx\"'"
-yabai -m signal --add event=window_created \
-    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-windows-jsx\"'"
-yabai -m signal --add event=space_changed \
-    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-windows-jsx\"'"

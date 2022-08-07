@@ -1,4 +1,4 @@
-local status_ok, lib = pcall(require, "telescope")
+local status_ok, lib = pcall(require, "colorizer")
 if not status_ok then
   return
 end

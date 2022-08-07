@@ -14,18 +14,17 @@ function split(inputstr, sep)
 	end
 	return t
 end
-local function splitByNumberChar(inputstr, number) 
-  local t = {}
-  local length = inputstr:len()
-  local i = 0
-  while (i<length)
-  do
-    local nextIndex = i+number
-    table.insert(t, string.sub(inputstr, i, nextIndex))
-    i = nextIndex
-  end
-  table.insert(t, '   ')
-  return t
+local function splitByNumberChar(inputstr, number)
+	local t = {}
+	local length = inputstr:len()
+	local i = 0
+	while i < length do
+		local nextIndex = i + number
+		table.insert(t, string.sub(inputstr, i, nextIndex))
+		i = nextIndex
+	end
+	table.insert(t, "   ")
+	return t
 end
 function os.capture(cmd, raw)
 	local f = assert(io.popen(cmd, "r"))
@@ -41,11 +40,8 @@ function os.capture(cmd, raw)
 end
 local home = os.getenv("HOME")
 local fortune = os.capture("fortune -s")
--- vim.g.dashboard_custom_footer = TableConcat({''}, Split(fortune, '   '))
--- vim.g.dashboard_custom_footer = { fortune }
-vim.g.dashboard_custom_footer = splitByNumberChar(fortune, 60)
--- vim.g.dashboard_preview_command = 'cat'
-vim.g.dashboard_custom_header = {
+local db = require("dashboard")
+db.custom_header = {
 	"",
 	"",
 	"",
@@ -60,37 +56,38 @@ vim.g.dashboard_custom_header = {
 	"   █   █  █      ▄▄           ▄▀   ",
 	"",
 }
--- vim.g.dashboard_preview_pipeline = 'lolcat'
--- vim.g.dashboard_preview_file = home .. '/.config/nvim/static/neovim.cat'
--- vim.g.dashboard_preview_file_height = 4 -- pikachu
--- vim.g.dashboard_preview_file_width = 13 -- pikachu
--- vim.g.dashboard_preview_file_height = 20 -- dota
--- vim.g.dashboard_preview_file_width = 42 -- dota
--- vim.g.dashboard_preview_file_height = 30 -- vegata
--- vim.g.dashboard_preview_file_width = 80 -- vegata
--- hide
--- vim.g.dashboard_preview_file_height = 1
--- vim.g.dashboard_preview_file_width = 1
-vim.g.dashboard_default_executive = "telescope"
-vim.g.dashboard_custom_section = {
-	last_session = {
-		description = { "  Recently latest session                  SPC s l" },
-		command = "SessionLoad",
-	},
-	find_history = {
-		description = { "  Recently opened files                   SPC f h" },
-		command = "DashboardFindHistory",
-	},
-	find_file = {
-		description = { "  Find  File                              SPC f f" },
-		command = "Telescope find_files find_command=rg,--hidden,--files",
-	},
-	new_file = {
-		description = { "  File Browser                            SPC f b" },
-		command = "Telescope file_browser",
-	},
-	find_word = {
-		description = { "  Find  word                              SPC f w" },
-		command = "DashboardFindWord",
-	},
-}
+
+db.custom_footer = splitByNumberChar(fortune, 60)
+db.session_directory = '~/Projects/dotfiles/nvim/session/'
+-- db.custom_center = {
+-- 	{
+-- 		icon = " ",
+-- 		desc = "Recently latest session                  ",
+-- 		shortcut = "SPC s l",
+-- 		action = "SessionLoad",
+-- 	},
+-- 	{
+-- 		icon = "  ",
+-- 		desc = "Recently opened files                   ",
+-- 		action = "DashboardFindHistory",
+-- 		shortcut = "SPC f h",
+-- 	},
+-- 	{
+-- 		icon = "  ",
+-- 		desc = "Find  File                              ",
+-- 		action = "Telescope find_files find_command=rg,--hidden,--files",
+-- 		shortcut = "SPC f f",
+-- 	},
+-- 	{
+-- 		icon = "  ",
+-- 		desc = "File Browser                            ",
+-- 		action = "Telescope file_browser",
+-- 		shortcut = "SPC f b",
+-- 	},
+-- 	{
+-- 		icon = "  ",
+-- 		desc = "Find  word                              ",
+-- 		action = "Telescope live_grep",
+-- 		shortcut = "SPC f w",
+-- 	},
+-- }

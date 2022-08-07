@@ -77,7 +77,7 @@ packer.startup(function(use)
 	})
 	use("andweeb/presence.nvim") -- discord Rich Presence
 	--tabbar
-	use("akinsho/bufferline.nvim")
+	-- use("akinsho/bufferline.nvim")
 	use("folke/todo-comments.nvim")
 
 	-- Colorschemes
@@ -177,7 +177,7 @@ require("plugin.accelerated-jk")
 require("plugin.autopairs")
 -- tabbar
 require("plugin.barbar")
-require("plugin.bufferline")
+-- require("plugin.bufferline")
 require("plugin.lightspeed")
 require("plugin.todo-comments")
 require("plugin.backup")

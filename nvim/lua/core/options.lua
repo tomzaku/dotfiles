@@ -74,7 +74,7 @@ local function load_options()
 		shortmess = "aoOTIcF",
 		scrolloff = 2,
 		sidescrolloff = 5,
-		foldlevelstart = 2,
+		-- foldlevelstart = 2,
 		ruler = false,
 		list = true,
 		showtabline = 0,
@@ -93,7 +93,7 @@ local function load_options()
 		listchars = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←",
 		pumblend = 10,
 		winblend = 10,
-		foldmethod = "indent",
+		foldmethod = "manual",
 		relativenumber = true,
 
 		-- GUI config
