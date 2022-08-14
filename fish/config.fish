@@ -1,13 +1,47 @@
 # Autojump
 [ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
 
+function shopeeTmux
+  tmux new-session -d -s $argv[1] > /dev/null
 
+  tmux new-window -t $argv[1]
+  tmux rename-window -t $argv[1]:1 'toC'
+  tmux send-keys -t $argv[1]:1.0 'cd /Users/tomzaku/Projects/shopee_react_native && clear && v' Enter
+  tmux splitw -v -p 10 -t $argv[1]:1.0
+  tmux send-keys -t $argv[1]:1.1 'cd /Users/tomzaku/Projects/shopee_react_native && clear' Enter
+  tmux select-window -t $argv[1]:1.0
+
+  tmux new-window -t $argv[1]
+  tmux rename-window -t $argv[1]:2 'toB'
+  tmux send-keys -t $argv[1]:2.0 'cd /Users/tomzaku/Projects/account-business-web && clear && v' Enter
+  tmux splitw -v -p 10 -t $argv[1]:2.0
+  tmux send-keys -t $argv[1]:2.1 'cd /Users/tomzaku/Projects/account-business-web && clear' Enter
+
+  
+  tmux new-window -t $argv[1]
+  tmux rename-window -t $argv[1]:3 'user-isfe'
+  tmux send-keys -t $argv[1]:3.0 'cd /Users/tomzaku/Projects/user-isfe && clear && v' Enter
+  tmux splitw -v -p 10 -t $argv[1]:3.0
+  tmux send-keys -t $argv[1]:3.1 'cd /Users/tomzaku/Projects/user-isfe && clear' Enter
+
+  tmux new-window -t $argv[1]
+  tmux rename-window -t $argv[1]:4 'user-mfe'
+  tmux send-keys -t $argv[1]:4.0 'cd /Users/tomzaku/Projects/user-web-fe && clear && v' Enter
+  tmux splitw -v -p 10 -t $argv[1]:4.0
+  tmux send-keys -t $argv[1]:4.1 'cd /Users/tomzaku/Projects/user-web-fe && clear' Enter
+
+  tmux rename-window -t $argv[1]:0 'dashboard'
+  tmux send-keys -t $argv[1]:0.0 'wtfutil' Enter
+
+  tmux a -t $argv[1]
+end
 
 # Alias
 alias v="nvim"
 alias vi="nvim"
 alias l="lazygit"
 alias st="tmux attach -t base || tmux new -s base"
+alias sts="tmux attach -t shopee || shopeeTmux shopee"
 
 # Fish
 # Change ls colors

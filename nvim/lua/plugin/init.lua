@@ -103,7 +103,7 @@ packer.startup(function(use)
 	-- use("hrsh7th/vim-vsnip")
 	use("L3MON4D3/LuaSnip") --snippet engine
 	use("saadparwaiz1/cmp_luasnip") -- snippet completions
-	-- use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
+	--[[ use("rafamadriz/friendly-snippets") -- a bunch of snippets to use ]]
 
 	-- LSP
   use("williamboman/mason.nvim")
@@ -186,4 +186,4 @@ require("plugin.backup")
 require("plugin.presence")
 require("plugin.spelunker-vim")
 require("plugin.nvim-dap")
-require("plugin.nvim-vsnip")
+--[[ require("plugin.nvim-vsnip") ]]
