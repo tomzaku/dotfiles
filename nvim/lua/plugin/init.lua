@@ -89,26 +89,29 @@ packer.startup(function(use)
 
 	-- cmp plugins
 	use("hrsh7th/nvim-cmp") -- The completion plugin
-	use("hrsh7th/vim-vsnip")
 	use("mattn/vim-sonictemplate")
 	-- use "dense-analysis/ale"
 	use("hrsh7th/cmp-buffer") -- buffer completions
 	use("hrsh7th/cmp-path") -- path completions
 	use("hrsh7th/cmp-cmdline") -- cmdline completions
-	use("saadparwaiz1/cmp_luasnip") -- snippet completions
 	use("hrsh7th/cmp-nvim-lsp")
 	--
 	-- snippets
 	use("mattn/emmet-vim")
+
+ --  use("hrsh7th/cmp-vsnip")
+	-- use("hrsh7th/vim-vsnip")
 	use("L3MON4D3/LuaSnip") --snippet engine
-	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
+	use("saadparwaiz1/cmp_luasnip") -- snippet completions
+	-- use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
 	-- LSP
+  use("williamboman/mason.nvim")
+  use("williamboman/mason-lspconfig.nvim")
 	use("neovim/nvim-lspconfig") -- enable LSP
 	-- use("glepnir/lspsaga.nvim") -- UI - not update having issue
 	use({ "tami5/lspsaga.nvim" })
 	use("folke/lsp-trouble.nvim") -- window for error
-	use("williamboman/nvim-lsp-installer") -- simple to use language server installer
 	use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for: plugin/lsp/setting/jsonls.lua
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
 
@@ -157,7 +160,6 @@ require("plugin.comment")
 require("plugin.neoscroll")
 require("plugin.nvim-colorizer")
 require("plugin.nvim-ts-context-commentstring")
-require("plugin.nvim-vsnip")
 require("plugin.toggleterm")
 require("plugin.vim-cursorword")
 require("plugin.vim-floaterm")
@@ -184,3 +186,4 @@ require("plugin.backup")
 require("plugin.presence")
 require("plugin.spelunker-vim")
 require("plugin.nvim-dap")
+require("plugin.nvim-vsnip")

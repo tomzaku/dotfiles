@@ -4,5 +4,5 @@ if not status_ok then
 end
 
 lib.setup({
-  auto_restore_enabled = false
+  -- auto_restore_enabled = false
 })

@@ -17,7 +17,6 @@ null_ls.setup({
 		formatting.eslint.with({
 			extra_args = { "--resolve-plugins-relative-to=(yarn global dir)" },
 		}),
-		-- formatting.eslint,
 		formatting.stylelint,
 	},
 	-- on_attach = function(client)

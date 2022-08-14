@@ -14,3 +14,8 @@ vim.cmd [[highlight Comment cterm=italic gui=italic]]
 vim.cmd [[highlight SignColumn ctermbg=NONE guibg=NONE]]
 vim.cmd [[highlight ColorColumn ctermbg=0 guibg=NONE]] -- maximum chars col
 vim.cmd [[highlight TabLine gui=NONE guibg=#041117 guifg=#abb2bf    cterm=NONE term=NONE ctermfg=black ctermbg=white]]
+
+
+-- Dashboard
+vim.cmd('hi DashboardHeader guifg=#0277bd')
+vim.cmd('hi DashboardFooter guifg=#B7B7B7')

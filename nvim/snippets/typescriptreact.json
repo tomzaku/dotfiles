@@ -20,13 +20,13 @@
   "Create useState hook": {
     "prefix": "useState",
     "body": [
-      "const [${1:state}, set${1:State}] = useState(${2:defaultState});"
+      "const [${1:state}, set${1:State}] = React.useState(${2:defaultState});"
     ],
     "description": "Creates React useState hook"
   },
   "Create useEffect hook": {
     "prefix": "useEffect",
-    "body": ["useEffect(() => {", "\t", "}, []);"],
+    "body": ["React.useEffect(() => {", "\t", "}, []);"],
     "description": "Creates React useEffect hook"
   },
   "Create useContext hook": {
