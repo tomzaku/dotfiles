@@ -98,7 +98,6 @@ packer.startup(function(use)
 	--
 	-- snippets
 	use("mattn/emmet-vim")
-
  --  use("hrsh7th/cmp-vsnip")
 	-- use("hrsh7th/vim-vsnip")
 	use("L3MON4D3/LuaSnip") --snippet engine
@@ -135,6 +134,7 @@ packer.startup(function(use)
 	-- Git
 	use("lewis6991/gitsigns.nvim")
 	use("tpope/vim-fugitive")
+  use("sindrets/diffview.nvim")
 
   -- Debugger
   use("mfussenegger/nvim-dap")
