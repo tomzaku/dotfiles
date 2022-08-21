@@ -5,4 +5,5 @@ end
 
 lib.setup({
   -- auto_restore_enabled = false
+  log_level="error"
 })

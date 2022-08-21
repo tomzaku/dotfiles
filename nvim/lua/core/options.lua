@@ -84,7 +84,7 @@ local function load_options()
 		helpheight = 12,
 		previewheight = 12,
 		showcmd = false,
-		cmdheight = 1,
+		cmdheight = 0,
 		cmdwinheight = 5,
 		equalalways = false,
 		laststatus = 2,
@@ -95,6 +95,7 @@ local function load_options()
 		winblend = 10,
 		foldmethod = "manual",
 		relativenumber = true,
+    shell = "/bin/bash"
 
 		-- GUI config
 		-- guifont        = "Hack Nerd Font,Fira Code Nerd Font, Hack Nerd Font mono:h12"

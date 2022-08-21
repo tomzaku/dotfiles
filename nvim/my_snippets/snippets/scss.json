@@ -1,0 +1,12 @@
+{
+    "local": {
+        "prefix": "lo",
+        "body": [
+            ":local {",
+            "   .container {",
+            "   ${1}",
+            "   }",
+            "}"
+        ]
+    }
+}

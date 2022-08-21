@@ -82,3 +82,5 @@ function vd
   /opt/cisco/anyconnect/bin/vpn disconnect
 end
 
+
+set -x GOPATH ~/Projects/golang/
