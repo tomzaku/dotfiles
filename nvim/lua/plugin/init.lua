@@ -57,7 +57,18 @@ packer.startup(function(use)
 	use("hrsh7th/vim-eft") -- enhanced f/t
 	-- use "rhysd/vim-operator-surround" -- mapping to enclose text objects with surrounds like paren, quote and so on.
 	use("kana/vim-niceblock") -- Make blockwise Visual mode more useful
-	use("tversteeg/registers.nvim") -- NeoVim plugin to preview the contents of the registers
+	--[[ use("tversteeg/registers.nvim") -- NeoVim plugin to preview the contents of the registers ]]
+	use({
+		"AckslD/nvim-neoclip.lua",
+		requires = {
+			{ "kkharji/sqlite.lua", module = "sqlite" },
+			{ "nvim-telescope/telescope.nvim" },
+			{ "ibhagwan/fzf-lua" },
+		},
+		config = function()
+			require("neoclip").setup()
+		end,
+	}) -- Clipboard management for registers
 	-- use 'editorconfig/editorconfig-vim' -- editor config
 	use("liuchengxu/vista.vim")
 	use("windwp/nvim-spectre") -- search & replace
@@ -76,6 +87,12 @@ packer.startup(function(use)
 		run = "cd app && yarn install",
 	})
 	use("andweeb/presence.nvim") -- discord Rich Presence
+
+  --- nvim-ufo
+  use("kevinhwang91/promise-async")
+	use("kevinhwang91/nvim-ufo")
+  -- nvim-ufo
+
 	--tabbar
 	-- use("akinsho/bufferline.nvim")
 	use("folke/todo-comments.nvim")
@@ -98,15 +115,15 @@ packer.startup(function(use)
 	--
 	-- snippets
 	use("mattn/emmet-vim")
- --  use("hrsh7th/cmp-vsnip")
+	--  use("hrsh7th/cmp-vsnip")
 	-- use("hrsh7th/vim-vsnip")
 	use("L3MON4D3/LuaSnip") --snippet engine
 	use("saadparwaiz1/cmp_luasnip") -- snippet completions
 	--[[ use("rafamadriz/friendly-snippets") -- a bunch of snippets to use ]]
 
 	-- LSP
-  use("williamboman/mason.nvim")
-  use("williamboman/mason-lspconfig.nvim")
+	use("williamboman/mason.nvim")
+	use("williamboman/mason-lspconfig.nvim")
 	use("neovim/nvim-lspconfig") -- enable LSP
 	-- use("glepnir/lspsaga.nvim") -- UI - not update having issue
 	use({ "tami5/lspsaga.nvim" })
@@ -134,12 +151,17 @@ packer.startup(function(use)
 	-- Git
 	use("lewis6991/gitsigns.nvim")
 	use("tpope/vim-fugitive")
-  use("sindrets/diffview.nvim")
+	use("sindrets/diffview.nvim")
 
-  -- Debugger
-  use("mfussenegger/nvim-dap")
-  use("rcarriga/nvim-dap-ui")
-  use("theHamsta/nvim-dap-virtual-text")
+	-- Debugger
+	use("mfussenegger/nvim-dap")
+	use("rcarriga/nvim-dap-ui")
+	use("theHamsta/nvim-dap-virtual-text")
+
+	-- Quickfix
+	use("kevinhwang91/nvim-bqf", { ft = "qf" })
+
+  use("windwp/nvim-ts-autotag")
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
@@ -187,3 +209,6 @@ require("plugin.presence")
 require("plugin.spelunker-vim")
 require("plugin.nvim-dap")
 --[[ require("plugin.nvim-vsnip") ]]
+--[[ require("plugin.nvim-neoclip") ]]
+require("plugin.nvim-ufo")
+require("plugin.nvim-ts-autotag")
