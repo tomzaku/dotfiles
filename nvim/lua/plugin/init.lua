@@ -124,6 +124,7 @@ packer.startup(function(use)
 	-- LSP
 	use("williamboman/mason.nvim")
 	use("williamboman/mason-lspconfig.nvim")
+  use("williamboman/nvim-lsp-installer")
 	use("neovim/nvim-lspconfig") -- enable LSP
 	-- use("glepnir/lspsaga.nvim") -- UI - not update having issue
 	use({ "tami5/lspsaga.nvim" })

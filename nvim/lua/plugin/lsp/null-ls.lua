@@ -14,15 +14,8 @@ null_ls.setup({
 		formatting.prettier,
 		formatting.black,
 		formatting.stylua,
-		formatting.eslint.with({
-			extra_args = { "--resolve-plugins-relative-to=(yarn global dir)" },
-		}),
+		formatting.eslint,
 		formatting.stylelint,
 	},
-	-- on_attach = function(client)
-		-- auto formatting on save
-		-- if client.resolved_capabilities.document_formatting then
-		-- 	vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-		-- end
-	-- end,
+  on_attach = require("plugin.lsp.handlers").on_attach,
 })
