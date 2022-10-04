@@ -1,3 +1,4 @@
+
 # Autojump
 [ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
 
@@ -68,7 +69,7 @@ end
 function removeVpnEnv
   set -e VPN_USERNAME
   set -e VPN_PASSWORD
-  set -e VPN_PASSWORD
+  set -e VPN_DOMAIN
 end
 
 function vw
@@ -84,3 +85,6 @@ end
 
 
 set -x GOPATH ~/Projects/golang/
+
+
+
