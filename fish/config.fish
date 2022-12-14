@@ -7,29 +7,35 @@ function shopeeTmux
 
   tmux new-window -t $argv[1]
   tmux rename-window -t $argv[1]:1 'toC'
-  tmux send-keys -t $argv[1]:1.0 'cd /Users/tomzaku/Projects/shopee_react_native && clear && v' Enter
+  tmux send-keys -t $argv[1]:1.0 'cd ~/Projects/shopee_react_native && clear && v' Enter
   tmux splitw -v -p 10 -t $argv[1]:1.0
-  tmux send-keys -t $argv[1]:1.1 'cd /Users/tomzaku/Projects/shopee_react_native && clear' Enter
+  tmux send-keys -t $argv[1]:1.1 'cd ~/Projects/shopee_react_native && clear' Enter
   tmux select-window -t $argv[1]:1.0
 
   tmux new-window -t $argv[1]
   tmux rename-window -t $argv[1]:2 'toB'
-  tmux send-keys -t $argv[1]:2.0 'cd /Users/tomzaku/Projects/account-business-web && clear && v' Enter
+  tmux send-keys -t $argv[1]:2.0 'cd ~/Projects/account-business-web && clear && v' Enter
   tmux splitw -v -p 10 -t $argv[1]:2.0
-  tmux send-keys -t $argv[1]:2.1 'cd /Users/tomzaku/Projects/account-business-web && clear' Enter
+  tmux send-keys -t $argv[1]:2.1 'cd ~/Projects/account-business-web && clear' Enter
 
   
   tmux new-window -t $argv[1]
   tmux rename-window -t $argv[1]:3 'user-isfe'
-  tmux send-keys -t $argv[1]:3.0 'cd /Users/tomzaku/Projects/user-isfe && clear && v' Enter
+  tmux send-keys -t $argv[1]:3.0 'cd ~/Projects/user-isfe && clear && v' Enter
   tmux splitw -v -p 10 -t $argv[1]:3.0
-  tmux send-keys -t $argv[1]:3.1 'cd /Users/tomzaku/Projects/user-isfe && clear' Enter
+  tmux send-keys -t $argv[1]:3.1 'cd ~/Projects/user-isfe && clear' Enter
 
   tmux new-window -t $argv[1]
   tmux rename-window -t $argv[1]:4 'user-mfe'
-  tmux send-keys -t $argv[1]:4.0 'cd /Users/tomzaku/Projects/user-web-fe && clear && v' Enter
+  tmux send-keys -t $argv[1]:4.0 'cd ~/Projects/user-web-fe && clear && v' Enter
   tmux splitw -v -p 10 -t $argv[1]:4.0
-  tmux send-keys -t $argv[1]:4.1 'cd /Users/tomzaku/Projects/user-web-fe && clear' Enter
+  tmux send-keys -t $argv[1]:4.1 'cd ~/Projects/user-web-fe && clear' Enter
+
+  tmux new-window -t $argv[1]
+  tmux rename-window -t $argv[1]:5 'ccms'
+  tmux send-keys -t $argv[1]:5.0 'cd ~/Projects/shopee-ccms-dev && clear' Enter
+  tmux splitw -h -p 50 -t $argv[1]:5.0
+  tmux send-keys -t $argv[1]:5.1 'cd ~/Projects/shopee-ccms && clear' Enter
 
   tmux rename-window -t $argv[1]:0 'dashboard'
   tmux send-keys -t $argv[1]:0.0 'wtfutil' Enter
