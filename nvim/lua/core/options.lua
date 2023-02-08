@@ -101,26 +101,7 @@ local function load_options()
 		-- guifont        = "Hack Nerd Font,Fira Code Nerd Font, Hack Nerd Font mono:h12"
 	}
 
-	local bw_local = {
-		synmaxcol = 2500,
-		formatoptions = "1jcroql",
-		textwidth = 80,
-		expandtab = false,
-		autoindent = true,
-		tabstop = 2,
-		shiftwidth = 2,
-		softtabstop = -1,
-		breakindentopt = "shift:2,min:20",
-		wrap = false,
-		linebreak = true,
-		number = true,
-		colorcolumn = "80",
-		foldenable = true,
-		signcolumn = "yes",
-		conceallevel = 2,
-		concealcursor = "niv",
-		fillchars = "",
-	}
+	
 
 	if global.is_mac then
 		vim.g.clipboard = {
@@ -138,10 +119,31 @@ local function load_options()
 		vim.g.python_host_prog = "/usr/bin/python"
 		vim.g.python3_host_prog = "/usr/local/bin/python3"
 	end
+
 	for name, value in pairs(global_local) do
 		vim.o[name] = value
 	end
-	bind_option(bw_local)
+	-- local bw_local = {
+	-- 	synmaxcol = 2500,
+	-- 	formatoptions = "1jcroql",
+	-- 	textwidth = 80,
+	-- 	expandtab = false,
+	-- 	autoindent = true,
+	-- 	tabstop = 2,
+	-- 	shiftwidth = 2,
+	-- 	softtabstop = -1,
+	-- 	breakindentopt = "shift:2,min:20",
+	-- 	wrap = false,
+	-- 	linebreak = true,
+	-- 	number = true,
+	-- 	colorcolumn = "80",
+	-- 	foldenable = true,
+	-- 	signcolumn = "yes",
+	-- 	conceallevel = 2,
+	-- 	concealcursor = "niv",
+	-- 	fillchars = "",
+	-- }
+	-- bind_option(bw_local)
 end
 
 load_options()
