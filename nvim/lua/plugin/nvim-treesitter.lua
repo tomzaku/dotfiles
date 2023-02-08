@@ -18,7 +18,7 @@ lib.setup({
 
 	highlight = {
 		enable = true,
-    disable = { "lua" },
+    disable = { "lua", "javascript" },
 
 	},
   -- p00f/nvim-ts-rainbow

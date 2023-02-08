@@ -81,7 +81,8 @@ packer.startup(function(use)
 	use("kdav5758/TrueZen.nvim")
 	use("christoomey/vim-tmux-navigator")
 	use("rmagatti/auto-session")
-	use("ggandor/lightspeed.nvim") -- motion
+	--[[ use("ggandor/lightspeed.nvim") -- motion ]]
+  use("ggandor/leap.nvim")
 	use({
 		"iamcco/markdown-preview.nvim",
 		run = "cd app && yarn install",
@@ -203,7 +204,8 @@ require("plugin.autopairs")
 -- tabbar
 require("plugin.barbar")
 -- require("plugin.bufferline")
-require("plugin.lightspeed")
+--[[ require("plugin.lightspeed") ]]
+require("plugin.leap")
 require("plugin.todo-comments")
 require("plugin.backup")
 require("plugin.presence")

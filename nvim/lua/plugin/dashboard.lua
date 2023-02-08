@@ -60,7 +60,7 @@ db.custom_header = {
 
 
 db.custom_footer = splitByNumberChar(fortune, 200)
-db.session_directory = '~/Projects/dotfiles/nvim/session/'
+db.session_directory = '~/Projects/dotfiles/nvim/session'
 db.custom_center = {
 	{
 		icon = " ",
