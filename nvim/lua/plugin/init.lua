@@ -14,6 +14,7 @@ if not status_ok then
     return
 end
 
+
 require('packer').startup(function(use)
     -- Package manager
     use 'wbthomason/packer.nvim'
@@ -121,7 +122,8 @@ require('packer').startup(function(use)
     use("akinsho/toggleterm.nvim") -- terminal
 
     -- Utility
-    use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' } -- Folding
+    --[[ use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' } -- Folding  ]]
+    
     use("liuchengxu/vista.vim")
 
     -- Key mapping
@@ -158,6 +160,8 @@ require('packer').startup(function(use)
         requires = { 'nvim-tree/nvim-web-devicons' }
     }
     use("glepnir/galaxyline.nvim") --tabbar footer
+    -- use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
+
     -- Colorschemes
     use("glepnir/zephyr-nvim") -- theme
     use("aonemd/kuroi.vim") -- theme
@@ -266,5 +270,8 @@ require("plugin.backup")
 require("plugin.presence")
 require("plugin.spelunker-vim")
 require("plugin.nvim-dap")
-require("plugin.nvim-ufo")
+--[[ require("plugin.nvim-ufo") ]] 
 require("plugin.nvim-ts-autotag")
+
+
+--require('lualine').setup()

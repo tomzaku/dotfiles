@@ -56,6 +56,7 @@ local function load_options()
 	    infercase = true,
 	    incsearch = true,
 	    wrapscan = true,
+            foldenable = true,
 	    complete = ".,w,b,k",
 	    inccommand = "nosplit",
 	    grepformat = "%f:%l:%c:%m",
@@ -74,7 +75,7 @@ local function load_options()
 	    shortmess = "aoOTIcF",
 	    scrolloff = 2,
 	    sidescrolloff = 5,
-	    -- foldlevelstart = 2,
+	    -- foldlevelstart = 3,
 	    ruler = false,
 	    list = true,
 	    showtabline = 0,
@@ -93,7 +94,7 @@ local function load_options()
 	    listchars = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←",
 	    pumblend = 10,
 	    winblend = 10,
-	    foldmethod = "manual",
+	    -- foldmethod = "indent",
 	    relativenumber = true,
 	    shell = "/bin/bash"
 	    -- GUI config
@@ -122,27 +123,6 @@ local function load_options()
 	for name, value in pairs(global_local) do
 		vim.o[name] = value
 	end
-	-- local bw_local = {
-	-- 	synmaxcol = 2500,
-	-- 	formatoptions = "1jcroql",
-	-- 	textwidth = 80,
-	-- 	expandtab = false,
-	-- 	autoindent = true,
-	-- 	tabstop = 2,
-	-- 	shiftwidth = 2,
-	-- 	softtabstop = -1,
-	-- 	breakindentopt = "shift:2,min:20",
-	-- 	wrap = false,
-	-- 	linebreak = true,
-	-- 	number = true,
-	-- 	colorcolumn = "80",
-	-- 	foldenable = true,
-	-- 	signcolumn = "yes",
-	-- 	conceallevel = 2,
-	-- 	concealcursor = "niv",
-	-- 	fillchars = "",
-	-- }
-	-- bind_option(bw_local)
 end
 
 load_options()

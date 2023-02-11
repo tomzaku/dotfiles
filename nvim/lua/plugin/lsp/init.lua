@@ -64,13 +64,6 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
--- Config from nvim-ufo
-capabilities.textDocument.foldingRange = {
-	dynamicRegistration = false,
-	lineFoldingOnly = true,
-}
-
-
 -- Setup mason so it can manage external tooling
 require('mason').setup()
 
@@ -92,7 +85,11 @@ mason_lspconfig.setup_handlers {
 }
 
 -- Turn on lsp status information
-require('fidget').setup()
+require('fidget').setup {
+   window = {
+    blend = 0, -- transparent
+  },
+}
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
