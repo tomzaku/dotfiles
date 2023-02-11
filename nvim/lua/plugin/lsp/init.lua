@@ -43,10 +43,10 @@ local servers = {
     -- gopls = {},
     -- pyright = {},
     -- rust_analyzer = {},
-    tsserver = {},
-    jsonls = {},
-    cssls = {},
-    html = {},
+    -- tsserver = {},
+    -- jsonls = {},
+    -- cssls = {},
+    -- html = {},
     sumneko_lua = {
         Lua = {
             workspace = { checkThirdParty = false },
