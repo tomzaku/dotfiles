@@ -342,6 +342,7 @@ addSections("short_line_left", {
 	        vim.api.nvim_command("hi GalaxyViModeLeftCap guifg=" .. modeStyle[2])
 	        return icons.heading
         end,
+        condition = should_hide_galaxy_line,
         highlight = { colors.base02, colors.bg_active },
     },
     {
@@ -353,6 +354,7 @@ addSections("short_line_left", {
 	        vim.api.nvim_command("hi GalaxyViMode guifg=" .. modeStyle[2])
 	        return icons.sep.space .. modeStyle[1] .. icons.sep.space
         end,
+        condition = should_hide_galaxy_line,
         highlight = { colors.light01, colors.base02, "bold" },
     },
     createSpaceSection(),

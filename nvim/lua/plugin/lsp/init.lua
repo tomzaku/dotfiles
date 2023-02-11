@@ -43,10 +43,10 @@ local servers = {
     -- gopls = {},
     -- pyright = {},
     -- rust_analyzer = {},
-    -- tsserver = {},
-    -- jsonls = {},
-    -- cssls = {},
-    -- html = {},
+    tsserver = {},
+    jsonls = {},
+    cssls = {},
+    html = {},
     sumneko_lua = {
         Lua = {
             workspace = { checkThirdParty = false },
@@ -61,8 +61,6 @@ require('neodev').setup()
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 -- Setup mason so it can manage external tooling
 require('mason').setup()
@@ -86,9 +84,9 @@ mason_lspconfig.setup_handlers {
 
 -- Turn on lsp status information
 require('fidget').setup {
-   window = {
-    blend = 0, -- transparent
-  },
+    window = {
+        blend = 0, -- transparent
+    },
 }
 
 -- nvim-cmp setup
@@ -133,3 +131,48 @@ cmp.setup {
         { name = 'luasnip' },
     },
 }
+
+
+
+local update_theme = function()
+  local signs = {
+      { name = "DiagnosticSignError", text = "" },
+      { name = "DiagnosticSignWarn",  text = "" },
+      { name = "DiagnosticSignHint",  text = "" },
+      { name = "DiagnosticSignInfo",  text = "" },
+  }
+  for _, sign in ipairs(signs) do
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+  end
+
+  local config = {
+      -- disable virtual text
+      virtual_text = false,
+      -- show signs
+      signs = {
+          active = signs,
+      },
+      update_in_insert = true,
+      underline = true,
+      severity_sort = true,
+      float = {
+          focusable = false,
+          style = "minimal",
+          border = "rounded",
+          source = "always",
+          header = "",
+          prefix = "",
+      },
+  }
+
+  vim.diagnostic.config(config)
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+          border = "rounded",
+      })
+
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+          border = "rounded",
+      })
+end
+
+update_theme()
