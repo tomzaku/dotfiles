@@ -13,6 +13,17 @@ require('nvim-treesitter.configs').setup {
             node_decremental = "grm",
         },
     },
+
+    -- Plugins: mrjones2014/nvim-ts-rainbow
+    rainbow = {
+        enable = true,
+        extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+        max_file_lines = nil, -- Do not enable for files with more than n lines, int
+        -- colors = {}, -- table of hex strings
+        -- termcolors = {} -- table of colour name strings
+    },
+    -- End of plugin mrjones2014/nvim-ts-rainbow
+
     textobjects = {
         select = {
             enable = true,
