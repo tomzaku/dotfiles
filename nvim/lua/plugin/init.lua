@@ -146,7 +146,17 @@ require('packer').startup(function(use)
     }) -- Clipboard management for registers
 
     -- Dashboard and theme
-    use("glepnir/dashboard-nvim") -- dashboard
+    use {
+        'glepnir/dashboard-nvim',
+        --event = 'VimEnter',
+        theme = 'hyper',
+        config = function()
+            require('dashboard').setup {
+                -- config
+            }
+        end,
+        requires = { 'nvim-tree/nvim-web-devicons' }
+    }
     use("glepnir/galaxyline.nvim") --tabbar footer
     -- Colorschemes
     use("glepnir/zephyr-nvim") -- theme
@@ -163,7 +173,15 @@ require('packer').startup(function(use)
 
 
     use("christoomey/vim-tmux-navigator")
-    use("rmagatti/auto-session")
+    use {
+        'rmagatti/auto-session',
+        config = function()
+            require("auto-session").setup {
+                log_level = "error",
+                auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+            }
+        end
+    }
 
     -- Motion
     use("ggandor/leap.nvim")
@@ -233,7 +251,6 @@ require("plugin.nvim-tree")
 require("plugin.nvim-spectre")
 require("plugin.nvim-colorizer")
 require("plugin.nvim-ts-context-commentstring")
-
 require("plugin.toggleterm")
 require("plugin.vim-floaterm")
 require("plugin.vista")
@@ -242,19 +259,11 @@ require("plugin.gitsign")
 require("plugin.galaxyline")
 require("plugin.indent-blankline")
 require("plugin.theme")
-
-require("plugin.auto-session")
 require("plugin.which-key")
-
-
-
 require("plugin.autopairs")
---[[ -- -- tabbar ]]
 require("plugin.leap")
-
 require("plugin.backup")
 require("plugin.presence")
-
 require("plugin.spelunker-vim")
 require("plugin.nvim-dap")
 require("plugin.nvim-ufo")
