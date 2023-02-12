@@ -32,7 +32,6 @@ local load_core = function()
 	require("plugin")
 	createdir()
 	leader_map()
-
 	require("core.options")
 	require("core.mapping")
 end

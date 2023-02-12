@@ -247,7 +247,7 @@ require("plugin.backup")
 require("plugin.presence")
 require("plugin.spelunker-vim")
 require("plugin.nvim-dap")
---[[ require("plugin.nvim-ufo") ]]
 require("plugin.nvim-ts-autotag")
 
+--[[ require("plugin.nvim-ufo") ]]
 --require('lualine').setup()

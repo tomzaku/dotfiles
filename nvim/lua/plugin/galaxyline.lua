@@ -34,6 +34,15 @@ local icons = {
 	},
 }
 
+local show_macro_recording = function()
+	local recording_register = vim.fn.reg_recording()
+	if recording_register == "" then
+		return ""
+	else
+		return "Recording @" .. recording_register .. " "
+	end
+end
+
 local split = function(inputstr, sep)
 	if sep == nil then
 		sep = "%s"
@@ -220,14 +229,27 @@ local string_provider = function(str)
 	end
 end
 
-local createSpaceSection = function(color)
+local create_space_section = function(color)
 	return {
 		name = "whitespace",
 		provider = string_provider(" "),
 		highlight = { color, color },
 	}
 end
-local createSeparateSection = function(color)
+
+local create_macro_recording = function(color)
+	return {
+		name = "Macro",
+		useNameAsId = true,
+		provider = function()
+			vim.api.nvim_command("hi GalaxyMacro guifg=" .. colors.yellow)
+			return show_macro_recording()
+		end,
+		highlight = { color, color, "bold" },
+	}
+end
+
+local create_separate_section = function(color)
 	return {
 		name = "whitespace",
 		provider = string_provider(icons.separate),
@@ -275,7 +297,8 @@ addSections("left", {
 		end,
 		highlight = { colors.light01, colors.base02, "bold" },
 	},
-	createSpaceSection(),
+	create_space_section(),
+	create_macro_recording(),
 	{
 		name = "FileIcon",
 		condition = condition.buffer_not_empty,
@@ -321,14 +344,14 @@ addSections("right", {
 	-- 	-- highlight = {colors.blue, colors.gray},
 	-- 	highlight = { colors.bg, colors.blue, "bold" },
 	-- },
-	createSeparateSection("#5C5C5C"),
+	create_separate_section("#5C5C5C"),
 	{
 		name = "GetLspClient",
 		provider = get_lsp_client,
 		condition = get_visible_lsp,
 		-- icon = icons.lsp,
 	},
-	createSpaceSection(),
+	create_space_section(),
 })
 
 addSections("short_line_left", {
@@ -355,7 +378,7 @@ addSections("short_line_left", {
 		condition = should_hide_galaxy_line,
 		highlight = { colors.light01, colors.base02, "bold" },
 	},
-	createSpaceSection(),
+	create_space_section(),
 	{
 		name = "FileIcon",
 		condition = should_hide_galaxy_line,
