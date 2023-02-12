@@ -1,6 +1,6 @@
 local status_ok, lib = pcall(require, "toggleterm")
 if not status_ok then
-  return
+	return
 end
 
 lib.setup({
@@ -26,14 +26,11 @@ lib.setup({
 	},
 })
 
-
 -- vim.api.nvim_set_keymap("n", "<F5>", "<cmd>:ToggleTerm size=20 dir=%:p:h direction=horizontal<CR>", {noremap = true, silent = true})
 -- vim.g.toggleterm_terminal_mapping = '<C-t>'
 
-vim.api.nvim_set_keymap("n", "<F3>", "<cmd>:ToggleTermToggleAll<CR>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("x", "<F3>", "<cmd>:ToggleTermToggleAll<CR>", {noremap = true, silent = true})
-
-
+vim.api.nvim_set_keymap("n", "<F3>", "<cmd>:ToggleTermToggleAll<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("x", "<F3>", "<cmd>:ToggleTermToggleAll<CR>", { noremap = true, silent = true })
 
 -- function _G.set_terminal_keymaps()
 --   local opts = {noremap = true}
@@ -67,7 +64,6 @@ function _PYTHON_TOGGLE()
 	python:toggle()
 end
 
-
 --[[ local Terminal  = require('toggleterm.terminal').Terminal ]]
 --[[ local lazygit = Terminal:new({ cmd = "lazygit", hidden = true }) ]]
 --[[]]
@@ -76,4 +72,3 @@ end
 --[[ end ]]
 --[[]]
 --[[ vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true}) ]]
-

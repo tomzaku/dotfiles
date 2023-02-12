@@ -15,9 +15,9 @@ function os.capture(cmd, raw)
 	s = string.gsub(s, "[\n\r]+", " ")
 	return s
 end
-local function printFortune ()
-  local fortune = os.capture("fortune -s")
-  return fortune
+local function printFortune()
+	local fortune = os.capture("fortune -s")
+	return fortune
 end
 
 lib:setup({

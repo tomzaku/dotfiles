@@ -6,32 +6,32 @@ end
 local condition = require("galaxyline.condition")
 
 local icons = {
-    edit = " ",
-    heading = "",
-    --[[ separate = "  ", ]]
-    --[[ separate = " ⏽ ", ]]
-    separate = "  ",
-    sep = {
-        left = "",
-        right = "",
-        space = " ",
-    },
-    diagnostic = {
-        error = " ",
-        warn = " ",
-        info = " ",
-    },
-    diff = {
-        add = " ",
-        modified = " ",
-        remove = " ",
-    },
-    -- git = ""
-    git = " ",
-    lsp = {
-        working = " ",
-        idle = " "
-    },
+	edit = " ",
+	heading = "",
+	--[[ separate = "  ", ]]
+	--[[ separate = " ⏽ ", ]]
+	separate = "  ",
+	sep = {
+		left = "",
+		right = "",
+		space = " ",
+	},
+	diagnostic = {
+		error = " ",
+		warn = " ",
+		info = " ",
+	},
+	diff = {
+		add = " ",
+		modified = " ",
+		remove = " ",
+	},
+	-- git = ""
+	git = " ",
+	lsp = {
+		working = " ",
+		idle = " ",
+	},
 }
 
 local split = function(inputstr, sep)
@@ -56,7 +56,7 @@ local slice = function(tbl, first, last, step)
 end
 
 local get_visible_lsp = function()
-	local tbl = { ["dashboard"] = true,[""] = true }
+	local tbl = { ["dashboard"] = true, [""] = true }
 	if tbl[vim.bo.filetype] then
 		return false
 	end
@@ -78,7 +78,6 @@ local get_path = function()
 	return table.concat(shortPath, "/")
 end
 
-
 local should_hide_galaxy_line = function()
 	local path = vim.fn.expand("%:p")
 	if string.find(path, "NvimTree") then
@@ -92,59 +91,59 @@ end
 -- end
 
 local colors = {
-    bg = "#202328",
-    fg = "#bbc2cf",
-    error = "#EA3323",
-    warn = "#F3A83B",
-    yellow = "#beb100",
-    cyan = "#008080",
-    darkblue = "#0277BD",
-    green = "#00C4AB",
-    orange = "#BA3600",
-    violet = "#a9a1e1",
-    magenta = "#c678dd",
-    blue = "#40C4FF",
-    red = "#FF5151",
-    gray = "#263238",
-    lightgray = "#344149",
-    darkergray = "#182124"
+	bg = "#202328",
+	fg = "#bbc2cf",
+	error = "#EA3323",
+	warn = "#F3A83B",
+	yellow = "#beb100",
+	cyan = "#008080",
+	darkblue = "#0277BD",
+	green = "#00C4AB",
+	orange = "#BA3600",
+	violet = "#a9a1e1",
+	magenta = "#c678dd",
+	blue = "#40C4FF",
+	red = "#FF5151",
+	gray = "#263238",
+	lightgray = "#344149",
+	darkergray = "#182124",
 }
 
 -- shorten lines for these filetypes
 galaxyline.short_line_list = {
-    "LuaTree",
-    "floaterm",
-    "dbui",
-    "startify",
-    "term",
-    "nerdtree",
-    "fugitive",
-    "fugitiveblame",
-    "NvimTree",
+	"LuaTree",
+	"floaterm",
+	"dbui",
+	"startify",
+	"term",
+	"nerdtree",
+	"fugitive",
+	"fugitiveblame",
+	"NvimTree",
 }
 
 -- hide NvimTree
 vim.api.nvim_exec(
-    [[
+	[[
 au BufEnter,BufWinEnter,WinEnter,CmdwinEnter * if bufname('%') == "NvimTree" | set laststatus=0 | else | set laststatus=2 | endif
 ]],
-    false
+	false
 )
 
 local modes = {
-    n = { "NORMAL", colors.green },
-    v = { "VISUAL", colors.yellow },
-    V = { "V-LINE", colors.yellow },
-    [""] = { "V-BLOCK", colors.yellow },
-    s = { "SELECT", colors.orange },
-    S = { "S-LINE", colors.orange },
-    [""] = { "S-BLOCK", colors.orange },
-    i = { "INSERT", colors.orange },
-    R = { "REPLACE", colors.red },
-    c = { "COMMAND", colors.darkblue },
-    r = { "PROMPT", colors.brown },
-    ["!"] = { "EXTERNAL", colors.orange },
-    t = { "TERMINAL", colors.blue },
+	n = { "NORMAL", colors.green },
+	v = { "VISUAL", colors.yellow },
+	V = { "V-LINE", colors.yellow },
+	[""] = { "V-BLOCK", colors.yellow },
+	s = { "SELECT", colors.orange },
+	S = { "S-LINE", colors.orange },
+	[""] = { "S-BLOCK", colors.orange },
+	i = { "INSERT", colors.orange },
+	R = { "REPLACE", colors.red },
+	c = { "COMMAND", colors.darkblue },
+	r = { "PROMPT", colors.brown },
+	["!"] = { "EXTERNAL", colors.orange },
+	t = { "TERMINAL", colors.blue },
 }
 
 local get_vim_mode_style = function()
@@ -184,11 +183,11 @@ local show_editting_file = function()
 end
 
 local sectionCount = {
-    left = 0,
-    mid = 0,
-    right = 0,
-    short_line_left = 0,
-    short_line_right = 0,
+	left = 0,
+	mid = 0,
+	right = 0,
+	short_line_left = 0,
+	short_line_right = 0,
 }
 
 local nextSectionNum = function(sectionKind)
@@ -205,7 +204,7 @@ local addSection = function(sectionKind, section)
 		id = section.name
 	end
 	galaxyline.section[sectionKind][num] = {
-	    [id] = section,
+		[id] = section,
 	}
 end
 
@@ -223,23 +222,22 @@ end
 
 local createSpaceSection = function(color)
 	return {
-	    name = "whitespace",
-	    provider = string_provider(" "),
-	    highlight = { color, color },
+		name = "whitespace",
+		provider = string_provider(" "),
+		highlight = { color, color },
 	}
 end
 local createSeparateSection = function(color)
 	return {
-	    name = "whitespace",
-	    provider = string_provider(icons.separate),
-	    highlight = { color },
+		name = "whitespace",
+		provider = string_provider(icons.separate),
+		highlight = { color },
 	}
 end
 
-
 local get_lsp_client = function(msg)
-	msg = msg or icons.lsp.idle .. 'no active lsp'
-	local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+	msg = msg or icons.lsp.idle .. "no active lsp"
+	local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
 	local clients = vim.lsp.get_active_clients()
 	if next(clients) == nil then
 		return msg
@@ -256,125 +254,125 @@ local get_lsp_client = function(msg)
 end
 
 addSections("left", {
-    {
-        name = "ViModeLeftCap",
-        useNameAsId = true,
-        provider = function()
-	        local modeStyle = get_vim_mode_style()
-	        vim.api.nvim_command("hi GalaxyViModeLeftCap guifg=" .. modeStyle[2])
-	        return icons.heading
-        end,
-        highlight = { colors.base02, colors.bg_active },
-    },
-    {
-        name = "ViMode",
-        useNameAsId = true,
-        provider = function()
-	        -- auto change color according the vim mode
-	        local modeStyle = get_vim_mode_style()
-	        vim.api.nvim_command("hi GalaxyViMode guifg=" .. modeStyle[2])
-	        return icons.sep.space .. modeStyle[1] .. icons.sep.space
-        end,
-        highlight = { colors.light01, colors.base02, "bold" },
-    },
-    createSpaceSection(),
-    {
-        name = "FileIcon",
-        condition = condition.buffer_not_empty,
-        highlight = { require("galaxyline.provider_fileinfo").get_file_icon_color },
-        provider = "FileIcon",
-    },
-    {
-        name = "GetPath",
-        provider = get_path,
-        condition = condition.buffer_not_empty,
-    },
-    {
-        name = "ShowEdittingFile",
-        provider = show_editting_file,
-        condition = condition.buffer_not_empty,
-    },
+	{
+		name = "ViModeLeftCap",
+		useNameAsId = true,
+		provider = function()
+			local modeStyle = get_vim_mode_style()
+			vim.api.nvim_command("hi GalaxyViModeLeftCap guifg=" .. modeStyle[2])
+			return icons.heading
+		end,
+		highlight = { colors.base02, colors.bg_active },
+	},
+	{
+		name = "ViMode",
+		useNameAsId = true,
+		provider = function()
+			-- auto change color according the vim mode
+			local modeStyle = get_vim_mode_style()
+			vim.api.nvim_command("hi GalaxyViMode guifg=" .. modeStyle[2])
+			return icons.sep.space .. modeStyle[1] .. icons.sep.space
+		end,
+		highlight = { colors.light01, colors.base02, "bold" },
+	},
+	createSpaceSection(),
+	{
+		name = "FileIcon",
+		condition = condition.buffer_not_empty,
+		highlight = { require("galaxyline.provider_fileinfo").get_file_icon_color },
+		provider = "FileIcon",
+	},
+	{
+		name = "GetPath",
+		provider = get_path,
+		condition = condition.buffer_not_empty,
+	},
+	{
+		name = "ShowEdittingFile",
+		provider = show_editting_file,
+		condition = condition.buffer_not_empty,
+	},
 })
 
 addSections("right", {
-    {
-        name = "LineColumn",
-        provider = "LineColumn",
-    },
-    {
-        name = "LinePercent",
-        provider = "LinePercent",
-    },
-    {
-        name = "DiagnosticError",
-        provider = "DiagnosticError",
-        icon = "  ",
-    },
-    -- createSpaceSection(colors.gray),
-    {
-        name = "DiagnosticWarn",
-        provider = "DiagnosticWarn",
-        icon = "   ",
-    },
-    -- {
-    -- 	name = "fileName",
-    -- 	provider = show_editting_file,
-    -- 	condition = condition.buffer_not_empty,
-    -- 	-- highlight = {colors.blue, colors.gray},
-    -- 	highlight = { colors.bg, colors.blue, "bold" },
-    -- },
-    createSeparateSection("#5C5C5C"),
-    {
-        name = "GetLspClient",
-        provider = get_lsp_client,
-        condition = get_visible_lsp,
-        -- icon = icons.lsp,
-    },
-    createSpaceSection(),
+	{
+		name = "LineColumn",
+		provider = "LineColumn",
+	},
+	{
+		name = "LinePercent",
+		provider = "LinePercent",
+	},
+	{
+		name = "DiagnosticError",
+		provider = "DiagnosticError",
+		icon = "  ",
+	},
+	-- createSpaceSection(colors.gray),
+	{
+		name = "DiagnosticWarn",
+		provider = "DiagnosticWarn",
+		icon = "   ",
+	},
+	-- {
+	-- 	name = "fileName",
+	-- 	provider = show_editting_file,
+	-- 	condition = condition.buffer_not_empty,
+	-- 	-- highlight = {colors.blue, colors.gray},
+	-- 	highlight = { colors.bg, colors.blue, "bold" },
+	-- },
+	createSeparateSection("#5C5C5C"),
+	{
+		name = "GetLspClient",
+		provider = get_lsp_client,
+		condition = get_visible_lsp,
+		-- icon = icons.lsp,
+	},
+	createSpaceSection(),
 })
 
 addSections("short_line_left", {
-    {
-        name = "ViModeLeftCap",
-        useNameAsId = true,
-        provider = function()
-	        local modeStyle = get_vim_mode_style()
-	        vim.api.nvim_command("hi GalaxyViModeLeftCap guifg=" .. modeStyle[2])
-	        return icons.heading
-        end,
-        condition = should_hide_galaxy_line,
-        highlight = { colors.base02, colors.bg_active },
-    },
-    {
-        name = "ViMode",
-        useNameAsId = true,
-        provider = function()
-	        -- auto change color according the vim mode
-	        local modeStyle = get_vim_mode_style()
-	        vim.api.nvim_command("hi GalaxyViMode guifg=" .. modeStyle[2])
-	        return icons.sep.space .. modeStyle[1] .. icons.sep.space
-        end,
-        condition = should_hide_galaxy_line,
-        highlight = { colors.light01, colors.base02, "bold" },
-    },
-    createSpaceSection(),
-    {
-        name = "FileIcon",
-        condition = should_hide_galaxy_line,
-        provider = "FileIcon",
-    },
-    {
-        name = "GetPath",
-        provider = get_filename,
-        condition = should_hide_galaxy_line,
-    },
-    {
-        name = "ShowEdittingFile",
-        provider = show_editting_file,
-        condition = should_hide_galaxy_line,
-    },
+	{
+		name = "ViModeLeftCap",
+		useNameAsId = true,
+		provider = function()
+			local modeStyle = get_vim_mode_style()
+			vim.api.nvim_command("hi GalaxyViModeLeftCap guifg=" .. modeStyle[2])
+			return icons.heading
+		end,
+		condition = should_hide_galaxy_line,
+		highlight = { colors.base02, colors.bg_active },
+	},
+	{
+		name = "ViMode",
+		useNameAsId = true,
+		provider = function()
+			-- auto change color according the vim mode
+			local modeStyle = get_vim_mode_style()
+			vim.api.nvim_command("hi GalaxyViMode guifg=" .. modeStyle[2])
+			return icons.sep.space .. modeStyle[1] .. icons.sep.space
+		end,
+		condition = should_hide_galaxy_line,
+		highlight = { colors.light01, colors.base02, "bold" },
+	},
+	createSpaceSection(),
+	{
+		name = "FileIcon",
+		condition = should_hide_galaxy_line,
+		provider = "FileIcon",
+	},
+	{
+		name = "GetPath",
+		provider = get_filename,
+		condition = should_hide_galaxy_line,
+	},
+	{
+		name = "ShowEdittingFile",
+		provider = show_editting_file,
+		condition = should_hide_galaxy_line,
+	},
 })
 
 addSections("short_line_right", {
-    -- createSpaceSection(colors.base02),
+	-- createSpaceSection(colors.base02),
 })

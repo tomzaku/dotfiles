@@ -6,10 +6,10 @@ vim.g.ale_set_quickfix = 1
 vim.g.ale_javascript_prettier_use_local_config = 1
 
 vim.g.ale_fixers = {
-  typescript = { "prettier", "eslint" },
-  javascript = { "prettier", "eslint" },
-  typescriptreact = { "prettier", "eslint" },
-  javascriptreact = { "prettier", "eslint" },
-  python = { "autopep8", "yapf" },
-  svelte = { "prettier", "eslint", "stylelint" },
+	typescript = { "prettier", "eslint" },
+	javascript = { "prettier", "eslint" },
+	typescriptreact = { "prettier", "eslint" },
+	javascriptreact = { "prettier", "eslint" },
+	python = { "autopep8", "yapf" },
+	svelte = { "prettier", "eslint", "stylelint" },
 }

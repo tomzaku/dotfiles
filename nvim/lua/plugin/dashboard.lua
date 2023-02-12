@@ -6,7 +6,7 @@ function TableConcat(t1, t2)
 end
 
 local function splitByNumberChar(inputstr, number)
-	local t = {"","",""}
+	local t = { "", "", "" }
 	local length = inputstr:len()
 	local i = 0
 	while i < length do
@@ -57,10 +57,8 @@ db.custom_header = {
 -- db.preview_file_width = 50
 -- db.preview_file_height = 12
 
-
-
 db.custom_footer = splitByNumberChar(fortune, 200)
-db.session_directory = '~/Projects/dotfiles/nvim/session'
+db.session_directory = "~/Projects/dotfiles/nvim/session"
 db.custom_center = {
 	{
 		icon = " ",
@@ -93,4 +91,3 @@ db.custom_center = {
 		shortcut = "SPC f w",
 	},
 }
-
