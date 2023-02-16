@@ -29,10 +29,10 @@ local leader_map = function()
 end
 
 local load_core = function()
+	require("core.options")
 	require("plugin")
 	createdir()
 	leader_map()
-	require("core.options")
 	require("core.mapping")
 end
 

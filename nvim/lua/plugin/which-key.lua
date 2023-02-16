@@ -3,6 +3,29 @@ if not status_ok then
 	return
 end
 
+function _FIND_UP_PACKAGE_JSON()
+	local currentPath = vim.fn.expand('%:p')
+	local cmdString = "find-up 'package.json' --cwd=" .. currentPath
+	local packageJsonPath = os.capture(cmdString)
+	if(packageJsonPath) then
+		vim.cmd('e' .. packageJsonPath)
+	end
+end
+
+function _COPY_PACKAGE_NAME()
+	local currentPath = vim.fn.expand('%:p')
+	local cmdString = "find-up 'package.json' --cwd=" .. currentPath
+	local packageJsonPath = os.capture(cmdString)
+	if(packageJsonPath) then
+		local cmd = 'cat ' .. packageJsonPath .. ' | grep "name" | sed -E "s/.* \\"(.*)\\",/\\1/g"'
+	  local packageName = os.capture(cmd)
+		print(packageName)
+		-- copy
+		local copyCmd = 'let @+ = expand("' .. packageName .. '")'
+		vim.cmd(copyCmd)
+	end
+end
+
 local setup = {
 	plugins = {
 		marks = true, -- shows a list of your marks on ' and `
@@ -95,58 +118,36 @@ local mappings = {
 			'<cmd>let @+ = fnamemodify(expand("%"), ":~:.")<cr><cmd>echo fnamemodify(expand("%"), ":~:.")<cr>',
 			"Copy project path",
 		},
+		P = {"<cmd>lua _COPY_PACKAGE_NAME()<CR>", "Copy package name of package.json"},
 	},
-	-- ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
 	["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-	-- ["f"] = {
-	--   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-	--   "Find files",
-	-- },
-	-- ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
-	-- ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
 	f = {
-		name = "Searching & Replacing",
+		name = "Finding",
 		f = { "<cmd>Telescope find_files<cr>", "Find files" },
-		g = { "<cmd>Telescope git_files<cr>", "Git files" },
 		h = { "<cmd>Telescope oldfiles cwd_only=v:true<cr>", "History files" },
 		w = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find words" },
-		-- w = { "<cmd> lua require('telescope.builtin').grep_string({ search = vim.fn.input('Grep For > ')})<cr>", "Search word" },
 		s = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Search current world" },
 		S = {
 			"<cmd>lua require('spectre').open_visual({path = vim.fn.fnamemodify(vim.fn.expand('%:h').. '/**/*', ':~:.')})<CR>",
 			"Search directory",
 		},
 		b = { "<cmd>Telescope file_browser<cr>", "File browser" },
-	},
-
-	p = {
-		name = "Packer",
-		c = { "<cmd>PackerCompile<cr>", "Compile" },
-		i = { "<cmd>PackerInstall<cr>", "Install" },
-		s = { "<cmd>PackerSync<cr>", "Sync" },
-		S = { "<cmd>PackerStatus<cr>", "Status" },
-		u = { "<cmd>PackerUpdate<cr>", "Update" },
+		P = {"<cmd>lua _FIND_UP_PACKAGE_JSON()<CR>", "Find up package.json"},
 	},
 
 	g = {
 		name = "Git",
-		j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
-		k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-		l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
-		p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
-		r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
-		R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-		s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-		u = {
-			"<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-			"Undo Stage Hunk",
+		l = {
+			"<cmd>FloatermShowOrNew lazygit<cr>",
+			"Lazy Git"
 		},
-		o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-		c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
 		d = {
-			"<cmd>Gitsigns diffthis HEAD<cr>",
+			"<cmd>DiffviewFileHistory %<cr>",
 			"Diff",
+		},
+		c = {
+			"<cmd>DiffviewClose<cr>",
+			"Close Diff",
 		},
 	},
 
@@ -182,15 +183,9 @@ local mappings = {
 	},
 	s = {
 		name = "Search",
-		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-		c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-		h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
-		M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
-		r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
 		R = { "<cmd>Telescope registers<cr>", "Registers" },
 		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
 		C = { "<cmd>Telescope commands<cr>", "Commands" },
-		w = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find words" },
 	},
 
 	t = {
@@ -203,7 +198,11 @@ local mappings = {
 		v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
 		c = { "<cmd>ToggleTerm size=20 dir=%:p:h direction=horizontal<CR>", "Directory here" },
 	},
-
+	w = {
+		name = "Windows",
+		v = { "<cmd>vsplit<cr>", "Split vertical"},
+		h = { "<cmd>split<cr>", "Split horizontal"},
+	},
 	z = { "<cmd>TZFocus<cr>", "Focus mode" },
 }
 

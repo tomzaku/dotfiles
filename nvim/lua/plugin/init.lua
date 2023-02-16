@@ -30,6 +30,9 @@ require("packer").startup(function(use)
 
 			-- Additional lua configuration, makes nvim stuff amazing
 			"folke/neodev.nvim",
+			
+			-- null-ls
+			"jose-elias-alvarez/null-ls.nvim"
 		},
 	})
 
@@ -54,7 +57,7 @@ require("packer").startup(function(use)
 	})
 
 	-- Git related plugins
-	use("tpope/vim-fugitive")
+	--[[ use("tpope/vim-fugitive") ]]
 	use("lewis6991/gitsigns.nvim")
 	use("sindrets/diffview.nvim")
 
@@ -98,10 +101,7 @@ require("packer").startup(function(use)
 	use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
 	use("windwp/nvim-ts-autotag")
 	use("mrjones2014/nvim-ts-rainbow") -- rainbow parentheses.
-	use({
-		"norcalli/nvim-colorizer.lua",
-		ft = { "html", "css", "sass", "scss", "vim", "typescript", "typescriptreact" },
-	})
+	use( "norcalli/nvim-colorizer.lua")
 	use("tpope/vim-sleuth") -- Detect tabstop and shiftwidth automatically
 	use("Pocco81/true-zen.nvim")
 
@@ -230,7 +230,6 @@ require("plugin.lsp")
 -- require("plugin.completion")
 require("plugin.nvim-tree")
 require("plugin.nvim-spectre")
-require("plugin.nvim-colorizer")
 require("plugin.nvim-ts-context-commentstring")
 require("plugin.toggleterm")
 require("plugin.vim-floaterm")
@@ -251,3 +250,4 @@ require("plugin.nvim-ts-autotag")
 
 --[[ require("plugin.nvim-ufo") ]]
 --require('lualine').setup()
+require("colorizer").setup()

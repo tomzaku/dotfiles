@@ -94,3 +94,6 @@ set -x GOPATH ~/Projects/golang/
 
 
 
+
+# Created by `pipx` on 2023-02-13 07:33:49
+set PATH $PATH /Users/tom.levt/.local/bin
