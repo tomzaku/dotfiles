@@ -1,14 +1,14 @@
 require("nvim-treesitter.configs").setup({
 	-- JoosepAlviste/nvim-ts-context-commentstring
-	context_commentstring = {
-		enable = true,
-		commentary_integration = {
-			-- change default mapping
-			Commentary = "g/",
-			-- disable default mapping
-			CommentaryLine = false,
-		},
-	},
+	-- context_commentstring = {
+	-- 	enable = true,
+	-- 	commentary_integration = {
+	-- 		-- change default mapping
+	-- 		Commentary = 'g/',
+	-- 		-- disable default mapping
+	-- 		CommentaryLine = false,
+	-- 	},
+	-- },
 	-- Add languages to be installed here that you want installed for treesitter
 	ensure_installed = { "c", "cpp", "go", "lua", "python", "rust", "typescript", "help", "vim" },
 	highlight = { enable = true },

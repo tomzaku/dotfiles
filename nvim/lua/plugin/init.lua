@@ -13,7 +13,7 @@ if not status_ok then
 	return
 end
 
-require("packer").startup({
+require("packer").startup(
 	function(use)
 		-- Package manager
 		use("wbthomason/packer.nvim")
@@ -69,7 +69,16 @@ require("packer").startup({
 		use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
 
 		-- Comment
+		use("tpope/vim-commentary")
 		use("JoosepAlviste/nvim-ts-context-commentstring")
+		-- use {
+		-- 	'numToStr/Comment.nvim',
+		-- 	config = function()
+		-- 		require('Comment').setup {
+		-- 			pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+		-- 		}
+		-- 	end
+		-- }
 		use({
 			"folke/todo-comments.nvim",
 			requires = "nvim-lua/plenary.nvim",
@@ -77,7 +86,6 @@ require("packer").startup({
 				require("todo-comments").setup({})
 			end,
 		})
-		use("tpope/vim-commentary")
 
 		-- Code Runner
 		use("metakirby5/codi.vim")
@@ -102,7 +110,6 @@ require("packer").startup({
 
 		-- Utility
 		--[[ use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' } -- Folding  ]]
-
 		use("liuchengxu/vista.vim")
 
 		-- Key mapping
@@ -115,7 +122,7 @@ require("packer").startup({
 		use({
 			"AckslD/nvim-neoclip.lua",
 			requires = {
-				{ "kkharji/sqlite.lua", module = "sqlite" },
+				{ "kkharji/sqlite.lua",           module = "sqlite" },
 				{ "nvim-telescope/telescope.nvim" },
 				{ "ibhagwan/fzf-lua" },
 			},
@@ -188,8 +195,8 @@ require("packer").startup({
 		if is_bootstrap then
 			require("packer").sync()
 		end
-	end,
-})
+	end
+)
 
 -- When we are bootstrapping a configuration, it doesn't
 -- make sense to execute the rest of the init.lua.
