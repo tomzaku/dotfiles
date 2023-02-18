@@ -13,196 +13,183 @@ if not status_ok then
 	return
 end
 
-require("packer").startup({function(use)
-	-- Package manager
-	use("wbthomason/packer.nvim")
+require("packer").startup({
+	function(use)
+		-- Package manager
+		use("wbthomason/packer.nvim")
 
-	-- LSP Configuration & Plugins
-	use({
-		"neovim/nvim-lspconfig",
-		requires = {
-			-- Automatically install LSPs to stdpath for neovim
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
+		-- LSP Configuration & Plugins
+		use({
+			"neovim/nvim-lspconfig",
+			requires = {
+				-- Automatically install LSPs to stdpath for neovim
+				"williamboman/mason.nvim",
+				"williamboman/mason-lspconfig.nvim",
 
-			-- Useful status updates for LSP
-			"j-hui/fidget.nvim",
+				-- Useful status updates for LSP
+				"j-hui/fidget.nvim",
 
-			-- Additional lua configuration, makes nvim stuff amazing
-			"folke/neodev.nvim",
-			
-			-- null-ls
-			"jose-elias-alvarez/null-ls.nvim"
-		},
-	})
+				-- Additional lua configuration, makes nvim stuff amazing
+				"folke/neodev.nvim",
 
-	-- Autocompletion
-	use({
-		"hrsh7th/nvim-cmp",
-		requires = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
-	})
+				-- null-ls
+				"jose-elias-alvarez/null-ls.nvim",
+			},
+		})
 
-	-- Highlight, edit, and navigate code
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = function()
-			pcall(require("nvim-treesitter.install").update({ with_sync = true }))
-		end,
-	})
+		-- Autocompletion
+		use({
+			"hrsh7th/nvim-cmp",
+			requires = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
+		})
 
-	-- Additional text objects via treesitter
-	use({
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		after = "nvim-treesitter",
-	})
+		-- Highlight, edit, and navigate code
+		use({
+			"nvim-treesitter/nvim-treesitter",
+			run = function()
+				pcall(require("nvim-treesitter.install").update({ with_sync = true }))
+			end,
+		})
 
-	-- Git related plugins
-	--[[ use("tpope/vim-fugitive") ]]
-	use("lewis6991/gitsigns.nvim")
-	use("sindrets/diffview.nvim")
+		-- Additional text objects via treesitter
+		use({
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			after = "nvim-treesitter",
+		})
 
-	-- Fuzzy Finder (files, lsp, etc)
-	use({ "nvim-telescope/telescope.nvim", branch = "0.1.x", requires = { "nvim-lua/plenary.nvim" } })
+		-- Git related plugins
+		--[[ use("tpope/vim-fugitive") ]]
+		use("lewis6991/gitsigns.nvim")
+		use("sindrets/diffview.nvim")
 
-	-- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
-	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
+		-- Fuzzy Finder (files, lsp, etc)
+		use({ "nvim-telescope/telescope.nvim", branch = "0.1.x", requires = { "nvim-lua/plenary.nvim" } })
 
-	-- Comment
-	use("JoosepAlviste/nvim-ts-context-commentstring")
-	use({
-		"folke/todo-comments.nvim",
-		requires = "nvim-lua/plenary.nvim",
-		config = function()
-			require("todo-comments").setup({})
-		end,
-	})
-	use("tpope/vim-commentary")
-	--[[ use({ ]]
-	--[[ 	"numToStr/Comment.nvim", ]]
-	--[[ 	requires = "JoosepAlviste/nvim-ts-context-commentstring", ]]
-	--[[ 	config = function() ]]
-	--[[ 		require("Comment").setup({ ]]
-	--[[       pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(), ]]
-	--[[ 		}) ]]
-	--[[ 	end, ]]
-	--[[ }) ]]
+		-- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
+		use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
 
-	-- Code Runner
-	use("metakirby5/codi.vim")
+		-- Comment
+		use("JoosepAlviste/nvim-ts-context-commentstring")
+		use({
+			"folke/todo-comments.nvim",
+			requires = "nvim-lua/plenary.nvim",
+			config = function()
+				require("todo-comments").setup({})
+			end,
+		})
+		use("tpope/vim-commentary")
 
-	-- Indent
-	use("lukas-reineke/indent-blankline.nvim")
+		-- Code Runner
+		use("metakirby5/codi.vim")
 
-	-- Editting Support
-	use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
-	use("windwp/nvim-ts-autotag")
-	use("mrjones2014/nvim-ts-rainbow") -- rainbow parentheses.
-	use( "norcalli/nvim-colorizer.lua")
-	use("tpope/vim-sleuth") -- Detect tabstop and shiftwidth automatically
-	use("Pocco81/true-zen.nvim")
+		-- Indent
+		use("lukas-reineke/indent-blankline.nvim")
 
-	-- Search & replace
-	use("windwp/nvim-spectre")
+		-- Editting Support
+		use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
+		use("windwp/nvim-ts-autotag")
+		use("mrjones2014/nvim-ts-rainbow") -- rainbow parentheses.
+		use("norcalli/nvim-colorizer.lua")
+		use("tpope/vim-sleuth") -- Detect tabstop and shiftwidth automatically
+		use("Pocco81/true-zen.nvim")
 
-	-- Terminal
-	use("voldikss/vim-floaterm") -- terminal
-	use("akinsho/toggleterm.nvim") -- terminal
+		-- Search & replace
+		use("windwp/nvim-spectre")
 
-	-- Utility
-	--[[ use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' } -- Folding  ]]
+		-- Terminal
+		use("voldikss/vim-floaterm") -- terminal
+		use("akinsho/toggleterm.nvim") -- terminal
 
-	use("liuchengxu/vista.vim")
+		-- Utility
+		--[[ use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' } -- Folding  ]]
 
-	-- Key mapping
-	use("folke/which-key.nvim")
+		use("liuchengxu/vista.vim")
 
-	-- Grammar & spelling
-	use("kamykn/spelunker.vim")
+		-- Key mapping
+		use("folke/which-key.nvim")
 
-	-- Registry
-	use({
-		"AckslD/nvim-neoclip.lua",
-		requires = {
-			{ "kkharji/sqlite.lua", module = "sqlite" },
-			{ "nvim-telescope/telescope.nvim" },
-			{ "ibhagwan/fzf-lua" },
-		},
-		config = function()
-			require("neoclip").setup()
-		end,
-	}) -- Clipboard management for registers
+		-- Grammar & spelling
+		use("kamykn/spelunker.vim")
 
-	-- Dashboard and theme
-	use({
-		"glepnir/dashboard-nvim",
-		--event = 'VimEnter',
-		theme = "hyper",
-		config = function()
-			require("dashboard").setup({
-				-- config
-			})
-		end,
-		requires = { "nvim-tree/nvim-web-devicons" },
-	})
-	use("glepnir/galaxyline.nvim") --tabbar footer
-	-- use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
+		-- Registry
+		use({
+			"AckslD/nvim-neoclip.lua",
+			requires = {
+				{ "kkharji/sqlite.lua", module = "sqlite" },
+				{ "nvim-telescope/telescope.nvim" },
+				{ "ibhagwan/fzf-lua" },
+			},
+			config = function()
+				require("neoclip").setup()
+			end,
+		}) -- Clipboard management for registers
 
-	-- Colorschemes
-	use("glepnir/zephyr-nvim") -- theme
-	use("aonemd/kuroi.vim") -- theme
+		-- Dashboard and theme
+		use({
+			"glepnir/dashboard-nvim",
+			--event = 'VimEnter',
+			theme = "hyper",
+			config = function()
+				require("dashboard").setup({
+					-- config
+				})
+			end,
+			requires = { "nvim-tree/nvim-web-devicons" },
+		})
+		use("glepnir/galaxyline.nvim") --tabbar footer
+		-- use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
 
-	use({
-		"nvim-tree/nvim-tree.lua",
-		requires = {
-			"nvim-tree/nvim-web-devicons", -- optional, for file icons
-		},
-		tag = "nightly", -- optional, updated every week. (see issue #1193)
-	})
+		-- Colorschemes
+		use("glepnir/zephyr-nvim") -- theme
+		use("aonemd/kuroi.vim") -- theme
 
-	use("christoomey/vim-tmux-navigator")
-	use({
-		"rmagatti/auto-session",
-		config = function()
-			require("auto-session").setup({
-				log_level = "error",
-				auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-			})
-		end,
-	})
+		use({
+			"nvim-tree/nvim-tree.lua",
+			requires = {
+				"nvim-tree/nvim-web-devicons", -- optional, for file icons
+			},
+			tag = "nightly", -- optional, updated every week. (see issue #1193)
+		})
 
-	-- Motion
-	use("ggandor/leap.nvim")
+		use("christoomey/vim-tmux-navigator")
+		use({
+			"rmagatti/auto-session",
+			config = function()
+				require("auto-session").setup({
+					log_level = "error",
+					auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+				})
+			end,
+		})
 
-	use({
-		"iamcco/markdown-preview.nvim",
-		run = "cd app && yarn install",
-	})
-	use("andweeb/presence.nvim") -- discord Rich Presence
+		-- Motion
+		use("ggandor/leap.nvim")
 
-	-- Debugger
-	use("mfussenegger/nvim-dap")
-	use("rcarriga/nvim-dap-ui")
-	use("theHamsta/nvim-dap-virtual-text")
+		use({
+			"iamcco/markdown-preview.nvim",
+			run = "cd app && yarn install",
+		})
+		use("andweeb/presence.nvim") -- discord Rich Presence
 
-	-- Quickfix
-	use("kevinhwang91/nvim-bqf", { ft = "qf" })
+		-- Debugger
+		use("mfussenegger/nvim-dap")
+		use("rcarriga/nvim-dap-ui")
+		use("theHamsta/nvim-dap-virtual-text")
 
-	-- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
-	local has_plugins, plugins = pcall(require, "custom.plugins")
-	if has_plugins then
-		plugins(use)
-	end
+		-- Quickfix
+		use("kevinhwang91/nvim-bqf", { ft = "qf" })
 
-	if is_bootstrap then
-		require("packer").sync()
-	end
-end,
-config = {
-  profile = {
-    enable = true,
-    threshold = 1 -- the amount in ms that a plugin's load time must be over for it to be included in the profile
-  }
-}})
+		-- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
+		local has_plugins, plugins = pcall(require, "custom.plugins")
+		if has_plugins then
+			plugins(use)
+		end
+
+		if is_bootstrap then
+			require("packer").sync()
+		end
+	end,
+})
 
 -- When we are bootstrapping a configuration, it doesn't
 -- make sense to execute the rest of the init.lua.
@@ -232,7 +219,6 @@ require("plugin.lsp")
 -- require("plugin.completion")
 require("plugin.nvim-tree")
 require("plugin.nvim-spectre")
---[[ require("plugin.nvim-ts-context-commentstring") ]]
 require("plugin.toggleterm")
 require("plugin.vim-floaterm")
 require("plugin.vista")
@@ -251,5 +237,4 @@ require("plugin.nvim-dap")
 require("plugin.nvim-ts-autotag")
 
 --[[ require("plugin.nvim-ufo") ]]
---require('lualine').setup()
 require("colorizer").setup()

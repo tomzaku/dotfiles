@@ -4,21 +4,21 @@ if not status_ok then
 end
 
 function _FIND_UP_PACKAGE_JSON()
-	local currentPath = vim.fn.expand('%:p')
+	local currentPath = vim.fn.expand("%:p")
 	local cmdString = "find-up 'package.json' --cwd=" .. currentPath
 	local packageJsonPath = os.capture(cmdString)
-	if(packageJsonPath) then
-		vim.cmd('e' .. packageJsonPath)
+	if packageJsonPath then
+		vim.cmd("e" .. packageJsonPath)
 	end
 end
 
 function _COPY_PACKAGE_NAME()
-	local currentPath = vim.fn.expand('%:p')
+	local currentPath = vim.fn.expand("%:p")
 	local cmdString = "find-up 'package.json' --cwd=" .. currentPath
 	local packageJsonPath = os.capture(cmdString)
-	if(packageJsonPath) then
-		local cmd = 'cat ' .. packageJsonPath .. ' | grep "name" | sed -E "s/.* \\"(.*)\\",/\\1/g"'
-	  local packageName = os.capture(cmd)
+	if packageJsonPath then
+		local cmd = "cat " .. packageJsonPath .. ' | grep "name" | sed -E "s/.* \\"(.*)\\",/\\1/g"'
+		local packageName = os.capture(cmd)
 		print(packageName)
 		-- copy
 		local copyCmd = 'let @+ = expand("' .. packageName .. '")'
@@ -118,7 +118,7 @@ local mappings = {
 			'<cmd>let @+ = fnamemodify(expand("%"), ":~:.")<cr><cmd>echo fnamemodify(expand("%"), ":~:.")<cr>',
 			"Copy project path",
 		},
-		P = {"<cmd>lua _COPY_PACKAGE_NAME()<CR>", "Copy package name of package.json"},
+		P = { "<cmd>lua _COPY_PACKAGE_NAME()<CR>", "Copy package name of package.json" },
 	},
 	["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 	f = {
@@ -132,14 +132,14 @@ local mappings = {
 			"Search directory",
 		},
 		b = { "<cmd>Telescope file_browser<cr>", "File browser" },
-		P = {"<cmd>lua _FIND_UP_PACKAGE_JSON()<CR>", "Find up package.json"},
+		P = { "<cmd>lua _FIND_UP_PACKAGE_JSON()<CR>", "Find up package.json" },
 	},
 
 	g = {
 		name = "Git",
 		l = {
 			"<cmd>FloatermShowOrNew lazygit<cr>",
-			"Lazy Git"
+			"Lazy Git",
 		},
 		d = {
 			"<cmd>DiffviewFileHistory %<cr>",
@@ -200,9 +200,9 @@ local mappings = {
 	},
 	p = {
 		name = "Windows",
-		v = { "<cmd>vsplit<cr>", "Split vertical"},
-		h = { "<cmd>split<cr>", "Split horizontal"},
-		t = { "<cmd>call ToggleWindowHorizontalVerticalSplit()<cr>", "Toggle pane"}
+		v = { "<cmd>vsplit<cr>", "Split vertical" },
+		h = { "<cmd>split<cr>", "Split horizontal" },
+		t = { "<cmd>call ToggleWindowHorizontalVerticalSplit()<cr>", "Toggle pane" },
 	},
 	z = { "<cmd>TZFocus<cr>", "Focus mode" },
 }

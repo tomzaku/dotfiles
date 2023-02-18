@@ -1,15 +1,16 @@
 require("nvim-treesitter.configs").setup({
-
 	-- JoosepAlviste/nvim-ts-context-commentstring
-  context_commentstring = {
-    enable = true,
-    --[[ enable_autocmd = false, ]]
-  },
-
-
+	context_commentstring = {
+		enable = true,
+		commentary_integration = {
+			-- change default mapping
+			Commentary = "g/",
+			-- disable default mapping
+			CommentaryLine = false,
+		},
+	},
 	-- Add languages to be installed here that you want installed for treesitter
 	ensure_installed = { "c", "cpp", "go", "lua", "python", "rust", "typescript", "help", "vim" },
-
 	highlight = { enable = true },
 	indent = { enable = true, disable = { "python" } },
 	incremental_selection = {
@@ -21,7 +22,6 @@ require("nvim-treesitter.configs").setup({
 			node_decremental = "grm",
 		},
 	},
-
 	-- Plugins: mrjones2014/nvim-ts-rainbow
 	rainbow = {
 		enable = true,
