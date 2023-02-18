@@ -198,10 +198,11 @@ local mappings = {
 		v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
 		c = { "<cmd>ToggleTerm size=20 dir=%:p:h direction=horizontal<CR>", "Directory here" },
 	},
-	w = {
+	p = {
 		name = "Windows",
 		v = { "<cmd>vsplit<cr>", "Split vertical"},
 		h = { "<cmd>split<cr>", "Split horizontal"},
+		t = { "<cmd>call ToggleWindowHorizontalVerticalSplit()<cr>", "Toggle pane"}
 	},
 	z = { "<cmd>TZFocus<cr>", "Focus mode" },
 }

@@ -4,11 +4,5 @@ if not status_ok then
 end
 
 comment.setup({
-	pre_hook = function(ctx)
-		local U = require("Comment.utils")
-		local type = ctx.ctype == U.ctype.line and "__default" or "__multiline"
-		return require("ts_context_commentstring.internal").calculate_commentstring({
-			key = type,
-		})
-	end,
+	  pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
 })

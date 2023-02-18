@@ -13,7 +13,7 @@ if not status_ok then
 	return
 end
 
-require("packer").startup(function(use)
+require("packer").startup({function(use)
 	-- Package manager
 	use("wbthomason/packer.nvim")
 
@@ -76,20 +76,16 @@ require("packer").startup(function(use)
 			require("todo-comments").setup({})
 		end,
 	})
-	use({
-		"numToStr/Comment.nvim",
-		config = function()
-			require("Comment").setup({
-				pre_hook = function(ctx)
-					local U = require("Comment.utils")
-					local type = ctx.ctype == U.ctype.line and "__default" or "__multiline"
-					return require("ts_context_commentstring.internal").calculate_commentstring({
-						key = type,
-					})
-				end,
-			})
-		end,
-	})
+	use("tpope/vim-commentary")
+	--[[ use({ ]]
+	--[[ 	"numToStr/Comment.nvim", ]]
+	--[[ 	requires = "JoosepAlviste/nvim-ts-context-commentstring", ]]
+	--[[ 	config = function() ]]
+	--[[ 		require("Comment").setup({ ]]
+	--[[       pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(), ]]
+	--[[ 		}) ]]
+	--[[ 	end, ]]
+	--[[ }) ]]
 
 	-- Code Runner
 	use("metakirby5/codi.vim")
@@ -200,7 +196,13 @@ require("packer").startup(function(use)
 	if is_bootstrap then
 		require("packer").sync()
 	end
-end)
+end,
+config = {
+  profile = {
+    enable = true,
+    threshold = 1 -- the amount in ms that a plugin's load time must be over for it to be included in the profile
+  }
+}})
 
 -- When we are bootstrapping a configuration, it doesn't
 -- make sense to execute the rest of the init.lua.
@@ -230,7 +232,7 @@ require("plugin.lsp")
 -- require("plugin.completion")
 require("plugin.nvim-tree")
 require("plugin.nvim-spectre")
-require("plugin.nvim-ts-context-commentstring")
+--[[ require("plugin.nvim-ts-context-commentstring") ]]
 require("plugin.toggleterm")
 require("plugin.vim-floaterm")
 require("plugin.vista")

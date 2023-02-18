@@ -14,5 +14,3 @@ function! ToggleWindowHorizontalVerticalSplit()
     let t:splitType = 'vertical'
   endif
 endfunction
-
-nnoremap <silent> st :call ToggleWindowHorizontalVerticalSplit()<cr>
