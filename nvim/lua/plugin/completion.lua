@@ -1,14 +1,5 @@
-local cmp_status_ok, cmp = pcall(require, "cmp")
-
-if not cmp_status_ok then
-	return
-end
-
-local luasnip_status_ok, luasnip = pcall(require, "luasnip")
-
-if not luasnip_status_ok then
-	return
-end
+local cmp = require("cmp")
+local luasnip = require("luasnip")
 
 -- load snippets from path/of/your/nvim/config/my_snippets
 require("luasnip/loaders/from_vscode").lazy_load({ paths = "./my_snippets" })
@@ -68,10 +59,31 @@ cmp.setup({
 		end,
 	},
 	mapping = cmp.mapping.preset.insert({
-		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+		["<C-d>"] = cmp.mapping.scroll_docs(-4),
+		["<C-f>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),
-		["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-		["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+		["<CR>"] = cmp.mapping.confirm({
+			behavior = cmp.ConfirmBehavior.Replace,
+			select = true,
+		}),
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item()
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+		["<S-Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+			elseif luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
 	}),
 
 	sources = cmp.config.sources({
@@ -84,7 +96,7 @@ cmp.setup({
 	}),
 })
 
-vim.cmd("imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'")
-vim.cmd("inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>")
-vim.cmd("snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>")
-vim.cmd("snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>")
+-- vim.cmd("imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'")
+-- vim.cmd("inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>")
+-- vim.cmd("snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>")
+-- vim.cmd("snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>")

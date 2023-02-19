@@ -49,13 +49,11 @@ require("lazy").setup({
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			"JoosepAlviste/nvim-ts-context-commentstring",
-			"numToStr/Comment.nvim",
+			"nvim-treesitter/nvim-treesitter-textobjects"
 		},
-		config = function()
-			pcall(require("nvim-treesitter.install").update({ with_sync = true }))
-		end,
+		-- config = function()
+		-- 	pcall(require("nvim-treesitter.install").update({ with_sync = true }))
+		-- end,
 	},
 
 	{ -- Adds git releated signs to the gutter, as well as utilities for managing changes
@@ -197,7 +195,7 @@ require("lazy").setup({
 require("plugin.nvim-treesitter")
 require("plugin.telescope")
 require("plugin.lsp")
--- require("plugin.completion")
+require("plugin.completion")
 require("plugin.nvim-tree")
 require("plugin.nvim-spectre")
 require("plugin.toggleterm")
