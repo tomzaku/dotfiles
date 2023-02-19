@@ -46,6 +46,18 @@ require("lazy").setup({
 		dependencies = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
 	},
 
+	{ -- Highlight, edit, and navigate code
+		"nvim-treesitter/nvim-treesitter",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			"JoosepAlviste/nvim-ts-context-commentstring",
+			"numToStr/Comment.nvim",
+		},
+		config = function()
+			pcall(require("nvim-treesitter.install").update({ with_sync = true }))
+		end,
+	},
+
 	{ -- Adds git releated signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
 		opts = {
@@ -77,25 +89,9 @@ require("lazy").setup({
 	-- "gc" to comment visual regions/lines
 	{
 		"numToStr/Comment.nvim",
-		dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
-
+		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
 		opts = {
-			pre_hook = function(ctx)
-				local U = require 'Comment.utils'
-
-				local location = nil
-				if ctx.type == U.ctype.block then
-					location = require('ts_context_commentstring.utils').get_cursor_location()
-				elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
-					location = require('ts_context_commentstring.utils').get_visual_start_location()
-				end
-
-				return require('ts_context_commentstring.internal').calculate_commentstring {
-					key = ctx.ctype == U.ctype.line and '__default' or '__multiline',
-					location = location
-				}
-			end
-			-- pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+			pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
 		},
 	},
 	{ "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
@@ -116,17 +112,6 @@ require("lazy").setup({
 		build = "make",
 		cond = function()
 			return vim.fn.executable("make") == 1
-		end,
-	},
-
-	{ -- Highlight, edit, and navigate code
-		"nvim-treesitter/nvim-treesitter",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			"JoosepAlviste/nvim-ts-context-commentstring",
-		},
-		config = function()
-			pcall(require("nvim-treesitter.install").update({ with_sync = true }))
 		end,
 	},
 
@@ -221,7 +206,6 @@ require("plugin.vista")
 require("plugin.dashboard")
 require("plugin.gitsign")
 require("plugin.galaxyline")
-require("plugin.indent-blankline")
 require("plugin.theme")
 require("plugin.which-key")
 require("plugin.autopairs")
@@ -231,6 +215,4 @@ require("plugin.presence")
 require("plugin.spelunker-vim")
 require("plugin.nvim-dap")
 require("plugin.nvim-ts-autotag")
-
---[[ require("plugin.nvim-ufo") ]]
 require("colorizer").setup()
