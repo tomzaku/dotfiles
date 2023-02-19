@@ -1,222 +1,195 @@
 -- Install packer
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-local is_bootstrap = false
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-	is_bootstrap = true
-	vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-	vim.cmd([[packadd packer.nvim]])
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
+vim.opt.rtp:prepend(lazypath)
 
--- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-	return
-end
+require("lazy").setup({
+	-- NOTE: First, some plugins that don't require any configuration
 
-require("packer").startup(
-	function(use)
-		-- Package manager
-		use("wbthomason/packer.nvim")
+	-- Git related plugins
+	"tpope/vim-fugitive",
+	"tpope/vim-rhubarb",
 
-		-- LSP Configuration & Plugins
-		use({
-			"neovim/nvim-lspconfig",
-			requires = {
-				-- Automatically install LSPs to stdpath for neovim
-				"williamboman/mason.nvim",
-				"williamboman/mason-lspconfig.nvim",
+	-- Detect tabstop and shiftwidth automatically
 
-				-- Useful status updates for LSP
-				"j-hui/fidget.nvim",
+	-- NOTE: This is where your plugins related to LSP can be installed.
+	--  The configuration is done below. Search for lspconfig to find it below.
+	{ -- LSP Configuration & Plugins
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			-- Automatically install LSPs to stdpath for neovim
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
 
-				-- Additional lua configuration, makes nvim stuff amazing
-				"folke/neodev.nvim",
+			-- Useful status updates for LSP
+			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+			{ "j-hui/fidget.nvim", opts = {} },
 
-				-- null-ls
-				"jose-elias-alvarez/null-ls.nvim",
+			-- Additional lua configuration, makes nvim stuff amazing!
+			"folke/neodev.nvim",
+
+			-- null-ls
+			"jose-elias-alvarez/null-ls.nvim",
+		},
+	},
+	{ -- Autocompletion
+		"hrsh7th/nvim-cmp",
+		dependencies = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
+	},
+
+	{ -- Adds git releated signs to the gutter, as well as utilities for managing changes
+		"lewis6991/gitsigns.nvim",
+		opts = {
+			-- See `:help gitsigns.txt`
+			signs = {
+				add = { text = "+" },
+				change = { text = "~" },
+				delete = { text = "_" },
+				topdelete = { text = "‾" },
+				changedelete = { text = "~" },
 			},
-		})
+		},
+	},
+	"sindrets/diffview.nvim",
 
-		-- Autocompletion
-		use({
-			"hrsh7th/nvim-cmp",
-			requires = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
-		})
+	-- Indent
+	{ -- Add indentation guides even on blank lines
+		"lukas-reineke/indent-blankline.nvim",
+		opts = {
+			filetype_exclude = { "help", "terminal", "dashboard", "packer" },
+			show_current_context_start = true,
+			show_current_context = true,
+			char = "╎",
+			show_trailing_blankline_indent = false,
+		},
+	},
 
-		-- Highlight, edit, and navigate code
-		use({
-			"nvim-treesitter/nvim-treesitter",
-			run = function()
-				pcall(require("nvim-treesitter.install").update({ with_sync = true }))
-			end,
-		})
+	-- "gc" to comment visual regions/lines
+	{
+		"numToStr/Comment.nvim",
+		dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
 
-		-- Additional text objects via treesitter
-		use({
+		opts = {
+			pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+		},
+	},
+	{ "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
+
+	-- Fuzzy Finder (files, lsp, etc)
+	{
+		"nvim-telescope/telescope.nvim",
+		version = "*",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
+	-- Fuzzy Finder Algorithm which requires local dependencies to be built.
+	-- Only load if `make` is available. Make sure you have the system
+	-- requirements installed.
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		-- NOTE: If you are having trouble with this installation,
+		--       refer to the README for telescope-fzf-native for more instructions.
+		build = "make",
+		cond = function()
+			return vim.fn.executable("make") == 1
+		end,
+	},
+
+	{ -- Highlight, edit, and navigate code
+		"nvim-treesitter/nvim-treesitter",
+		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
-			after = "nvim-treesitter",
-		})
+			"JoosepAlviste/nvim-ts-context-commentstring",
+		},
+		config = function()
+			pcall(require("nvim-treesitter.install").update({ with_sync = true }))
+		end,
+	},
 
-		-- Git related plugins
-		--[[ use("tpope/vim-fugitive") ]]
-		use("lewis6991/gitsigns.nvim")
-		use("sindrets/diffview.nvim")
+	"metakirby5/codi.vim",
 
-		-- Fuzzy Finder (files, lsp, etc)
-		use({ "nvim-telescope/telescope.nvim", branch = "0.1.x", requires = { "nvim-lua/plenary.nvim" } })
+	-- Editting Support
+	"windwp/nvim-autopairs",
+	"windwp/nvim-ts-autotag",
+	"mrjones2014/nvim-ts-rainbow",
+	"norcalli/nvim-colorizer.lua",
+	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
+	"Pocco81/true-zen.nvim",
 
-		-- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
-		use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
+	-- Search & Replace
+	"windwp/nvim-spectre",
 
-		-- Comment
-		use("tpope/vim-commentary")
-		use("JoosepAlviste/nvim-ts-context-commentstring")
-		-- use {
-		-- 	'numToStr/Comment.nvim',
-		-- 	config = function()
-		-- 		require('Comment').setup {
-		-- 			pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
-		-- 		}
-		-- 	end
-		-- }
-		use({
-			"folke/todo-comments.nvim",
-			requires = "nvim-lua/plenary.nvim",
-			config = function()
-				require("todo-comments").setup({})
-			end,
-		})
+	-- Terminal
+	"voldikss/vim-floaterm",
+	"akinsho/toggleterm.nvim",
 
-		-- Code Runner
-		use("metakirby5/codi.vim")
+	-- Utility
+	"liuchengxu/vista.vim",
+	"folke/which-key.nvim", -- Key mapping
+	"kamykn/spelunker.vim", -- Grmmar & spelling
+	{
+		"AckslD/nvim-neoclip.lua",
+		dependencies = {
+			{ "kkharji/sqlite.lua", module = "sqlite" },
+			{ "nvim-telescope/telescope.nvim" },
+			{ "ibhagwan/fzf-lua" },
+		},
+		opts = {},
+	},
 
-		-- Indent
-		use("lukas-reineke/indent-blankline.nvim")
+	-- Theme & Dashboard
+	{
+		"glepnir/dashboard-nvim",
+		theme = "hyper",
+		opts = {},
+		dependencies = "nvim-tree/nvim-web-devicons",
+	},
+	"glepnir/galaxyline.nvim",
+	-- Colorschemes
+	"glepnir/zephyr-nvim",
+	"aonemd/kuroi.vim",
 
-		-- Editting Support
-		use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
-		use("windwp/nvim-ts-autotag")
-		use("mrjones2014/nvim-ts-rainbow") -- rainbow parentheses.
-		use("norcalli/nvim-colorizer.lua")
-		use("tpope/vim-sleuth") -- Detect tabstop and shiftwidth automatically
-		use("Pocco81/true-zen.nvim")
+	{
+		"nvim-tree/nvim-tree.lua",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		tag = "nightly",
+	},
 
-		-- Search & replace
-		use("windwp/nvim-spectre")
+	"christoomey/vim-tmux-navigator",
+	{
+		"rmagatti/auto-session",
+		opts = {
 
-		-- Terminal
-		use("voldikss/vim-floaterm") -- terminal
-		use("akinsho/toggleterm.nvim") -- terminal
+			log_level = "error",
+			auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+		},
+	},
 
-		-- Utility
-		--[[ use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' } -- Folding  ]]
-		use("liuchengxu/vista.vim")
+	"ggandor/leap.nvim", -- Motion
 
-		-- Key mapping
-		use("folke/which-key.nvim")
+	{
+		"iamcco/markdown-preview.nvim",
+		run = "cd app && yarn install",
+	},
 
-		-- Grammar & spelling
-		use("kamykn/spelunker.vim")
+	"andweeb/presence.nvim",
 
-		-- Registry
-		use({
-			"AckslD/nvim-neoclip.lua",
-			requires = {
-				{ "kkharji/sqlite.lua",           module = "sqlite" },
-				{ "nvim-telescope/telescope.nvim" },
-				{ "ibhagwan/fzf-lua" },
-			},
-			config = function()
-				require("neoclip").setup()
-			end,
-		}) -- Clipboard management for registers
+	-- Debugger
+	"mfussenegger/nvim-dap",
+	"rcarriga/nvim-dap-ui",
+	"theHamsta/nvim-dap-virtual-text",
 
-		-- Dashboard and theme
-		use({
-			"glepnir/dashboard-nvim",
-			--event = 'VimEnter',
-			theme = "hyper",
-			config = function()
-				require("dashboard").setup({
-					-- config
-				})
-			end,
-			requires = { "nvim-tree/nvim-web-devicons" },
-		})
-		use("glepnir/galaxyline.nvim") --tabbar footer
-		-- use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
-
-		-- Colorschemes
-		use("glepnir/zephyr-nvim") -- theme
-		use("aonemd/kuroi.vim") -- theme
-
-		use({
-			"nvim-tree/nvim-tree.lua",
-			requires = {
-				"nvim-tree/nvim-web-devicons", -- optional, for file icons
-			},
-			tag = "nightly", -- optional, updated every week. (see issue #1193)
-		})
-
-		use("christoomey/vim-tmux-navigator")
-		use({
-			"rmagatti/auto-session",
-			config = function()
-				require("auto-session").setup({
-					log_level = "error",
-					auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-				})
-			end,
-		})
-
-		-- Motion
-		use("ggandor/leap.nvim")
-
-		use({
-			"iamcco/markdown-preview.nvim",
-			run = "cd app && yarn install",
-		})
-		use("andweeb/presence.nvim") -- discord Rich Presence
-
-		-- Debugger
-		use("mfussenegger/nvim-dap")
-		use("rcarriga/nvim-dap-ui")
-		use("theHamsta/nvim-dap-virtual-text")
-
-		-- Quickfix
-		use("kevinhwang91/nvim-bqf", { ft = "qf" })
-
-		-- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
-		local has_plugins, plugins = pcall(require, "custom.plugins")
-		if has_plugins then
-			plugins(use)
-		end
-
-		if is_bootstrap then
-			require("packer").sync()
-		end
-	end
-)
-
--- When we are bootstrapping a configuration, it doesn't
--- make sense to execute the rest of the init.lua.
--- You'll need to restart nvim, and then it will work.
-if is_bootstrap then
-	print("==================================")
-	print("    Plugins are being installed")
-	print("    Wait until Packer completes,")
-	print("       then restart nvim")
-	print("==================================")
-	return
-end
-
--- Automatically source and re-compile packer whenever you save this init.lua
-local packer_group = vim.api.nvim_create_augroup("Packer", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePost", {
-	command = "source <afile> | silent! LspStop | silent! LspStart | PackerCompile",
-	group = packer_group,
-	pattern = vim.fn.expand("$MYVIMRC"),
-})
+	-- Quickfix
+	"kevinhwang91/nvim-bqf",
+}, {})
 
 -- Setup
 
