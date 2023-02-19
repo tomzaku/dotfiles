@@ -29,65 +29,40 @@ function os.capture(cmd, raw)
 	s = string.gsub(s, "[\n\r]+", " ")
 	return s
 end
-local home = os.getenv("HOME")
+
 local fortune = os.capture("fortune -s")
-local db = require("dashboard")
 
-db.custom_header = {
-	"",
-	"",
-	"",
-	"",
-	"",
-	"",
-	"          ▀████▀▄▄              ▄█ ",
-	"            █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█ ",
-	"    ▄        █          ▀▀▀▀▄  ▄▀  ",
-	"   ▄▀ ▀▄      ▀▄              ▀▄▀  ",
-	"  ▄▀    █     █▀   ▄█▀▄      ▄█    ",
-	"  ▀▄     ▀▄  █     ▀██▀     ██▄█   ",
-	"   ▀▄    ▄▀ █   ▄██▄   ▄  ▄  ▀▀ █  ",
-	"    █  ▄▀  █    ▀██▀    ▀▀ ▀▀  ▄▀  ",
-	"   █   █  █      ▄▄           ▄▀   ",
-	"",
-}
+require('dashboard').setup {
+	theme = 'hyper',
+	config = {
+		footer = splitByNumberChar(fortune, 100),
+		header = {
+			"          ▀████▀▄▄              ▄█ ",
+			"            █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█ ",
+			"    ▄        █          ▀▀▀▀▄  ▄▀  ",
+			"   ▄▀ ▀▄      ▀▄              ▀▄▀  ",
+			"  ▄▀    █     █▀   ▄█▀▄      ▄█    ",
+			"  ▀▄     ▀▄  █     ▀██▀     ██▄█   ",
+			"   ▀▄    ▄▀ █   ▄██▄   ▄  ▄  ▀▀ █  ",
+			"    █  ▄▀  █    ▀██▀    ▀▀ ▀▀  ▄▀  ",
+			"   █   █  █      ▄▄           ▄▀   ",
+			"",
 
--- db.preview_file_path = home .. '/.config/nvim/static/pikachu.cat'
--- db.preview_command = 'cat | lolcat -F 0.3'
--- db.preview_file_width = 50
--- db.preview_file_height = 12
+		},
+		-- week_header = {
+		-- 	enable = true,
+		-- },
+		shortcut = {
+			{ desc = ' Update', group = '@property', action = 'Lazy update', key = 'u' },
+			{
+				icon = ' ',
+				icon_hl = '@variable',
+				desc = 'Files',
+				group = '@property',
+				action = 'Telescope find_files',
+				key = 'f',
+			}
+		},
+	},
 
-db.custom_footer = splitByNumberChar(fortune, 200)
-db.session_directory = "~/Projects/dotfiles/nvim/session"
-db.custom_center = {
-	{
-		icon = " ",
-		desc = "Recently latest session                  ",
-		shortcut = "SPC s l",
-		action = "SessionLoad",
-	},
-	{
-		icon = "  ",
-		desc = "Recently opened files                   ",
-		action = "DashboardFindHistory",
-		shortcut = "SPC f h",
-	},
-	{
-		icon = "  ",
-		desc = "Find  File                              ",
-		action = "Telescope find_files find_command=rg,--hidden,--files",
-		shortcut = "SPC f f",
-	},
-	{
-		icon = "  ",
-		desc = "File Browser                            ",
-		action = "Telescope file_browser",
-		shortcut = "SPC f b",
-	},
-	{
-		icon = "  ",
-		desc = "Find  word                              ",
-		action = "Telescope live_grep",
-		shortcut = "SPC f w",
-	},
 }

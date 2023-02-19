@@ -147,9 +147,10 @@ require("lazy").setup({
 	-- Theme & Dashboard
 	{
 		"glepnir/dashboard-nvim",
-		theme = "hyper",
-		opts = {},
-		dependencies = "nvim-tree/nvim-web-devicons",
+		event = 'VimEnter',
+		opts = {
+		},
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
 	"glepnir/galaxyline.nvim",
 	-- Colorschemes
@@ -213,4 +214,5 @@ require("plugin.presence")
 require("plugin.spelunker-vim")
 require("plugin.nvim-dap")
 require("plugin.nvim-ts-autotag")
+require("plugin.dashboard")
 require("colorizer").setup()
