@@ -5,7 +5,7 @@ local map_cmd = bind.map_cmd
 -- default map
 local def_map = {
 	-- Vim map
-	["n|<F1>"] = map_cmd("<nop>"), -- ignore Fn
+	-- ["n|<F1>"] = map_cmd("<nop>"), -- ignore Fn
 	["i|<F1>"] = map_cmd("<nop>"), -- ignore Fn
 	["i|<F2>"] = map_cmd("<nop>"), -- ignore Fn
 	["i|<F3>"] = map_cmd("<nop>"), -- ignore Fn
@@ -19,10 +19,6 @@ local def_map = {
 	["i|<F11>"] = map_cmd("<nop>"), -- ignore Fn
 	["i|<F12>"] = map_cmd("<nop>"), -- ignore Fn
 	["n|Y"] = map_cmd("y$"),
-	["n|<C-h>"] = map_cmd("<C-w>h"):with_noremap(),
-	["n|<C-l>"] = map_cmd("<C-w>l"):with_noremap(),
-	["n|<C-j>"] = map_cmd("<C-w>j"):with_noremap(),
-	["n|<C-k>"] = map_cmd("<C-w>k"):with_noremap(),
 	["n|<C-q>"] = map_cmd(":wq<CR>"),
 	["n|<Leader>ss"] = map_cu("SessionSave"):with_noremap(),
 	["n|<Leader>sl"] = map_cu("SessionLoad"):with_noremap(),

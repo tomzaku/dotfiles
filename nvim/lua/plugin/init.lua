@@ -49,13 +49,17 @@ require("lazy").setup({
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
-			"nvim-treesitter/nvim-treesitter-textobjects"
+			"nvim-treesitter/nvim-treesitter-textobjects",
 		},
+		build = ":TSUpdate"
 		-- config = function()
 		-- 	pcall(require("nvim-treesitter.install").update({ with_sync = true }))
 		-- end,
 	},
-
+	{
+		"kylechui/nvim-surround",
+		opts = {}
+	},
 	{ -- Adds git releated signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
 		opts = {
@@ -204,7 +208,7 @@ require("plugin.vim-floaterm")
 require("plugin.vista")
 require("plugin.dashboard")
 require("plugin.gitsign")
-require("plugin.galaxyline")
+require("plugin.galaxyline") -- TODO: Lagging
 require("plugin.theme")
 require("plugin.which-key")
 require("plugin.autopairs")

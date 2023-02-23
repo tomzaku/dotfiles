@@ -17,7 +17,7 @@ function _COPY_PACKAGE_NAME()
 	local cmdString = "find-up 'package.json' --cwd=" .. currentPath
 	local packageJsonPath = os.capture(cmdString)
 	if packageJsonPath then
-		local cmd = "cat " .. packageJsonPath .. ' | grep "name" | sed -E "s/.* \\"(.*)\\",/\\1/g"'
+		local cmd = "cat " .. packageJsonPath .. ' | grep "name" | sed -E "s/.* \\"(.*)\\",/\\1/g" | head -n 1'
 		local packageName = os.capture(cmd)
 		print(packageName)
 		-- copy
@@ -100,6 +100,13 @@ local opts = {
 	noremap = true, -- use `noremap` when creating keymaps
 	nowait = true, -- use `nowait` when creating keymaps
 }
+
+local Terminal  = require('toggleterm.terminal').Terminal
+local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
+
+function _lazygit_toggle()
+  lazygit:toggle()
+end
 
 local mappings = {
 	["b"] = {

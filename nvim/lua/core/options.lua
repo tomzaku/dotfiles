@@ -99,7 +99,7 @@ local function load_options()
 		winblend = 10,
 		-- foldmethod = "indent",
 		relativenumber = true,
-		shell = "/bin/bash",
+		-- shell = "/bin/bash",
 		-- GUI config
 		-- guifont        = "Hack Nerd Font,Fira Code Nerd Font, Hack Nerd Font mono:h12"
 	}

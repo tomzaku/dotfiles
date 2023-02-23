@@ -8,9 +8,9 @@ local condition = require("galaxyline.condition")
 local icons = {
 	edit = " ",
 	heading = "",
-	--[[ separate = "  ", ]]
-	--[[ separate = " ⏽ ", ]]
-	separate = "  ",
+	-- separate = "  ",
+	separate = " - ", 
+	-- separate = "  ",
 	sep = {
 		left = "",
 		right = "",
@@ -100,7 +100,7 @@ end
 -- end
 
 local colors = {
-	bg = "#202328",
+	bg = "#1D1D1D",
 	fg = "#bbc2cf",
 	error = "#EA3323",
 	warn = "#F3A83B",
@@ -249,11 +249,11 @@ local create_macro_recording = function(color)
 	}
 end
 
-local create_separate_section = function(color)
+local create_separate_section = function(fg, bg)
 	return {
 		name = "whitespace",
 		provider = string_provider(icons.separate),
-		highlight = { color },
+		highlight = { fg, bg },
 	}
 end
 
@@ -284,6 +284,7 @@ addSections("left", {
 			vim.api.nvim_command("hi GalaxyViModeLeftCap guifg=" .. modeStyle[2])
 			return icons.heading
 		end,
+		highlight={colors.fg, colors.bg},
 	},
 	{
 		name = "ViMode",
@@ -294,25 +295,27 @@ addSections("left", {
 			vim.api.nvim_command("hi GalaxyViMode guifg=" .. modeStyle[2])
 			return icons.sep.space .. modeStyle[1] .. icons.sep.space
 		end,
-		highlight = { nil, nil, "bold" },
+		highlight = { colors.fg, colors.bg, "bold" },
 	},
-	create_space_section(),
-	create_macro_recording(),
+	create_space_section(colors.bg),
+	create_macro_recording(colors.bg),
 	{
 		name = "FileIcon",
 		condition = condition.buffer_not_empty,
-		highlight = { require("galaxyline.provider_fileinfo").get_file_icon_color },
+		highlight = { require("galaxyline.provider_fileinfo").get_file_icon_color, colors.bg },
 		provider = "FileIcon",
 	},
 	{
 		name = "GetPath",
 		provider = get_path,
 		condition = condition.buffer_not_empty,
+		highlight={colors.fg, colors.bg},
 	},
 	{
 		name = "ShowEdittingFile",
 		provider = show_editting_file,
 		condition = condition.buffer_not_empty,
+		highlight={colors.fg, colors.bg},
 	},
 })
 
@@ -320,21 +323,25 @@ addSections("right", {
 	{
 		name = "LineColumn",
 		provider = "LineColumn",
+		highlight={colors.fg, colors.bg},
 	},
 	{
 		name = "LinePercent",
 		provider = "LinePercent",
+		highlight={colors.fg, colors.bg},
 	},
 	{
 		name = "DiagnosticError",
 		provider = "DiagnosticError",
 		icon = "  ",
+		highlight={colors.fg, colors.bg},
 	},
 	-- createSpaceSection(colors.gray),
 	{
 		name = "DiagnosticWarn",
 		provider = "DiagnosticWarn",
 		icon = "   ",
+		highlight={colors.fg, colors.bg},
 	},
 	-- {
 	-- 	name = "fileName",
@@ -343,14 +350,15 @@ addSections("right", {
 	-- 	-- highlight = {colors.blue, colors.gray},
 	-- 	highlight = { colors.bg, colors.blue, "bold" },
 	-- },
-	create_separate_section("#5C5C5C"),
+	create_separate_section("#5C5C5C", colors.bg),
 	{
 		name = "GetLspClient",
 		provider = get_lsp_client,
 		condition = get_visible_lsp,
+		highlight={colors.fg, colors.bg},
 		-- icon = icons.lsp,
 	},
-	create_space_section(),
+	create_space_section(colors.bg),
 })
 
 addSections("short_line_left", {
@@ -363,6 +371,7 @@ addSections("short_line_left", {
 			return icons.heading
 		end,
 		condition = should_hide_galaxy_line,
+		highlight={colors.fg, colors.bg},
 	},
 	{
 		name = "ViMode",
@@ -374,23 +383,26 @@ addSections("short_line_left", {
 			return icons.sep.space .. modeStyle[1] .. icons.sep.space
 		end,
 		condition = should_hide_galaxy_line,
-		highlight = { nil, nil, "bold" },
+		highlight = { colors.fg, colors.bg, "bold" },
 	},
-	create_space_section(),
+	create_space_section(colors.bg),
 	{
 		name = "FileIcon",
 		condition = should_hide_galaxy_line,
 		provider = "FileIcon",
+		highlight={colors.fg, colors.bg},
 	},
 	{
 		name = "GetPath",
 		provider = get_filename,
 		condition = should_hide_galaxy_line,
+		highlight={colors.fg, colors.bg},
 	},
 	{
 		name = "ShowEdittingFile",
 		provider = show_editting_file,
 		condition = should_hide_galaxy_line,
+		highlight={colors.fg, colors.bg},
 	},
 })
 
