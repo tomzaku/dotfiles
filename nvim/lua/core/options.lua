@@ -89,7 +89,7 @@ local function load_options()
 		previewheight = 12,
 		showcmd = false,
 		cmdheight = 0,
-		laststatus = 0,
+		laststatus = 2,
 		cmdwinheight = 5,
 		equalalways = false,
 		display = "lastline",

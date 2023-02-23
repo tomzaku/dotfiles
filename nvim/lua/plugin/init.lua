@@ -51,7 +51,7 @@ require("lazy").setup({
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 		},
-		build = ":TSUpdate"
+		-- build = ":TSUpdate"
 		-- config = function()
 		-- 	pcall(require("nvim-treesitter.install").update({ with_sync = true }))
 		-- end,
@@ -152,11 +152,15 @@ require("lazy").setup({
 	{
 		"glepnir/dashboard-nvim",
 		event = 'VimEnter',
-		opts = {
-		},
+		opts = {},
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
-	"glepnir/galaxyline.nvim",
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		-- opts = {}
+	},
+	-- "glepnir/galaxyline.nvim",
 	-- Colorschemes
 	"glepnir/zephyr-nvim",
 	"aonemd/kuroi.vim",
@@ -208,7 +212,9 @@ require("plugin.vim-floaterm")
 require("plugin.vista")
 require("plugin.dashboard")
 require("plugin.gitsign")
-require("plugin.galaxyline") -- TODO: Lagging
+-- require("plugin.galaxyline") -- TODO: Lagging
+-- require("plugin.lualine")
+require("plugin.lualine-custom")
 require("plugin.theme")
 require("plugin.which-key")
 require("plugin.autopairs")
