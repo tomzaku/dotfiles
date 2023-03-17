@@ -30,6 +30,7 @@ brew install fzf
 brew install tmux
 brew install fish 
 brew install jesseduffield/lazygit/lazygit
+brew install --HEAD nvim
 ```
 
 3. Install shell
@@ -52,8 +53,7 @@ curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 fisher update
 ```
 
-- ln -s ${DOTS_FILES_PATH} ~/.config
-
+4. Link this project to our local config
 For example
 
 ```
