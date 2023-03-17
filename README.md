@@ -13,13 +13,32 @@ https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/Symbols-2048-em%2
 - Kitty: fd (brew install fd).
 - Install prettier as global for autoformat.
 
-```
-brew install ripgrep
-brew install fzf
-```
 
 ## Installation
 
+1. Install brew
+```
+xcode-select --install
+sudo xcode-select -switch /Library/Developer/CommandLineTools
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+2. Install some useful packages
+```
+brew install ripgrep
+brew install fzf
+brew install tmux
+brew install fish 
+brew install jesseduffield/lazygit/lazygit
+```
+
+3. Install shell
+
+```bash
+sudo vim /etc/shells
+# Add this line '/usr/local/bin/fish'
+chsh -s /usr/local/bin/fish
+```
 
 ```bash
 # install tmux package management
@@ -44,7 +63,7 @@ ln -s ~/Projects/dotfiles/yabai ~/.config/yabai
 ln -s ~/Projects/dotfiles/skhd ~/.config/skhd
 ln -s ~/Projects/dotfiles/limelight ~/.config/limelight
 ln -s ~/Projects/dotfiles/kitty ~/.config/kitty
-ln -s ~/Projects/dotfiles/lazygit/config.yml ~/Library/Application\ Support/lazygit/config.yml
+rm ~/Library/Application\ Support/lazygit/config.yml && ln -s ~/Projects/dotfiles/lazygit/config.yml ~/Library/Application\ Support/lazygit/config.yml
 ```
 
 ## Feature
