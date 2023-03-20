@@ -25,12 +25,23 @@ sudo xcode-select -switch /Library/Developer/CommandLineTools
 
 2. Install some useful packages
 ```
+brew install gnu-sed
 brew install ripgrep
 brew install fzf
+
+# Yabai
+brew install koekeishiya/formulae/yabai
+brew services start yabai
+
+# Skhd
+brew install koekeishiya/formulae/skhd
+brew services start skhd
+
 brew install tmux
 brew install fish 
+brew install autojump
 brew install jesseduffield/lazygit/lazygit
-brew install --HEAD nvim
+brew install --HEAD neovim
 ```
 
 3. Install shell
@@ -64,6 +75,8 @@ ln -s ~/Projects/dotfiles/skhd ~/.config/skhd
 ln -s ~/Projects/dotfiles/limelight ~/.config/limelight
 ln -s ~/Projects/dotfiles/kitty ~/.config/kitty
 rm ~/Library/Application\ Support/lazygit/config.yml && ln -s ~/Projects/dotfiles/lazygit/config.yml ~/Library/Application\ Support/lazygit/config.yml
+ln -s ~/Projects/dotfiles/fish/config.fish ~/.config/fish/config.fish
+ln -s ~/Projects/dotfiles/fish/fish_plugins ~/.config/fish/fish_plugins
 ```
 
 ## Feature

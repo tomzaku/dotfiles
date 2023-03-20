@@ -27,9 +27,9 @@ function shopeeTmux
 
   tmux new-window -t $argv[1]
   tmux rename-window -t $argv[1]:4 'user-mfe'
-  tmux send-keys -t $argv[1]:4.0 'cd ~/Projects/user-web-fe && clear && v' Enter
+  tmux send-keys -t $argv[1]:4.0 'cd ~/Projects/user-spfe && clear && v' Enter
   tmux splitw -v -p 10 -t $argv[1]:4.0
-  tmux send-keys -t $argv[1]:4.1 'cd ~/Projects/user-web-fe && clear' Enter
+  tmux send-keys -t $argv[1]:4.1 'cd ~/Projects/user-spfe && clear' Enter
 
   tmux new-window -t $argv[1]
   tmux rename-window -t $argv[1]:5 'ccms'
@@ -93,7 +93,15 @@ end
 set -x GOPATH ~/Projects/golang/
 
 
+# Node manager
+status is-interactive && fnm env --use-on-cd | source
+
 
 
 # Created by `pipx` on 2023-02-13 07:33:49
 set PATH $PATH /Users/tom.levt/.local/bin
+
+# pnpm
+set -gx PNPM_HOME "/Users/tom.levt/Library/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
+# pnpm end
