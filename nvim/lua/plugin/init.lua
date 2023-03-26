@@ -58,7 +58,7 @@ require("lazy").setup({
 	},
 	{
 		"kylechui/nvim-surround",
-		opts = {}
+		opts = {},
 	},
 	{ -- Adds git releated signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
@@ -92,10 +92,10 @@ require("lazy").setup({
 	{
 		"numToStr/Comment.nvim",
 		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
-		after = 'nvim-ts-context-commentstring',
-	    opts = function()
+		after = "nvim-ts-context-commentstring",
+		opts = function()
 			return {
-				pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+				pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
 			}
 		end,
 	},
@@ -144,7 +144,7 @@ require("lazy").setup({
 	{
 		"AckslD/nvim-neoclip.lua",
 		dependencies = {
-			{ "kkharji/sqlite.lua",           module = "sqlite" },
+			{ "kkharji/sqlite.lua", module = "sqlite" },
 			{ "nvim-telescope/telescope.nvim" },
 			{ "ibhagwan/fzf-lua" },
 		},
@@ -154,7 +154,7 @@ require("lazy").setup({
 	-- Theme & Dashboard
 	{
 		"glepnir/dashboard-nvim",
-		event = 'VimEnter',
+		event = "VimEnter",
 		opts = {},
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},

@@ -9,7 +9,7 @@ local icons = {
 	edit = " ",
 	heading = "",
 	-- separate = "  ",
-	separate = " - ", 
+	separate = " - ",
 	-- separate = "  ",
 	sep = {
 		left = "",
@@ -284,7 +284,7 @@ addSections("left", {
 			vim.api.nvim_command("hi GalaxyViModeLeftCap guifg=" .. modeStyle[2])
 			return icons.heading
 		end,
-		highlight={colors.fg, colors.bg},
+		highlight = { colors.fg, colors.bg },
 	},
 	{
 		name = "ViMode",
@@ -309,13 +309,13 @@ addSections("left", {
 		name = "GetPath",
 		provider = get_path,
 		condition = condition.buffer_not_empty,
-		highlight={colors.fg, colors.bg},
+		highlight = { colors.fg, colors.bg },
 	},
 	{
 		name = "ShowEdittingFile",
 		provider = show_editting_file,
 		condition = condition.buffer_not_empty,
-		highlight={colors.fg, colors.bg},
+		highlight = { colors.fg, colors.bg },
 	},
 })
 
@@ -323,25 +323,25 @@ addSections("right", {
 	{
 		name = "LineColumn",
 		provider = "LineColumn",
-		highlight={colors.fg, colors.bg},
+		highlight = { colors.fg, colors.bg },
 	},
 	{
 		name = "LinePercent",
 		provider = "LinePercent",
-		highlight={colors.fg, colors.bg},
+		highlight = { colors.fg, colors.bg },
 	},
 	{
 		name = "DiagnosticError",
 		provider = "DiagnosticError",
 		icon = "  ",
-		highlight={colors.fg, colors.bg},
+		highlight = { colors.fg, colors.bg },
 	},
 	-- createSpaceSection(colors.gray),
 	{
 		name = "DiagnosticWarn",
 		provider = "DiagnosticWarn",
 		icon = "   ",
-		highlight={colors.fg, colors.bg},
+		highlight = { colors.fg, colors.bg },
 	},
 	-- {
 	-- 	name = "fileName",
@@ -355,7 +355,7 @@ addSections("right", {
 		name = "GetLspClient",
 		provider = get_lsp_client,
 		condition = get_visible_lsp,
-		highlight={colors.fg, colors.bg},
+		highlight = { colors.fg, colors.bg },
 		-- icon = icons.lsp,
 	},
 	create_space_section(colors.bg),
@@ -371,7 +371,7 @@ addSections("short_line_left", {
 			return icons.heading
 		end,
 		condition = should_hide_galaxy_line,
-		highlight={colors.fg, colors.bg},
+		highlight = { colors.fg, colors.bg },
 	},
 	{
 		name = "ViMode",
@@ -390,19 +390,19 @@ addSections("short_line_left", {
 		name = "FileIcon",
 		condition = should_hide_galaxy_line,
 		provider = "FileIcon",
-		highlight={colors.fg, colors.bg},
+		highlight = { colors.fg, colors.bg },
 	},
 	{
 		name = "GetPath",
 		provider = get_filename,
 		condition = should_hide_galaxy_line,
-		highlight={colors.fg, colors.bg},
+		highlight = { colors.fg, colors.bg },
 	},
 	{
 		name = "ShowEdittingFile",
 		provider = show_editting_file,
 		condition = should_hide_galaxy_line,
-		highlight={colors.fg, colors.bg},
+		highlight = { colors.fg, colors.bg },
 	},
 })
 

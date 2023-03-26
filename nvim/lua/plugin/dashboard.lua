@@ -32,8 +32,8 @@ end
 
 local fortune = os.capture("fortune -s")
 
-require('dashboard').setup {
-	theme = 'hyper',
+require("dashboard").setup({
+	theme = "hyper",
 	config = {
 		footer = splitByNumberChar(fortune, 100),
 		header = {
@@ -47,22 +47,20 @@ require('dashboard').setup {
 			"    █  ▄▀  █    ▀██▀    ▀▀ ▀▀  ▄▀  ",
 			"   █   █  █      ▄▄           ▄▀   ",
 			"",
-
 		},
 		-- week_header = {
 		-- 	enable = true,
 		-- },
 		shortcut = {
-			{ desc = ' Update', group = '@property', action = 'Lazy update', key = 'u' },
+			{ desc = " Update", group = "@property", action = "Lazy update", key = "u" },
 			{
-				icon = ' ',
-				icon_hl = '@variable',
-				desc = 'Files',
-				group = '@property',
-				action = 'Telescope find_files',
-				key = 'f',
-			}
+				icon = " ",
+				icon_hl = "@variable",
+				desc = "Files",
+				group = "@property",
+				action = "Telescope find_files",
+				key = "f",
+			},
 		},
 	},
-
-}
+})

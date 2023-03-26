@@ -23,6 +23,7 @@ function _COPY_PACKAGE_NAME()
 		-- copy
 		local copyCmd = 'let @+ = expand("' .. packageName .. '")'
 		vim.cmd(copyCmd)
+		return packageName
 	end
 end
 
@@ -101,11 +102,11 @@ local opts = {
 	nowait = true, -- use `nowait` when creating keymaps
 }
 
-local Terminal  = require('toggleterm.terminal').Terminal
+local Terminal = require("toggleterm.terminal").Terminal
 local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
 
 function _lazygit_toggle()
-  lazygit:toggle()
+	lazygit:toggle()
 end
 
 local mappings = {
@@ -117,7 +118,6 @@ local mappings = {
 	["E"] = { "<cmd>NvimTreeFindFile<cr>", "Explorer File" },
 	["w"] = { "<cmd>w!<CR>", "Save" },
 	["q"] = { "<cmd>q!<CR>", "Quit" },
-
 	c = {
 		name = "Copy",
 		f = { '<cmd>let @+ = expand("%:p")<cr><cmd>echo expand("%:p")<cr>', "Copy full path" },
@@ -141,7 +141,6 @@ local mappings = {
 		b = { "<cmd>Telescope file_browser<cr>", "File browser" },
 		P = { "<cmd>lua _FIND_UP_PACKAGE_JSON()<CR>", "Find up package.json" },
 	},
-
 	g = {
 		name = "Git",
 		l = {
@@ -157,7 +156,6 @@ local mappings = {
 			"Close Diff",
 		},
 	},
-
 	l = {
 		name = "LSP",
 		a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
@@ -194,7 +192,6 @@ local mappings = {
 		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
 		C = { "<cmd>Telescope commands<cr>", "Commands" },
 	},
-
 	t = {
 		name = "Terminal",
 		n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },

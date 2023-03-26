@@ -5,9 +5,9 @@ require("nvim-treesitter.configs").setup({
 		enable_autocmd = false,
 	},
 	-- Add languages to be installed here that you want installed for treesitter
-	ensure_installed = {},
+	ensure_installed = { "lua", "vim", "javascript", "typescript" },
 	sync_install = false,
-	auto_install = false,
+	auto_install = true,
 	highlight = { enable = true },
 	indent = { enable = true, disable = { "python" } },
 	incremental_selection = {

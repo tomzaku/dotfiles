@@ -22,6 +22,7 @@ local def_map = {
 	["n|<C-q>"] = map_cmd(":wq<CR>"),
 	["n|<Leader>ss"] = map_cu("SessionSave"):with_noremap(),
 	["n|<Leader>sl"] = map_cu("SessionLoad"):with_noremap(),
+	["n|<Esc>"] = map_cmd(":nohlsearch<CR>"), -- clear highlight searching in vim
 	-- Insert
 	["i|<C-h>"] = map_cmd("<BS>"):with_noremap(),
 	["i|<C-d>"] = map_cmd("<Del>"):with_noremap(),
@@ -43,7 +44,6 @@ local def_map = {
 	["c|<C-t>"] = map_cmd([[<C-R>=expand("%:p:h") . "/" <CR>]]):with_noremap(),
 	-- view
 	["v|<C-c>"] = map_cmd('"*y'), -- copy
-
 	-- quickfix
 	["n|<C-n>"] = map_cmd(":cn<CR>"):with_noremap(),
 	["n|<C-p>"] = map_cmd(":cp<CR>"):with_noremap(),

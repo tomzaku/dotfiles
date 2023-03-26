@@ -1,12 +1,12 @@
 -- Eviline config for lualine
 -- Author: shadmansaleh
 -- Credit: glepnir
-local lualine = require('lualine')
+local lualine = require("lualine")
 
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
-	bg       = '#202328',
+	-- bg       = '#0F1013',
 	fg       = '#bbc2cf',
 	yellow   = '#ECBE7B',
 	cyan     = '#008080',
@@ -22,13 +22,13 @@ local mode_color = {
 	n = colors.blue,
 	i = colors.green,
 	v = colors.blue,
-	[''] = colors.blue,
+	[""] = colors.blue,
 	V = colors.blue,
 	c = colors.magenta,
 	no = colors.red,
 	s = colors.orange,
 	S = colors.orange,
-	[''] = colors.orange,
+	[""] = colors.orange,
 	ic = colors.yellow,
 	R = colors.violet,
 	Rv = colors.violet,
@@ -36,8 +36,8 @@ local mode_color = {
 	ce = colors.red,
 	r = colors.cyan,
 	rm = colors.cyan,
-	['r?'] = colors.cyan,
-	['!'] = colors.red,
+	["r?"] = colors.cyan,
+	["!"] = colors.red,
 	t = colors.red,
 }
 
@@ -76,18 +76,16 @@ local show_macro_recording = function()
 	end
 end
 
-
-
 local conditions = {
 	buffer_not_empty = function()
-		return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
+		return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
 	end,
 	hide_in_width = function()
 		return vim.fn.winwidth(0) > 80
 	end,
 	check_git_workspace = function()
-		local filepath = vim.fn.expand('%:p:h')
-		local gitdir = vim.fn.finddir('.git', filepath .. ';')
+		local filepath = vim.fn.expand("%:p:h")
+		local gitdir = vim.fn.finddir(".git", filepath .. ";")
 		return gitdir and #gitdir > 0 and #gitdir < #filepath
 	end,
 }
@@ -96,8 +94,8 @@ local conditions = {
 local config = {
 	options = {
 		-- Disable sections and component separators
-		component_separators = '',
-		section_separators = '',
+		component_separators = "",
+		section_separators = "",
 		theme = {
 			-- We are going to use lualine_c an lualine_x as left and
 			-- right section. Both are highlighted by c theme .  So we
@@ -137,7 +135,7 @@ local function ins_right(component)
 	table.insert(config.sections.lualine_x, component)
 end
 
-ins_left {
+ins_left({
 	function()
 		return icons.heading
 	end,
@@ -145,9 +143,9 @@ ins_left {
 		return { fg = mode_color[vim.fn.mode()] }
 	end,
 	padding = { left = 0, right = 1 }, -- We don't need space before this
-}
+})
 
-ins_left {
+ins_left({
 	-- mode component
 	function()
 		local text = {
@@ -168,13 +166,13 @@ ins_left {
 		return text[vim.fn.mode()]
 	end,
 	color = function()
-		return { fg = mode_color[vim.fn.mode()], gui = 'bold' }
+		return { fg = mode_color[vim.fn.mode()], gui = "bold" }
 	end,
 	padding = { right = 1 },
-}
+})
 
-ins_left {
-	'filename',
+ins_left({
+	"filename",
 	file_status = true, -- Displays file status (readonly status, modified status)
 	newfile_status = false, -- Display new file status (new file means no write after created)
 	path = 1, -- 0: Just the filename
@@ -185,36 +183,36 @@ ins_left {
 	shorting_target = 40, -- Shortens path to leave 40 spaces in the window
 	-- for other components. (terrible name, any suggestions?)
 	symbols = {
-		modified = '[+]', -- Text to show when the file is modified.
-		readonly = '[-]', -- Text to show when the file is non-modifiable or readonly.
-		unnamed = '[No Name]', -- Text to show for unnamed buffers.
-		newfile = '[New]', -- Text to show for newly created file before first write
+		modified = "[+]", -- Text to show when the file is modified.
+		readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
+		unnamed = "[No Name]", -- Text to show for unnamed buffers.
+		newfile = "[New]", -- Text to show for newly created file before first write
 	},
 
-	'filename',
+	"filename",
 	cond = conditions.buffer_not_empty,
-}
+})
 
-ins_left {
-	show_macro_recording
-}
+ins_left({
+	show_macro_recording,
+})
 
-ins_left {
-	"searchcount"
-}
+ins_left({
+	"searchcount",
+})
 -- Add components to right sections
-ins_right {
-	'progress', -- option component same as &encoding in viml
+ins_right({
+	"progress", -- option component same as &encoding in viml
 	fmt = string.upper, -- I'm not sure why it's upper case either ;)
 	cond = conditions.hide_in_width,
-}
-ins_right {
-	'location', -- option component same as &encoding in viml
+})
+ins_right({
+	"location", -- option component same as &encoding in viml
 	fmt = string.upper, -- I'm not sure why it's upper case either ;)
 	cond = conditions.hide_in_width,
-}
-ins_right {
-	'filetype', -- option component same as &encoding in viml
-}
+})
+ins_right({
+	"filetype", -- option component same as &encoding in viml
+})
 -- Now don't forget to initialize lualine
 lualine.setup(config)
