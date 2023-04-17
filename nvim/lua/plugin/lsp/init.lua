@@ -182,7 +182,7 @@ null_ls.setup({
 	sources = {
 		formatting.prettier,
 		--[[ formatting.black, ]]
-		--[[ formatting.stylua, ]]
+		formatting.stylua,
 		--[[ formatting.eslint, ]]
 		--[[ formatting.stylelint, ]]
 	},

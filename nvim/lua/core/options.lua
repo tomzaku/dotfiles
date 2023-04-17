@@ -100,9 +100,12 @@ local function load_options()
 		-- foldmethod = "indent",
 		relativenumber = true,
 		-- shell = "/bin/bash",
-		-- GUI config
-		-- guifont        = "Hack Nerd Font,Fira Code Nerd Font, Hack Nerd Font mono:h12"
+		-- guifont = "Hack Nerd Font,Fira Code Nerd Font, Hack Nerd Font mono:h12",
 	}
+	if vim.g.neovide then
+		vim.o.guifont = "Source Code Pro:h14"
+    -- Put anything you want to happen only in Neovide here
+	end
 
 	if global.is_mac then
 		vim.g.clipboard = {
