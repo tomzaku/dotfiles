@@ -1,7 +1,17 @@
 customCommands:
   - key: 'C'
-    type: 'input'
+    prompts:
+      - type: 'input'
+        title: 'What is the new branch name?'
+        initialValue: 'tom.levt/feat/'
     context: 'localBranches'
-    title: 'What is the new branch name?'
     description: 'Checkout under your name'
-    command: "git checkout"
+    command: "git checkout -b {{index .PromptResponses 0}}"
+  - key: 'F'
+    context: 'global'
+    description: 'Pull the latest target branch to your branch'
+    command: "git pull --rebase origin {{index .PromptResponses 0}}"
+    prompts:
+      - type: 'input'
+        title: 'What is the target branch to pull to your branch'
+        initialValue: 'master'
