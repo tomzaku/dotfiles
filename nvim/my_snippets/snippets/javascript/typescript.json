@@ -26,12 +26,12 @@
 	"Interface Definition": {
 		"prefix": "iface",
 		"body": [
-		  "interface ${1:name} {",
-		  "\t$0",
-		  "}"
+			"interface ${1:name} {",
+			"\t$0",
+			"}"
 		],
 		"description": "Interface Definition"
-	},	
+	},
 	"Public Method Definition": {
 		"prefix": "public method",
 		"body": [
@@ -72,12 +72,16 @@
 		"description": "Property getter"
 	},
 	"Log to the console": {
-		"prefix": "log",
+		"prefix": "co",
 		"body": [
 			"console.log($1);",
 			"$0"
 		],
 		"description": "Log to the console"
+	},
+	"console.log a variable": {
+		"prefix": "cv",
+		"body": "console.log('[CONSOLE.LOG] ${1}:', ${1})"
 	},
 	"Log warning to console": {
 		"prefix": "warn",

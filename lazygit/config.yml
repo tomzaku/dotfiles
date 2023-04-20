@@ -1,0 +1,7 @@
+customCommands:
+  - key: 'C'
+    type: 'input'
+    context: 'localBranches'
+    title: 'What is the new branch name?'
+    description: 'Checkout under your name'
+    command: "git checkout"

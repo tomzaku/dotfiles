@@ -27,6 +27,11 @@ function _COPY_PACKAGE_NAME()
 	end
 end
 
+function _CONSOLE_NODE() 
+	local selectedText = vim.fn.expand('<cword>')
+
+end
+
 local setup = {
 	plugins = {
 		marks = true, -- shows a list of your marks on ' and `
