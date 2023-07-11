@@ -23,16 +23,20 @@ require("lazy").setup({
 
 	-- NOTE: This is where your plugins related to LSP can be installed.
 	--  The configuration is done below. Search for lspconfig to find it below.
-	{ -- LSP Configuration & Plugins
+	{
+		-- LSP Configuration & Plugins
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			-- Automatically install LSPs to stdpath for neovim
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 
+			-- LSP signature hint as you type 
+			{"ray-x/lsp_signature.nvim", opts = {}},
+
 			-- Useful status updates for LSP
 			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-			{ "j-hui/fidget.nvim", opts = {} },
+			{ "j-hui/fidget.nvim", opts = {}, tag = "legacy" },
 
 			-- Additional lua configuration, makes nvim stuff amazing!
 			"folke/neodev.nvim",
@@ -41,12 +45,14 @@ require("lazy").setup({
 			"jose-elias-alvarez/null-ls.nvim",
 		},
 	},
-	{ -- Autocompletion
+	{
+		-- Autocompletion
 		"hrsh7th/nvim-cmp",
 		dependencies = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
 	},
 
-	{ -- Highlight, edit, and navigate code
+	{
+		-- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
@@ -60,7 +66,8 @@ require("lazy").setup({
 		"kylechui/nvim-surround",
 		opts = {},
 	},
-	{ -- Adds git releated signs to the gutter, as well as utilities for managing changes
+	{
+		-- Adds git releated signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
 		opts = {
 			-- See `:help gitsigns.txt`
@@ -76,7 +83,8 @@ require("lazy").setup({
 	"sindrets/diffview.nvim",
 
 	-- Indent
-	{ -- Add indentation guides even on blank lines
+	{
+		-- Add indentation guides even on blank lines
 		"lukas-reineke/indent-blankline.nvim",
 		opts = {
 			filetype_exclude = { "help", "terminal", "dashboard", "packer" },
@@ -178,7 +186,6 @@ require("lazy").setup({
 	{
 		"rmagatti/auto-session",
 		opts = {
-
 			log_level = "error",
 			auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
 		},
@@ -191,7 +198,8 @@ require("lazy").setup({
 		run = "cd app && yarn install",
 	},
 
-	"andweeb/presence.nvim",
+	-- Discord
+	-- "andweeb/presence.nvim",
 
 	-- Debugger
 	"mfussenegger/nvim-dap",
@@ -223,7 +231,7 @@ require("plugin.which-key")
 require("plugin.autopairs")
 require("plugin.leap")
 require("plugin.backup")
-require("plugin.presence")
+-- require("plugin.presence") -- Has error with package
 require("plugin.spelunker-vim")
 require("plugin.nvim-dap")
 require("plugin.nvim-ts-autotag")

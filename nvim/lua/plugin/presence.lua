@@ -20,10 +20,10 @@ local function printFortune()
 	return fortune
 end
 
-lib:setup({
+lib.setup({
 	buttons = false,
 	reading_text = "Reading", -- Format string rendered when a read-only or unmodifiable file is loaded in the buffer (either string or function(filename: string): string)
 	workspace_text = printFortune, -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): string)
-	editing_text = "Editing", -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
+	editing_text = "E", -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
 	file_explorer_text = "Browsing",
 })

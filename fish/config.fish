@@ -94,7 +94,25 @@ set -x GOPATH ~/Projects/golang/
 
 
 # Node manager
+
+# Option 1
+# status is-interactive && fnm env --use-on-cd | source
+
+# Option 2
 status is-interactive && fnm env --use-on-cd | source
+alias nv="cat package.json | grep '\"node\":' | grep -o '[0-9.]*' 2>&1"
+function _fnm_autoload_package_hook --on-variable PWD --description 'Change Node version on directory change'
+  status --is-command-substitution; and return
+  if test -f package.json
+    # nv # Run to check if the version is exist
+    if test $(nv)
+      fnm use $(nv) --silent-if-unchanged
+    end
+  end
+end
+
+_fnm_autoload_package_hook
+
 
 
 
@@ -105,3 +123,8 @@ set PATH $PATH /Users/tom.levt/.local/bin
 set -gx PNPM_HOME "/Users/tom.levt/Library/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
 # pnpm end
+
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
