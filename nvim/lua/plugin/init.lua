@@ -183,13 +183,15 @@ require("lazy").setup({
 	},
 
 	"christoomey/vim-tmux-navigator",
-	{
-		"rmagatti/auto-session",
-		opts = {
-			log_level = "error",
-			auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-		},
-	},
+
+	-- bug when use the new version
+	-- { 
+	-- 	"rmagatti/auto-session",
+	-- 	opts = {
+	-- 		log_level = "error",
+	-- 		auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+	-- 	},
+	-- },
 
 	"ggandor/leap.nvim", -- Motion
 

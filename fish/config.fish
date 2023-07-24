@@ -128,3 +128,7 @@ set -gx PATH "$PNPM_HOME" $PATH
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+
+
+# rust
+set --export PATH $HOME/.cargo/bin $PATH
