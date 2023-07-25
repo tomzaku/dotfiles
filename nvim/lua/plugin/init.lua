@@ -24,6 +24,10 @@ require("lazy").setup({
 	-- NOTE: This is where your plugins related to LSP can be installed.
 	--  The configuration is done below. Search for lspconfig to find it below.
 	{
+		"williamboman/mason.nvim",
+		build = ":MasonUpdate", -- :MasonUpdate updates registry contents
+	},
+	{
 		-- LSP Configuration & Plugins
 		"neovim/nvim-lspconfig",
 		dependencies = {
@@ -31,7 +35,7 @@ require("lazy").setup({
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 
-			-- LSP signature hint as you type 
+			-- LSP signature hint as you type
 			{"ray-x/lsp_signature.nvim", opts = {}},
 
 			-- Useful status updates for LSP
@@ -57,7 +61,7 @@ require("lazy").setup({
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 		},
-		-- build = ":TSUpdate"
+		build = ":TSUpdate",
 		-- config = function()
 		-- 	pcall(require("nvim-treesitter.install").update({ with_sync = true }))
 		-- end,
@@ -185,7 +189,7 @@ require("lazy").setup({
 	"christoomey/vim-tmux-navigator",
 
 	-- bug when use the new version
-	-- { 
+	-- {
 	-- 	"rmagatti/auto-session",
 	-- 	opts = {
 	-- 		log_level = "error",
