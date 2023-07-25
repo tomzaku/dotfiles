@@ -13,13 +13,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	-- NOTE: First, some plugins that don't require any configuration
+	-- Basic region
+	"nvim-lua/plenary.nvim",
 
 	-- Git related plugins
 	"tpope/vim-fugitive",
 	"tpope/vim-rhubarb",
-
-	-- Detect tabstop and shiftwidth automatically
 
 	-- NOTE: This is where your plugins related to LSP can be installed.
 	--  The configuration is done below. Search for lspconfig to find it below.
@@ -66,6 +65,11 @@ require("lazy").setup({
 		-- 	pcall(require("nvim-treesitter.install").update({ with_sync = true }))
 		-- end,
 	},
+
+
+
+
+	-- End of region basic - the rest can comment to debug
 	{
 		"kylechui/nvim-surround",
 		opts = {},
@@ -137,7 +141,6 @@ require("lazy").setup({
 	-- Editting Support
 	"windwp/nvim-autopairs",
 	"windwp/nvim-ts-autotag",
-	"mrjones2014/nvim-ts-rainbow",
 	"norcalli/nvim-colorizer.lua",
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 	"Pocco81/true-zen.nvim",
@@ -219,10 +222,13 @@ require("lazy").setup({
 -- Setup
 
 require("plugin.nvim-treesitter")
-require("plugin.telescope")
 require("plugin.lsp")
-require("plugin.completion")
 require("plugin.nvim-tree")
+
+
+-- The rest is not addtion plugin can remove for debug
+require("plugin.telescope")
+require("plugin.completion")
 require("plugin.nvim-spectre")
 require("plugin.toggleterm")
 require("plugin.vim-floaterm")
