@@ -44,8 +44,10 @@ function shopeeTmux
 end
 
 # Alias
-alias v="nvim"
-alias vi="nvim"
+# alias v="nvim"
+alias v='nvim --listen /tmp/nvim-server.pipe'
+alias vi='nvim --listen /tmp/nvim-server.pipe'
+# alias vi="nvim"
 alias l="lazygit"
 alias st="tmux attach -t base || tmux new -s base"
 alias sts="tmux attach -t shopee || shopeeTmux shopee"

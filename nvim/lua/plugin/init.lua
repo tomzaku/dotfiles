@@ -163,6 +163,13 @@ require("lazy").setup({
 		},
 		opts = {},
 	},
+	{
+		"kdheepak/lazygit.nvim",
+		-- optional for floating window border decoration
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+	},
 
 	-- Theme & Dashboard
 	{
@@ -185,6 +192,7 @@ require("lazy").setup({
 	"glepnir/zephyr-nvim",
 	"aonemd/kuroi.vim",
 	"sainnhe/edge",
+	"Mofiqul/vscode.nvim",
 	{ "projekt0n/github-nvim-theme" },
 
 	{
