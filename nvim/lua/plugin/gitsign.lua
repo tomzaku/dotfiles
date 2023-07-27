@@ -20,4 +20,3 @@ lib.setup({
 	current_line_blame = true,
 })
 
-vim.api.nvim_command("hi GitSignsCurrentLineBlame term=bold cterm=bold guibg=#0C0C0C")

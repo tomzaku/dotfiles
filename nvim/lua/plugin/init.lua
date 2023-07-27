@@ -179,6 +179,11 @@ require("lazy").setup({
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		-- opts = {}
 	},
+	{
+		"mcchrish/zenbones.nvim",
+		dependencies = { "rktjmp/lush.nvim" }
+
+	},
 	-- "glepnir/galaxyline.nvim",
 	-- Colorschemes
 	"glepnir/zephyr-nvim",
