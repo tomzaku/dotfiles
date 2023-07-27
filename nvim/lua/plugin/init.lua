@@ -35,7 +35,7 @@ require("lazy").setup({
 			"williamboman/mason-lspconfig.nvim",
 
 			-- LSP signature hint as you type
-			{"ray-x/lsp_signature.nvim", opts = {}},
+			{ "ray-x/lsp_signature.nvim", opts = {} },
 
 			-- Useful status updates for LSP
 			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -59,16 +59,13 @@ require("lazy").setup({
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
-			"nvim-treesitter/nvim-treesitter-context"
+			"nvim-treesitter/nvim-treesitter-context",
 		},
 		build = ":TSUpdate",
 		-- config = function()
 		-- 	pcall(require("nvim-treesitter.install").update({ with_sync = true }))
 		-- end,
 	},
-
-
-
 
 	-- End of region basic - the rest can comment to debug
 	{
@@ -181,13 +178,14 @@ require("lazy").setup({
 	},
 	{
 		"mcchrish/zenbones.nvim",
-		dependencies = { "rktjmp/lush.nvim" }
-
+		dependencies = { "rktjmp/lush.nvim" },
 	},
 	-- "glepnir/galaxyline.nvim",
 	-- Colorschemes
 	"glepnir/zephyr-nvim",
 	"aonemd/kuroi.vim",
+	"sainnhe/edge",
+	{ "projekt0n/github-nvim-theme" },
 
 	{
 		"nvim-tree/nvim-tree.lua",
@@ -230,7 +228,6 @@ require("lazy").setup({
 require("plugin.nvim-treesitter")
 require("plugin.lsp")
 require("plugin.nvim-tree")
-
 
 -- The rest is not addtion plugin can remove for debug
 require("plugin.telescope")

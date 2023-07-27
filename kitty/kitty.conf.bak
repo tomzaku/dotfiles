@@ -12,8 +12,8 @@ font_family     Hermit, Symbols Nerd Font
   # font_family      3270Medium Nerd Font
 # font_family      MesloLGS NF
 # bold_font        auto
-italic_font      Victor Mono Italic
-bold_italic_font Victor Mono Bold Italic
+# italic_font      Victor Mono Italic
+# bold_italic_font Victor Mono Bold Italic
 
 #: You can specify different fonts for the bold/italic/bold-italic
 #: variants. To get a full list of supported fonts use the `kitty
@@ -1405,6 +1405,6 @@ map cmd+n new_os_window_with_cwd
 
 
 # BEGIN_KITTY_THEME
-# Ayu Light
+# Everforest Light Medium
 include current-theme.conf
 # END_KITTY_THEME

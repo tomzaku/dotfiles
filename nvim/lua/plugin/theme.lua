@@ -2,7 +2,9 @@ vim.cmd("set termguicolors") -- White
 vim.cmd("set background=light") -- White
 
 -- vim.cmd("colorscheme kuroi") -- Dark
-vim.cmd("colorscheme zenbones") -- White
+vim.cmd("colorscheme forestbones") -- White
+-- vim.cmd("colorscheme github_light") -- White
+-- vim.cmd("colorscheme edge") -- White
 
 
 -- DARK THEME - kuroi
