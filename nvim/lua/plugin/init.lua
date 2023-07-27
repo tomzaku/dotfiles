@@ -59,6 +59,7 @@ require("lazy").setup({
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
+			"nvim-treesitter/nvim-treesitter-context"
 		},
 		build = ":TSUpdate",
 		-- config = function()
@@ -192,13 +193,13 @@ require("lazy").setup({
 	"christoomey/vim-tmux-navigator",
 
 	-- bug when use the new version
-	-- {
-	-- 	"rmagatti/auto-session",
-	-- 	opts = {
-	-- 		log_level = "error",
-	-- 		auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-	-- 	},
-	-- },
+	{
+		"rmagatti/auto-session",
+		opts = {
+			log_level = "error",
+			auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+		},
+	},
 
 	"ggandor/leap.nvim", -- Motion
 
