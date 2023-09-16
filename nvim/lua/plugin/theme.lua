@@ -4,10 +4,10 @@ vim.cmd("set background=light") -- White
 -- vim.cmd("colorscheme kuroi") -- Dark
 -- vim.cmd("colorscheme forestbones") -- White
 -- vim.cmd("colorscheme zenwritten") -- White
+vim.cmd("colorscheme vscode") -- White
 -- vim.cmd("colorscheme github_light") -- White
 -- vim.cmd("colorscheme edge") -- White
 -- vim.cmd("colorscheme forestbones") -- White
-vim.cmd("colorscheme vscode") -- White
 
 
 -- DARK THEME - kuroi

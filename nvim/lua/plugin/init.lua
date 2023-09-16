@@ -153,7 +153,7 @@ require("lazy").setup({
 	-- Utility
 	"liuchengxu/vista.vim",
 	"folke/which-key.nvim", -- Key mapping
-	"kamykn/spelunker.vim", -- Grmmar & spelling
+	"kamykn/spelunker.vim", -- Grammar & spelling - Add word to spellfile: Zg
 	{
 		"AckslD/nvim-neoclip.lua",
 		dependencies = {
