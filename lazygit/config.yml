@@ -1,6 +1,6 @@
-# os:
-#   editCommand: 'nvim'
-#   editCommandTemplate: '{{editor}} --server /tmp/nvim-server.pipe --remote-tab "$(pwd)/{{filename}}"'
+os:
+  edit: 'nvr --remote-send "<F1>:e $(pwd)/{{filename}}<cr>"'
+  editAtLine: 'nvr --remote-send "<F1>:e +{{line}} $(pwd)/{{filename}}<cr>"'
 gui:
   theme:
     selectedLineBgColor:

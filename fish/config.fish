@@ -53,16 +53,27 @@ end
 #     set -x VISUAL "nvr -cc split --remote-wait +'set bufhidden=wipe'"
 #     set -x EDITOR "nvr -cc split --remote-wait +'set bufhidden=wipe'"
 # else
-#     set -x VISUAL "nvim"
-#     set -x EDITOR "nvim"
+#     set -x VISUAL nvim
+#     set -x EDITOR nvim
 # end
-# alias v="nvim"
-# alias vi="nvim"
 
+# Allow edit file for lazygit
+alias vim='nvim --listen /tmp/nvimsocket'
+alias v='nvim --listen /tmp/nvimsocket'
+alias vi='nvim --listen /tmp/nvimsocket'
+#
+# alias vim='nvim --listen /tmp/nvim-server.pipe'
 # alias v='nvim --listen /tmp/nvim-server.pipe'
 # alias vi='nvim --listen /tmp/nvim-server.pipe'
-alias v='nvim'
-alias vi='nvim'
+
+# # Allow edit file for tmux
+# alias vim="nvim --listen /tmp/nvim-server-$(tmux display-message -p '#S').pipe"
+# alias v="nvim --listen /tmp/nvim-server-$(tmux display-message -p '#S').pipe"
+# alias vi="nvim --listen /tmp/nvim-server-$(tmux display-message -p '#S').pipe"
+
+
+# alias v='nvim'
+# alias vi='nvim'
 alias l="lazygit"
 alias st="tmux attach -t base || tmux new -s base"
 alias sts="tmux attach -t shopee || shopeeTmux shopee"
