@@ -27,11 +27,6 @@ function _COPY_PACKAGE_NAME()
 	end
 end
 
-function _CONSOLE_NODE() 
-	local selectedText = vim.fn.expand('<cword>')
-
-end
-
 local setup = {
 	plugins = {
 		marks = true, -- shows a list of your marks on ' and `
@@ -205,7 +200,7 @@ local mappings = {
 		f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
 		h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
 		v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
-		c = { "<cmd>ToggleTerm size=20 dir=%:p:h direction=horizontal<CR>", "Directory here" },
+		c = { "<cmd>!tmux split-window -c %:p:h <cr>", "Directory here" },
 	},
 	p = {
 		name = "Windows",
@@ -213,6 +208,8 @@ local mappings = {
 		h = { "<cmd>split<cr>", "Split horizontal" },
 		t = { "<cmd>call ToggleWindowHorizontalVerticalSplit()<cr>", "Toggle pane" },
 	},
+	["\\"] = {  "<cmd>vsplit<cr>", "Split vertical"  },
+	["-"] = {  "<cmd>split<cr>", "Split horizontal"  },
 	z = { "<cmd>TZFocus<cr>", "Focus mode" },
 }
 

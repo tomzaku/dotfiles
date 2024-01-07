@@ -1,3 +1,4 @@
+set home_directory '~/Projects/dotfiles'
 
 # Autojump
 [ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
@@ -43,37 +44,10 @@ function shopeeTmux
     tmux a -t $argv[1]
 end
 
-# Alias
-# if test -n "$NVIM_LISTEN_ADDRESS"
-#     function nvim
-#         nvr -cc split --remote-wait +'set bufhidden=wipe' $argv
-#     end
-# end
-# if test -n "$NVIM_LISTEN_ADDRESS"
-#     set -x VISUAL "nvr -cc split --remote-wait +'set bufhidden=wipe'"
-#     set -x EDITOR "nvr -cc split --remote-wait +'set bufhidden=wipe'"
-# else
-#     set -x VISUAL nvim
-#     set -x EDITOR nvim
-# end
-
 # Allow edit file for lazygit
 alias vim='nvim --listen /tmp/nvimsocket'
 alias v='nvim --listen /tmp/nvimsocket'
 alias vi='nvim --listen /tmp/nvimsocket'
-#
-# alias vim='nvim --listen /tmp/nvim-server.pipe'
-# alias v='nvim --listen /tmp/nvim-server.pipe'
-# alias vi='nvim --listen /tmp/nvim-server.pipe'
-
-# # Allow edit file for tmux
-# alias vim="nvim --listen /tmp/nvim-server-$(tmux display-message -p '#S').pipe"
-# alias v="nvim --listen /tmp/nvim-server-$(tmux display-message -p '#S').pipe"
-# alias vi="nvim --listen /tmp/nvim-server-$(tmux display-message -p '#S').pipe"
-
-
-# alias v='nvim'
-# alias vi='nvim'
 alias l="lazygit"
 alias st="tmux attach -t base || tmux new -s base"
 alias sts="tmux attach -t shopee || shopeeTmux shopee"
@@ -130,18 +104,42 @@ set -x GOPATH ~/Projects/golang/
 # status is-interactive && fnm env --use-on-cd | source
 
 # Option 2
+function find-up-node-version
+    # Set the initial directory to the current directory
+    set current_directory (pwd)
+
+    # Loop through parent directories until the root directory is reached
+    while test -n "$current_directory"
+        set found_path "$current_directory/$argv[1]"
+        # Check if the specified file exists in the current directory
+        if test -e "$found_path"
+            set node_version (cat $found_path | grep '\"node\":' | grep -o '[0-9.]*' 2>&1)
+            if test $node_version
+                echo "$node_version"
+                return 0
+            end
+        end
+        
+        set new_current_directory (dirname $current_directory)
+
+        if test "$current_directory" = "$new_current_directory"
+            return 1
+        end
+        # Move up to the parent directory
+        set current_directory $new_current_directory
+    end
+
+    # If the loop completes without finding the file, return failure
+    return 1
+end
 status is-interactive && fnm env --use-on-cd | source
-alias nv="cat package.json | grep '\"node\":' | grep -o '[0-9.]*' 2>&1"
 function _fnm_autoload_package_hook --on-variable PWD --description 'Change Node version on directory change'
     status --is-command-substitution; and return
-    if test -f package.json
-        # nv # Run to check if the version is exist
-        if test $(nv)
-            fnm use $(nv) --silent-if-unchanged
-        end
+    set node_version (find-up-node-version "package.json")
+    if test $node_version
+        fnm use $node_version --silent-if-unchanged
     end
 end
-
 _fnm_autoload_package_hook
 
 
@@ -165,3 +163,4 @@ set --export PATH $BUN_INSTALL/bin $PATH
 
 # rust
 set --export PATH $HOME/.cargo/bin $PATH
+
