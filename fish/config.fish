@@ -13,13 +13,6 @@ function shopeeTmux
     tmux send-keys -t $argv[1]:0.1 'cd ~/Projects/shopee_react_native && clear' Enter
     tmux select-window -t $argv[1]:0.0
 
-    # tmux new-window -t $argv[1]
-    # tmux rename-window -t $argv[1]:2 'toB'
-    # tmux send-keys -t $argv[1]:2.0 'cd ~/Projects/account-business-web && clear && v' Enter
-    # tmux splitw -v -p 10 -t $argv[1]:2.0
-    # tmux send-keys -t $argv[1]:2.1 'cd ~/Projects/account-business-web && clear' Enter
-
-
     tmux new-window -t $argv[1]
     tmux rename-window -t $argv[1]:1 isfe
     tmux send-keys -t $argv[1]:1.0 'cd ~/Projects/user-isfe && clear && v' Enter

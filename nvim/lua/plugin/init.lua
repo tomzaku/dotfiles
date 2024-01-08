@@ -203,7 +203,54 @@ require("lazy").setup({
 		tag = "nightly",
 	},
 
-	"christoomey/vim-tmux-navigator",
+	-- "christoomey/vim-tmux-navigator", use kitty instead
+	{
+		"knubie/vim-kitty-navigator",
+		build = function()
+			vim.fn.system("cp", "*.py", "~/.config/kitty")
+		end,
+	},
+	-- {
+	-- 	"MunsMan/kitty-navigator.nvim",
+	-- 	keys = {
+	-- 		{
+	-- 			"<C-h>",
+	-- 			function()
+	-- 				require("kitty-navigator").navigateLeft()
+	-- 			end,
+	-- 			desc = "Move left a Split",
+	-- 			mode = { "n" },
+	-- 		},
+	-- 		{
+	-- 			"<C-j>",
+	-- 			function()
+	-- 				require("kitty-navigator").navigateDown()
+	-- 			end,
+	-- 			desc = "Move down a Split",
+	-- 			mode = { "n" },
+	-- 		},
+	-- 		{
+	-- 			"<C-k>",
+	-- 			function()
+	-- 				require("kitty-navigator").navigateUp()
+	-- 			end,
+	-- 			desc = "Move up a Split",
+	-- 			mode = { "n" },
+	-- 		},
+	-- 		{
+	-- 			"<C-l>",
+	-- 			function()
+	-- 				require("kitty-navigator").navigateRight()
+	-- 			end,
+	-- 			desc = "Move right a Split",
+	-- 			mode = { "n" },
+	-- 		},
+	-- 	},
+	-- 	build = function()
+	-- 		vim.fn.system("cp", "navigate_kitty.py", "~/.config/kitty")
+	-- 		vim.fn.system("cp", "pass_keys.py", "~/.config/kitty")
+	-- 	end,
+	-- },
 
 	-- bug when use the new version
 	{
@@ -231,6 +278,15 @@ require("lazy").setup({
 
 	-- Quickfix
 	"kevinhwang91/nvim-bqf",
+
+	-- image preview
+
+	-- {
+	-- 	"edluffy/hologram.nvim",
+	-- 	opts = {
+	-- 		auto_display = true -- WIP automatic markdown image display, may be prone to breaking
+	-- 	}
+	-- }
 }, {})
 
 -- Setup

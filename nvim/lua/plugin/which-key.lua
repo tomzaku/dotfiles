@@ -200,7 +200,8 @@ local mappings = {
 		f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
 		h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
 		v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
-		c = { "<cmd>!tmux split-window -c %:p:h <cr>", "Directory here" },
+		-- c = { "<cmd>!tmux split-window -c %:p:h <cr>", "Directory here" },
+		c = { "<cmd>!kitty @ new-window --cwd %:p:h <cr>", "Directory here" },
 	},
 	p = {
 		name = "Windows",
