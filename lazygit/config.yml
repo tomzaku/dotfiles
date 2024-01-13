@@ -1,0 +1,26 @@
+os:
+  # edit: 'nvr -O $(pwd)/{{filename}}'
+  # editAtLine: 'nvr -O +{{line}} $(pwd)/{{filename}}'
+  edit: 'nvr --remote-send "<F1>:e $(pwd)/{{filename}}<cr>"'
+  editAtLine: 'nvr --remote-send "<F1>:e +{{line}} $(pwd)/{{filename}}<cr>"'
+gui:
+  theme:
+    selectedLineBgColor:
+      - default
+customCommands:
+  - key: 'C'
+    prompts:
+      - type: 'input'
+        title: 'What is the new branch name?'
+        initialValue: 'tom.levt/feat/'
+    context: 'localBranches'
+    description: 'Checkout under your name'
+    command: "git checkout -b {{index .PromptResponses 0}}"
+  - key: 'F'
+    context: 'global'
+    description: 'Pull the latest target branch to your branch'
+    command: "git pull --rebase origin {{index .PromptResponses 0}}"
+    prompts:
+      - type: 'input'
+        title: 'What is the target branch to pull to your branch'
+        initialValue: 'master'

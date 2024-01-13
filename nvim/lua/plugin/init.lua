@@ -1,217 +1,302 @@
-local fn = vim.fn
-
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-
--- Automatically install packer
-if fn.empty(fn.glob(install_path)) > 0 then
-	PACKER_BOOTSTRAP = fn.system({
-		"git",
-		"clone",
-		"--depth",
-		"1",
-		"https://github.com/wbthomason/packer.nvim",
-		install_path,
-	})
-	print("Installing packer close and reopen Neovim...")
-	vim.cmd([[packadd packer.nvim]])
+-- Install packer
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
 end
+vim.opt.rtp:prepend(lazypath)
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost init.lua source <afile> | PackerSync
-  augroup end
-]])
+require("lazy").setup({
+    -- Basic region
+    "nvim-lua/plenary.nvim",
 
--- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-	return
-end
+    -- Git related plugins
+    "tpope/vim-fugitive",
+    "tpope/vim-rhubarb",
 
--- Have packer use a popup window
-packer.init({})
+    -- NOTE: This is where your plugins related to LSP can be installed.
+    --  The configuration is done below. Search for lspconfig to find it below.
+    {
+        "williamboman/mason.nvim",
+        build = ":MasonUpdate", -- :MasonUpdate updates registry contents
+    },
+    {
+        -- LSP Configuration & Plugins
+        "neovim/nvim-lspconfig",
+        dependencies = {
+            -- Automatically install LSPs to stdpath for neovim
+            "williamboman/mason.nvim",
+            "williamboman/mason-lspconfig.nvim",
 
--- Install your plugins here
-packer.startup(function(use)
-	use("wbthomason/packer.nvim") -- Have packer manage itself
-	use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
-	use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
-	use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
-	use("numToStr/Comment.nvim") -- Easily comment stuff
-	use("kyazdani42/nvim-web-devicons")
-	use("moll/vim-bbye") -- Delete buffers and close files in Vim without closing your windows or messing up your layout
-	use("lewis6991/impatient.nvim") -- Make load plugins faster
-	use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight -- Having bugs
-	use("folke/which-key.nvim")
-	use("metakirby5/codi.vim")
-	use("kamykn/spelunker.vim")
-	-- use "Raimondi/delimitMate" --  insert mode auto-completion for quotes, parens, brackets, etc. doesn't powerful since it doesn't use treesister
-	use("xiyaowong/accelerated-jk.nvim")
-	use({
-		"norcalli/nvim-colorizer.lua",
-		ft = { "html", "css", "sass", "scss", "vim", "typescript", "typescriptreact" },
-	})
-	use("itchyny/vim-cursorword") -- Underlines the word under the cursor
-	use("hrsh7th/vim-eft") -- enhanced f/t
-	-- use "rhysd/vim-operator-surround" -- mapping to enclose text objects with surrounds like paren, quote and so on.
-	use("kana/vim-niceblock") -- Make blockwise Visual mode more useful
-	--[[ use("tversteeg/registers.nvim") -- NeoVim plugin to preview the contents of the registers ]]
-	use({
-		"AckslD/nvim-neoclip.lua",
-		requires = {
-			{ "kkharji/sqlite.lua", module = "sqlite" },
-			{ "nvim-telescope/telescope.nvim" },
-			{ "ibhagwan/fzf-lua" },
-		},
-		config = function()
-			require("neoclip").setup()
-		end,
-	}) -- Clipboard management for registers
-	-- use 'editorconfig/editorconfig-vim' -- editor config
-	use("liuchengxu/vista.vim")
-	use("windwp/nvim-spectre") -- search & replace
-	use("voldikss/vim-floaterm") -- terminal
-	use("akinsho/toggleterm.nvim") -- terminal
-	use("glacambre/firenvim") -- editor for chrome
-	use("glepnir/dashboard-nvim") -- dashboard
-	use("glepnir/galaxyline.nvim") --tabbar footer
-	use("lukas-reineke/indent-blankline.nvim") -- indent
-	use("kdav5758/TrueZen.nvim")
-	use("christoomey/vim-tmux-navigator")
-	use("rmagatti/auto-session")
-	--[[ use("ggandor/lightspeed.nvim") -- motion ]]
-  use("ggandor/leap.nvim")
-	use({
-		"iamcco/markdown-preview.nvim",
-		run = "cd app && yarn install",
-	})
-	use("andweeb/presence.nvim") -- discord Rich Presence
+            -- LSP signature hint as you type
+            { "ray-x/lsp_signature.nvim", opts = {} },
 
-  --- nvim-ufo
-  use("kevinhwang91/promise-async")
-	use("kevinhwang91/nvim-ufo")
-  -- nvim-ufo
+            -- Useful status updates for LSP
+            -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+            { "j-hui/fidget.nvim", opts = {}, tag = "legacy" },
 
-	--tabbar
-	-- use("akinsho/bufferline.nvim")
-	use("folke/todo-comments.nvim")
+            -- Additional lua configuration, makes nvim stuff amazing!
+            "folke/neodev.nvim",
 
-	-- Colorschemes
-	use("glepnir/zephyr-nvim") -- theme
-	use("aonemd/kuroi.vim") -- theme
+            -- null-ls
+            "jose-elias-alvarez/null-ls.nvim",
+        },
+    },
+    {
+        -- Autocompletion
+        "hrsh7th/nvim-cmp",
+        dependencies = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
+    },
 
-	-- Terminal image
-	use("edluffy/hologram.nvim")
+    {
+        -- Highlight, edit, and navigate code
+        "nvim-treesitter/nvim-treesitter",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            "nvim-treesitter/nvim-treesitter-context",
+        },
+        build = ":TSUpdate",
+        -- config = function()
+        -- 	pcall(require("nvim-treesitter.install").update({ with_sync = true }))
+        -- end,
+    },
 
-	-- cmp plugins
-	use("hrsh7th/nvim-cmp") -- The completion plugin
-	use("mattn/vim-sonictemplate")
-	-- use "dense-analysis/ale"
-	use("hrsh7th/cmp-buffer") -- buffer completions
-	use("hrsh7th/cmp-path") -- path completions
-	use("hrsh7th/cmp-cmdline") -- cmdline completions
-	use("hrsh7th/cmp-nvim-lsp")
-	--
-	-- snippets
-	use("mattn/emmet-vim")
-	--  use("hrsh7th/cmp-vsnip")
-	-- use("hrsh7th/vim-vsnip")
-	use("L3MON4D3/LuaSnip") --snippet engine
-	use("saadparwaiz1/cmp_luasnip") -- snippet completions
-	--[[ use("rafamadriz/friendly-snippets") -- a bunch of snippets to use ]]
+    -- End of region basic - the rest can comment to debug
+    {
+        "kylechui/nvim-surround",
+        opts = {},
+    },
+    {
+        -- Adds git releated signs to the gutter, as well as utilities for managing changes
+        "lewis6991/gitsigns.nvim",
+        opts = {
+            -- See `:help gitsigns.txt`
+            signs = {
+                add = { text = "+" },
+                change = { text = "~" },
+                delete = { text = "_" },
+                topdelete = { text = "‾" },
+                changedelete = { text = "~" },
+            },
+        },
+    },
+    "sindrets/diffview.nvim",
 
-	-- LSP
-	use("williamboman/mason.nvim")
-	use("williamboman/mason-lspconfig.nvim")
-  use("williamboman/nvim-lsp-installer")
-	use("neovim/nvim-lspconfig") -- enable LSP
-	-- use("glepnir/lspsaga.nvim") -- UI - not update having issue
-	use({ "tami5/lspsaga.nvim" })
-	use("folke/lsp-trouble.nvim") -- window for error
-	use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for: plugin/lsp/setting/jsonls.lua
-	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
+    -- Indent
+    {
+        -- Add indentation guides even on blank lines
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
+        opts = {
+            -- indent = { char = "╎" },
+            -- filetype_exclude = { "help", "terminal", "dashboard", "packer" },
+            -- show_current_context_start = true,
+            -- show_current_context = true,
+            -- char = "╎",
+            -- show_trailing_blankline_indent = false,
+        },
+    },
 
-	-- Telescope
-	use("nvim-telescope/telescope.nvim")
-	-- FZF sorter for telescope written in c
-	use({
-		"nvim-telescope/telescope-fzf-native.nvim",
-		run = "make",
-	})
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    -- "gc" to comment visual regions/lines
+    {
+        "numToStr/Comment.nvim",
+        dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
+        after = "nvim-ts-context-commentstring",
+        opts = function()
+            return {
+                pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+            }
+        end,
+    },
+    { "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
 
-	-- Treesitter
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
-	})
-	use("JoosepAlviste/nvim-ts-context-commentstring")
-	use("kyazdani42/nvim-tree.lua")
-	use("p00f/nvim-ts-rainbow") -- rainbow parentheses.
+    -- Fuzzy Finder (files, lsp, etc)
+    {
+        "nvim-telescope/telescope.nvim",
+        version = "*",
+        dependencies = { "nvim-lua/plenary.nvim" },
+    },
+    -- Fuzzy Finder Algorithm which requires local dependencies to be built.
+    -- Only load if `make` is available. Make sure you have the system
+    -- requirements installed.
+    {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        -- NOTE: If you are having trouble with this installation,
+        --       refer to the README for telescope-fzf-native for more instructions.
+        build = "make",
+        cond = function()
+            return vim.fn.executable("make") == 1
+        end,
+    },
 
-	-- Git
-	use("lewis6991/gitsigns.nvim")
-	use("tpope/vim-fugitive")
-	use("sindrets/diffview.nvim")
+    "metakirby5/codi.vim",
 
-	-- Debugger
-	use("mfussenegger/nvim-dap")
-	use("rcarriga/nvim-dap-ui")
-	use("theHamsta/nvim-dap-virtual-text")
+    -- Editting Support
+    "windwp/nvim-autopairs",
+    "windwp/nvim-ts-autotag",
+    "norcalli/nvim-colorizer.lua",
+    "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
+    "Pocco81/true-zen.nvim",
 
-	-- Quickfix
-	use("kevinhwang91/nvim-bqf", { ft = "qf" })
+    -- Search & Replace
+    "windwp/nvim-spectre",
 
-  use("windwp/nvim-ts-autotag")
+    -- Terminal
+    "voldikss/vim-floaterm",
+    "akinsho/toggleterm.nvim",
 
-	-- Automatically set up your configuration after cloning packer.nvim
-	-- Put this at the end after all plugins
-	if PACKER_BOOTSTRAP then
-		require("packer").sync()
-	end
-end)
+    -- Utility
+    "liuchengxu/vista.vim",
+    "folke/which-key.nvim", -- Key mapping
+    -- "kamykn/spelunker.vim", -- Grammar & spelling - Add word to spellfile: Zg
+    {
+        "AckslD/nvim-neoclip.lua",
+        dependencies = {
+            { "kkharji/sqlite.lua", module = "sqlite" },
+            { "nvim-telescope/telescope.nvim" },
+            { "ibhagwan/fzf-lua" },
+        },
+        opts = {},
+    },
+    {
+        "kdheepak/lazygit.nvim",
+        -- optional for floating window border decoration
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+    },
+
+    -- Theme & Dashboard
+    {
+        "glepnir/dashboard-nvim",
+        event = "VimEnter",
+        opts = {},
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
+    {
+        "nvim-lualine/lualine.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        -- opts = {}
+    },
+    {
+        "mcchrish/zenbones.nvim",
+        dependencies = { "rktjmp/lush.nvim" },
+    },
+    -- "glepnir/galaxyline.nvim",
+    -- Colorschemes
+    "glepnir/zephyr-nvim",
+    "aonemd/kuroi.vim",
+    "sainnhe/edge",
+    "Mofiqul/vscode.nvim",
+    { "projekt0n/github-nvim-theme" },
+
+    {
+        "nvim-tree/nvim-tree.lua",
+        dependencies = "nvim-tree/nvim-web-devicons",
+        tag = "nightly",
+    },
+
+    -- "christoomey/vim-tmux-navigator", use kitty instead
+    {
+        "knubie/vim-kitty-navigator",
+        build = function()
+            vim.fn.system("cp", "*.py", "~/.config/kitty")
+        end,
+    },
+    -- bug when use the new version
+    {
+        "rmagatti/auto-session",
+        opts = {
+            log_level = "error",
+            auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+        },
+    },
+
+    "ggandor/leap.nvim", -- Motion
+
+    {
+        "iamcco/markdown-preview.nvim",
+        run = "cd app && yarn install",
+    },
+
+    -- Discord
+    -- "andweeb/presence.nvim",
+
+    -- Debugger
+    "mfussenegger/nvim-dap",
+    "rcarriga/nvim-dap-ui",
+    "theHamsta/nvim-dap-virtual-text",
+
+    -- Quickfix
+    "kevinhwang91/nvim-bqf",
+
+    -- image preview
+    {
+        "3rd/image.nvim",
+        opts = {
+            backend = "kitty",
+            integrations = {
+                markdown = {
+                    enabled = true,
+                    clear_in_insert_mode = true,
+                    download_remote_images = true,
+                    only_render_image_at_cursor = true,
+                    filetypes = { "markdown", "vimwiki" }, -- markdown extensions (ie. quarto) can go here
+                },
+                neorg = {
+                    enabled = true,
+                    clear_in_insert_mode = false,
+                    download_remote_images = true,
+                    only_render_image_at_cursor = false,
+                    filetypes = { "norg" },
+                },
+            },
+            max_width = nil,
+            max_height = nil,
+            max_width_window_percentage = nil,
+            max_height_window_percentage = 50,
+            window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
+            window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+            editor_only_render_when_focused = true, -- auto show/hide images when the editor gains/looses focus
+            tmux_show_only_in_active_window = true, -- auto show/hide images in the correct Tmux window (needs visual-activity off)
+            hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" }, -- render image files as images when opened
+        },
+    },
+}, {})
 
 -- Setup
-require("plugin.lsp")
-require("plugin.completion")
+
 require("plugin.nvim-treesitter")
-require("plugin.telescope")
+require("plugin.lsp")
 require("plugin.nvim-tree")
+
+-- The rest is not addtion plugin can remove for debug
+require("plugin.telescope")
+require("plugin.completion")
 require("plugin.nvim-spectre")
--- require 'plugin.ale'
-require("plugin.comment")
-require("plugin.neoscroll")
-require("plugin.nvim-colorizer")
-require("plugin.nvim-ts-context-commentstring")
 require("plugin.toggleterm")
-require("plugin.vim-cursorword")
 require("plugin.vim-floaterm")
-require("plugin.vim-eft")
-require("plugin.vim-operator-replace")
 require("plugin.vista")
 require("plugin.dashboard")
 require("plugin.gitsign")
-require("plugin.galaxyline")
-require("plugin.indent-blankline")
+-- require("plugin.galaxyline") -- TODO: Lagging
+-- require("plugin.lualine")
+require("plugin.lualine-custom")
 require("plugin.theme")
--- require 'plugin.delimitMate'
-require("plugin.emmet-vim")
-require("plugin.auto-session")
 require("plugin.which-key")
-require("plugin.accelerated-jk")
 require("plugin.autopairs")
--- tabbar
-require("plugin.barbar")
--- require("plugin.bufferline")
---[[ require("plugin.lightspeed") ]]
 require("plugin.leap")
-require("plugin.todo-comments")
 require("plugin.backup")
-require("plugin.presence")
-require("plugin.spelunker-vim")
+-- require("plugin.presence") -- Has error with package
+-- require("plugin.spelunker-vim") -- Lagging
 require("plugin.nvim-dap")
---[[ require("plugin.nvim-vsnip") ]]
---[[ require("plugin.nvim-neoclip") ]]
-require("plugin.nvim-ufo")
 require("plugin.nvim-ts-autotag")
+require("plugin.dashboard")
+require("colorizer").setup()

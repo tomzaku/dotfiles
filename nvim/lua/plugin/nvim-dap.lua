@@ -1,20 +1,18 @@
 local status_ok, dap = pcall(require, "dap")
 if not status_ok then
-  return
+    return
 end
 
 local status_ok_ui, dapui = pcall(require, "dapui")
 if not status_ok_ui then
-  return
+    return
 end
-
 
 dap.adapters.chrome = {
     type = "executable",
     command = "node",
-    args = {os.getenv("HOME") .. "/.app/vscode-chrome-debug/out/src/chromeDebug.js"} 
+    args = { os.getenv("HOME") .. "/.app/vscode-chrome-debug/out/src/chromeDebug.js" },
 }
-
 
 dap.configurations.javascript = { -- change this to javascript if needed
     {
@@ -25,8 +23,8 @@ dap.configurations.javascript = { -- change this to javascript if needed
         sourceMaps = true,
         protocol = "inspector",
         port = 9222,
-        webRoot = "${workspaceFolder}"
-    }
+        webRoot = "${workspaceFolder}",
+    },
 }
 
 dap.configurations.javascriptreact = { -- change this to javascript if needed
@@ -38,8 +36,8 @@ dap.configurations.javascriptreact = { -- change this to javascript if needed
         sourceMaps = true,
         protocol = "inspector",
         port = 9222,
-        webRoot = "${workspaceFolder}"
-    }
+        webRoot = "${workspaceFolder}",
+    },
 }
 
 dap.configurations.typescriptreact = { -- change to typescript if needed
@@ -51,8 +49,8 @@ dap.configurations.typescriptreact = { -- change to typescript if needed
         sourceMaps = true,
         protocol = "inspector",
         port = 9222,
-        webRoot = "${workspaceFolder}"
-    }
+        webRoot = "${workspaceFolder}",
+    },
 }
 
 -- dap.setup()

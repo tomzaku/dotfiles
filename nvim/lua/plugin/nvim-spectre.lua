@@ -1,7 +1,7 @@
-local status_ok, lib = pcall(require, "telescope")
+local status_ok, lib = pcall(require, "spectre")
 if not status_ok then
-  return
+    return
 end
 lib.setup({
-  line_sep_start = '┌------- <Leader> R: repleace all; dd: toggle; <leader>o: option menu ------'
+    line_sep_start = "┌------- <Leader> R: repleace all; dd: toggle; <leader>o: option menu ------",
 })

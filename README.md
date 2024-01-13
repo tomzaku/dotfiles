@@ -7,6 +7,7 @@
 - Font: Symbol Nerd Font, MesloLGS NF, Hack, Victor Mono, Symbols Nerd Font (Icon)
 
 https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/VictorMono
+https://rubjo.github.io/victor-mono/
 
 https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/Symbols-2048-em%20Nerd%20Font%20Complete.ttf
 
@@ -25,12 +26,23 @@ sudo xcode-select -switch /Library/Developer/CommandLineTools
 
 2. Install some useful packages
 ```
+brew install gnu-sed
 brew install ripgrep
 brew install fzf
+
+# Yabai
+brew install koekeishiya/formulae/yabai
+brew services start yabai
+
+# Skhd
+brew install koekeishiya/formulae/skhd
+brew services start skhd
+
 brew install tmux
 brew install fish 
+brew install autojump
 brew install jesseduffield/lazygit/lazygit
-brew install --HEAD nvim
+brew install --HEAD neovim
 ```
 
 3. Install shell
@@ -64,7 +76,19 @@ ln -s ~/Projects/dotfiles/skhd ~/.config/skhd
 ln -s ~/Projects/dotfiles/limelight ~/.config/limelight
 ln -s ~/Projects/dotfiles/kitty ~/.config/kitty
 rm ~/Library/Application\ Support/lazygit/config.yml && ln -s ~/Projects/dotfiles/lazygit/config.yml ~/Library/Application\ Support/lazygit/config.yml
+ln -s ~/Projects/dotfiles/fish/config.fish ~/.config/fish/config.fish
+ln -s ~/Projects/dotfiles/fish/fish_plugins ~/.config/fish/fish_plugins
 ```
+
+5. Support image in nvim
+
+Following this [link](https://github.com/3rd/image.nvim/issues/114)
+
+```
+brew install imagemagick
+luarocks --local install magick
+```
+
 
 ## Feature
 
