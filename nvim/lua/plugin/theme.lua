@@ -8,7 +8,6 @@
 -- vim.cmd("colorscheme edge") -- White
 -- vim.cmd("colorscheme forestbones") -- White
 
-
 -- DARK THEME - kuroi
 vim.cmd("colorscheme kuroi") -- Dark
 vim.cmd("hi Normal guibg=NONE ctermbg=NONE")

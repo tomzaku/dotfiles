@@ -1,29 +1,29 @@
 local status_ok, lib = pcall(require, "toggleterm")
 if not status_ok then
-	return
+    return
 end
 
 lib.setup({
-	size = 20,
-	open_mapping = [[<c-\>]],
-	hide_numbers = true,
-	shade_filetypes = {},
-	shade_terminals = true,
-	shading_factor = 2,
-	start_in_insert = true,
-	insert_mappings = true,
-	persist_size = true,
-	direction = "float",
-	close_on_exit = true,
-	shell = vim.o.shell,
-	float_opts = {
-		border = "curved",
-		winblend = 0,
-		highlights = {
-			border = "Normal",
-			background = "Normal",
-		},
-	},
+    size = 20,
+    open_mapping = [[<c-\>]],
+    hide_numbers = true,
+    shade_filetypes = {},
+    shade_terminals = true,
+    shading_factor = 2,
+    start_in_insert = true,
+    insert_mappings = true,
+    persist_size = true,
+    direction = "float",
+    close_on_exit = true,
+    shell = vim.o.shell,
+    float_opts = {
+        border = "curved",
+        winblend = 0,
+        highlights = {
+            border = "Normal",
+            background = "Normal",
+        },
+    },
 })
 
 -- vim.api.nvim_set_keymap("n", "<F5>", "<cmd>:ToggleTerm size=20 dir=%:p:h direction=horizontal<CR>", {noremap = true, silent = true})
@@ -49,19 +49,19 @@ local Terminal = require("toggleterm.terminal").Terminal
 local node = Terminal:new({ cmd = "node", hidden = true })
 
 function _NODE_TOGGLE()
-	node:toggle()
+    node:toggle()
 end
 
 local htop = Terminal:new({ cmd = "htop", hidden = true })
 
 function _HTOP_TOGGLE()
-	htop:toggle()
+    htop:toggle()
 end
 
 local python = Terminal:new({ cmd = "python", hidden = true })
 
 function _PYTHON_TOGGLE()
-	python:toggle()
+    python:toggle()
 end
 
 --[[ local Terminal  = require('toggleterm.terminal').Terminal ]]
