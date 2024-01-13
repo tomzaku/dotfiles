@@ -8,8 +8,8 @@ require("nvim-treesitter.configs").setup({
     ensure_installed = { "lua", "vim", "javascript", "typescript", "tsx" },
     sync_install = false,
     auto_install = true,
-    highlight = { enable = true },
-    indent = { enable = true, disable = { "python" } },
+    highlight = { enable = false }, -- highlight toggle on will lagging
+    indent = { enable = true, disable = { "python", "lua" } },
     incremental_selection = {
         enable = true,
         keymaps = {
@@ -24,8 +24,6 @@ require("nvim-treesitter.configs").setup({
         enable = true,
         extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
         max_file_lines = nil, -- Do not enable for files with more than n lines, int
-        -- colors = {}, -- table of hex strings
-        -- termcolors = {} -- table of colour name strings
     },
     -- End of plugin mrjones2014/nvim-ts-rainbow
 
