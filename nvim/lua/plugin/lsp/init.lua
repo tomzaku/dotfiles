@@ -47,6 +47,7 @@ local servers = {
 	jsonls = {},
 	cssls = {},
 	html = {},
+	lua_ls = {},
 	--[[ sumneko_lua = { ]]
 	--[[ 	Lua = { ]]
 	--[[ 		workspace = { checkThirdParty = false }, ]]
