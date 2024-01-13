@@ -80,6 +80,16 @@ ln -s ~/Projects/dotfiles/fish/config.fish ~/.config/fish/config.fish
 ln -s ~/Projects/dotfiles/fish/fish_plugins ~/.config/fish/fish_plugins
 ```
 
+5. Support image in nvim
+
+Following this [link](https://github.com/3rd/image.nvim/issues/114)
+
+```
+brew install imagemagick
+luarocks --local install magick
+```
+
+
 ## Feature
 
 **1. Customize desktop**

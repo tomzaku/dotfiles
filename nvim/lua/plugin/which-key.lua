@@ -210,7 +210,9 @@ local mappings = {
         t = { "<cmd>call ToggleWindowHorizontalVerticalSplit()<cr>", "Toggle pane" },
     },
     ["\\"] = { "<cmd>vsplit<cr>", "Split vertical" },
+    ["|"] = { "<cmd>vsplit<cr>", "Split vertical" },
     ["-"] = { "<cmd>split<cr>", "Split horizontal" },
+    ["_"] = { "<cmd>split<cr>", "Split horizontal" },
     z = { "<cmd>TZFocus<cr>", "Focus mode" },
 }
 
