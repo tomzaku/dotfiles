@@ -106,7 +106,7 @@ function find-up-node-version
         set found_path "$current_directory/$argv[1]"
         # Check if the specified file exists in the current directory
         if test -e "$found_path"
-            set node_version (cat $found_path | grep '\"node\":' | grep -o '[0-9.]*' 2>&1)
+            set node_version (cat $found_path | grep '\"node\":' | grep -o '[0-9.]*' | head -n 1 2>&1)
             if test $node_version
                 echo "$node_version"
                 return 0
