@@ -43,6 +43,11 @@ brew install fish
 brew install autojump
 brew install jesseduffield/lazygit/lazygit
 brew install --HEAD neovim
+
+
+brew tap FelixKratz/formulae
+brew install borders
+
 ```
 
 3. Install shell
@@ -88,6 +93,10 @@ Following this [link](https://github.com/3rd/image.nvim/issues/114)
 brew install imagemagick
 luarocks --local install magick
 ```
+
+6. Install X11
+
+https://kb.thayer.dartmouth.edu/article/336-x11-for-windows-and-mac
 
 
 ## Feature

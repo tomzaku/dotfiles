@@ -3,7 +3,7 @@ set home_directory '~/Projects/dotfiles'
 # Autojump
 [ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
 
-function shopeeTmux
+function shopee-tmux
     tmux new-session -d -s $argv[1] >/dev/null
 
     # tmux new-window -t $argv[1]
@@ -37,13 +37,19 @@ function shopeeTmux
     tmux a -t $argv[1]
 end
 
+function shopee-kitty-session
+    # nohub short for no hang up is a command in Linux systems that keep processes running even after exiting the shell or terminal. 
+    nohup kitty --session ~/Projects/dotfiles/kitty/shopee-session.conf & disown
+end
+
 # Allow edit file for lazygit
 alias vim='nvim --listen /tmp/nvimsocket'
 alias v='nvim --listen /tmp/nvimsocket'
 alias vi='nvim --listen /tmp/nvimsocket'
 alias l="lazygit"
 alias st="tmux attach -t base || tmux new -s base"
-alias sts="tmux attach -t shopee || shopeeTmux shopee"
+alias sts="tmux attach -t shopee || shopee-tmux shopee"
+alias sks="shopee-kitty-session"
 
 # Fish
 # Change ls colors
