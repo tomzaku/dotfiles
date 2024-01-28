@@ -180,16 +180,16 @@ require("lazy").setup({
         opts = {},
         dependencies = { "nvim-tree/nvim-web-devicons" },
     },
-    {
-        "nvim-lualine/lualine.nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-        -- opts = {}
-    },
+    -- {
+    --     "nvim-lualine/lualine.nvim",
+    --     dependencies = { "nvim-tree/nvim-web-devicons" },
+    --     -- opts = {}
+    -- },
     {
         "mcchrish/zenbones.nvim",
         dependencies = { "rktjmp/lush.nvim" },
     },
-    -- "glepnir/galaxyline.nvim",
+    "glepnir/galaxyline.nvim",
     -- Colorschemes
     "glepnir/zephyr-nvim",
     "aonemd/kuroi.vim",
@@ -290,9 +290,9 @@ require("plugin.vim-floaterm")
 require("plugin.vista")
 require("plugin.dashboard")
 require("plugin.gitsign")
--- require("plugin.galaxyline") -- TODO: Lagging
+require("plugin.galaxyline") -- TODO: Lagging
 -- require("plugin.lualine")
-require("plugin.lualine-custom")
+-- require("plugin.lualine-custom")
 require("plugin.theme")
 require("plugin.which-key")
 require("plugin.autopairs")
