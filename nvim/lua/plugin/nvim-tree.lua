@@ -1,11 +1,17 @@
-local status_ok, lib = pcall(require, "nvim-tree")
-if not status_ok then
-    return
-end
-lib.setup({})
-vim.g.nvim_tree_git_hl = 0
-vim.g.nvim_tree_show_icons = {
-    git = 0,
-    folders = 1,
-    files = 1,
-}
+require("nvim-tree").setup({
+    filesystem_watchers = {
+        enable = true,
+        debounce_delay = 50,
+        ignore_dirs = {
+            "**/node_modules/*",
+            "node_modules",
+            ".*node_modules.*"
+        },
+    },
+})
+-- vim.g.nvim_tree_git_hl = 0
+-- vim.g.nvim_tree_show_icons = {
+--     git = 0,
+--     folders = 1,
+--     files = 1,
+-- }

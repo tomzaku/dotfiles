@@ -362,29 +362,29 @@ addSections("right", {
 })
 
 addSections("short_line_left", {
-    {
-        name = "ViModeLeftCap",
-        useNameAsId = true,
-        provider = function()
-            local modeStyle = get_vim_mode_style()
-            vim.api.nvim_command("hi GalaxyViModeLeftCap guifg=" .. modeStyle[2])
-            return icons.heading
-        end,
-        condition = should_hide_galaxy_line,
-        highlight = { colors.fg, colors.bg },
-    },
-    {
-        name = "ViMode",
-        useNameAsId = true,
-        provider = function()
-            -- auto change color according the vim mode
-            local modeStyle = get_vim_mode_style()
-            vim.api.nvim_command("hi GalaxyViMode guifg=" .. modeStyle[2])
-            return icons.sep.space .. modeStyle[1] .. icons.sep.space
-        end,
-        condition = should_hide_galaxy_line,
-        highlight = { colors.fg, colors.bg, "bold" },
-    },
+    -- {
+    --     name = "ViModeLeftCap",
+    --     useNameAsId = true,
+    --     provider = function()
+    --         local modeStyle = get_vim_mode_style()
+    --         vim.api.nvim_command("hi GalaxyViModeLeftCap guifg=" .. modeStyle[2])
+    --         return icons.heading
+    --     end,
+    --     condition = should_hide_galaxy_line,
+    --     highlight = { colors.fg, colors.bg },
+    -- },
+    -- {
+    --     name = "ViMode",
+    --     useNameAsId = true,
+    --     provider = function()
+    --         -- auto change color according the vim mode
+    --         local modeStyle = get_vim_mode_style()
+    --         vim.api.nvim_command("hi GalaxyViMode guifg=" .. modeStyle[2])
+    --         return icons.sep.space .. modeStyle[1] .. icons.sep.space
+    --     end,
+    --     condition = should_hide_galaxy_line,
+    --     highlight = { colors.fg, colors.bg, "bold" },
+    -- },
     create_space_section(colors.bg),
     {
         name = "FileIcon",
