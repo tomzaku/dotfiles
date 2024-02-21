@@ -38,7 +38,6 @@ require("lazy").setup({
             { "ray-x/lsp_signature.nvim", opts = {} },
 
             -- Useful status updates for LSP
-            -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
             { "j-hui/fidget.nvim", opts = {}, tag = "legacy" },
 
             -- Additional lua configuration, makes nvim stuff amazing!
@@ -59,7 +58,7 @@ require("lazy").setup({
         "nvim-treesitter/nvim-treesitter",
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
-            "nvim-treesitter/nvim-treesitter-context",
+            -- "nvim-treesitter/nvim-treesitter-context", -- show the context of child such as parent function
         },
         build = ":TSUpdate",
         -- config = function()
@@ -240,6 +239,9 @@ require("lazy").setup({
 
     -- Quickfix
     "kevinhwang91/nvim-bqf",
+
+    -- AI
+    "github/copilot.vim",
 
     -- image preview
     {
