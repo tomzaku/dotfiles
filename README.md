@@ -1,9 +1,10 @@
 ## Requirements
 
 - Rd: search files by regrex.
-- fzf: search files.
-- npx.
+- fzf: search files (brew install fzf)
 - Ubersicht.
+- Kitty: fd (brew install fd).
+
 - Font: Symbol Nerd Font, MesloLGS NF, Hack, Victor Mono, Symbols Nerd Font (Icon)
 
 Font download:
@@ -12,8 +13,6 @@ https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/VictorMono
 https://rubjo.github.io/victor-mono/
 3270: https://www.nerdfonts.com/font-downloads
 ```
-- Kitty: fd (brew install fd).
-- Install prettier as global for autoformat.
 
 
 ## Installation
