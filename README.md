@@ -6,11 +6,12 @@
 - Ubersicht.
 - Font: Symbol Nerd Font, MesloLGS NF, Hack, Victor Mono, Symbols Nerd Font (Icon)
 
+Font download:
+```
 https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/VictorMono
 https://rubjo.github.io/victor-mono/
-
-https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/Symbols-2048-em%20Nerd%20Font%20Complete.ttf
-
+3270: https://www.nerdfonts.com/font-downloads
+```
 - Kitty: fd (brew install fd).
 - Install prettier as global for autoformat.
 
@@ -30,6 +31,9 @@ brew install gnu-sed
 brew install ripgrep
 brew install fzf
 
+# fnm: node management
+curl -fsSL https://fnm.vercel.app/install | bash
+
 # Yabai
 brew install koekeishiya/formulae/yabai
 brew services start yabai
@@ -43,6 +47,7 @@ brew install fish
 brew install autojump
 brew install jesseduffield/lazygit/lazygit
 brew install --HEAD neovim
+
 
 
 brew tap FelixKratz/formulae
