@@ -32,6 +32,8 @@ brew install fzf
 
 # NVIM Plugin
 brew install gnu-sed
+brew install fortune
+
 
 # fnm: node management
 curl -fsSL https://fnm.vercel.app/install | bash
