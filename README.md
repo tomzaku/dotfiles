@@ -30,6 +30,9 @@ brew install gnu-sed
 brew install ripgrep
 brew install fzf
 
+# NVIM Plugin
+brew install gnu-sed
+
 # fnm: node management
 curl -fsSL https://fnm.vercel.app/install | bash
 
