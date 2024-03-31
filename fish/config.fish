@@ -1,7 +1,8 @@
+# brew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 set home_directory '~/Projects/dotfiles'
 
-# Autojump
-[ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
 
 function shopee-tmux
     tmux new-session -d -s $argv[1] >/dev/null
@@ -103,43 +104,43 @@ set -x GOPATH ~/Projects/golang/
 # status is-interactive && fnm env --use-on-cd | source
 
 # Option 2
-function find-up-node-version
-    # Set the initial directory to the current directory
-    set current_directory (pwd)
-
-    # Loop through parent directories until the root directory is reached
-    while test -n "$current_directory"
-        set found_path "$current_directory/$argv[1]"
-        # Check if the specified file exists in the current directory
-        if test -e "$found_path"
-            set node_version (cat $found_path | grep '\"node\":' | grep -o '[0-9.]*' | head -n 1 2>&1)
-            if test $node_version
-                echo "$node_version"
-                return 0
-            end
-        end
-        
-        set new_current_directory (dirname $current_directory)
-
-        if test "$current_directory" = "$new_current_directory"
-            return 1
-        end
-        # Move up to the parent directory
-        set current_directory $new_current_directory
-    end
-
-    # If the loop completes without finding the file, return failure
-    return 1
-end
-status is-interactive && fnm env --use-on-cd | source
-function _fnm_autoload_package_hook --on-variable PWD --description 'Change Node version on directory change'
-    status --is-command-substitution; and return
-    set node_version (find-up-node-version "package.json")
-    if test $node_version
-        fnm use $node_version --silent-if-unchanged
-    end
-end
-_fnm_autoload_package_hook
+# function find-up-node-version
+#     # Set the initial directory to the current directory
+#     set current_directory (pwd)
+#
+#     # Loop through parent directories until the root directory is reached
+#     while test -n "$current_directory"
+#         set found_path "$current_directory/$argv[1]"
+#         # Check if the specified file exists in the current directory
+#         if test -e "$found_path"
+#             set node_version (cat $found_path | grep '\"node\":' | grep -o '[0-9.]*' | head -n 1 2>&1)
+#             if test $node_version
+#                 echo "$node_version"
+#                 return 0
+#             end
+#         end
+#         
+#         set new_current_directory (dirname $current_directory)
+#
+#         if test "$current_directory" = "$new_current_directory"
+#             return 1
+#         end
+#         # Move up to the parent directory
+#         set current_directory $new_current_directory
+#     end
+#
+#     # If the loop completes without finding the file, return failure
+#     return 1
+# end
+# status is-interactive && fnm env --use-on-cd | source
+# function _fnm_autoload_package_hook --on-variable PWD --description 'Change Node version on directory change'
+#     status --is-command-substitution; and return
+#     set node_version (find-up-node-version "package.json")
+#     if test $node_version
+#         fnm use $node_version --silent-if-unchanged
+#     end
+# end
+# _fnm_autoload_package_hook
 
 
 
@@ -163,3 +164,6 @@ set --export PATH $BUN_INSTALL/bin $PATH
 # rust
 set --export PATH $HOME/.cargo/bin $PATH
 
+
+# autojump
+[ -f /opt/homebrew/share/autojump/autojump.fish ]; and source /opt/homebrew/share/autojump/autojump.fish

@@ -24,7 +24,7 @@ require("lazy").setup({
     --  The configuration is done below. Search for lspconfig to find it below.
     {
         "williamboman/mason.nvim",
-        build = ":MasonUpdate", -- :MasonUpdate updates registry contents
+        opts = {},
     },
     {
         -- LSP Configuration & Plugins
@@ -38,7 +38,7 @@ require("lazy").setup({
             { "ray-x/lsp_signature.nvim", opts = {} },
 
             -- Useful status updates for LSP
-            { "j-hui/fidget.nvim", opts = {}, tag = "legacy" },
+            { "j-hui/fidget.nvim",        opts = {}, tag = "legacy" },
 
             -- Additional lua configuration, makes nvim stuff amazing!
             "folke/neodev.nvim",
@@ -106,15 +106,14 @@ require("lazy").setup({
     -- "gc" to comment visual regions/lines
     {
         "numToStr/Comment.nvim",
-        dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
         after = "nvim-ts-context-commentstring",
-        opts = function()
-            return {
-                pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-            }
-        end,
+        opts = {
+            pre_hook = function()
+                return vim.bo.commentstring
+            end,
+        }
     },
-    { "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
+    { "folke/todo-comments.nvim",   dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
 
     -- Fuzzy Finder (files, lsp, etc)
     {
@@ -158,7 +157,7 @@ require("lazy").setup({
     {
         "AckslD/nvim-neoclip.lua",
         dependencies = {
-            { "kkharji/sqlite.lua", module = "sqlite" },
+            { "kkharji/sqlite.lua",           module = "sqlite" },
             { "nvim-telescope/telescope.nvim" },
             { "ibhagwan/fzf-lua" },
         },
@@ -198,8 +197,14 @@ require("lazy").setup({
 
     {
         "nvim-tree/nvim-tree.lua",
-        dependencies = "nvim-tree/nvim-web-devicons",
-        tag = "nightly",
+        version = "*",
+        lazy = false,
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+        },
+        config = function()
+            require("nvim-tree").setup {}
+        end,
     },
 
     -- "christoomey/vim-tmux-navigator", use kitty instead
@@ -244,37 +249,37 @@ require("lazy").setup({
     "github/copilot.vim",
 
     -- image preview
-    {
-        "3rd/image.nvim",
-        opts = {
-            backend = "kitty",
-            integrations = {
-                markdown = {
-                    enabled = true,
-                    clear_in_insert_mode = true,
-                    download_remote_images = true,
-                    only_render_image_at_cursor = true,
-                    filetypes = { "markdown", "vimwiki" }, -- markdown extensions (ie. quarto) can go here
-                },
-                neorg = {
-                    enabled = true,
-                    clear_in_insert_mode = false,
-                    download_remote_images = true,
-                    only_render_image_at_cursor = false,
-                    filetypes = { "norg" },
-                },
-            },
-            max_width = nil,
-            max_height = nil,
-            max_width_window_percentage = nil,
-            max_height_window_percentage = 50,
-            window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
-            window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-            editor_only_render_when_focused = true, -- auto show/hide images when the editor gains/looses focus
-            tmux_show_only_in_active_window = true, -- auto show/hide images in the correct Tmux window (needs visual-activity off)
-            hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" }, -- render image files as images when opened
-        },
-    },
+    -- {
+    --     "3rd/image.nvim",
+    --     opts = {
+    --         backend = "kitty",
+    --         integrations = {
+    --             markdown = {
+    --                 enabled = true,
+    --                 clear_in_insert_mode = true,
+    --                 download_remote_images = true,
+    --                 only_render_image_at_cursor = true,
+    --                 filetypes = { "markdown", "vimwiki" }, -- markdown extensions (ie. quarto) can go here
+    --             },
+    --             neorg = {
+    --                 enabled = true,
+    --                 clear_in_insert_mode = false,
+    --                 download_remote_images = true,
+    --                 only_render_image_at_cursor = false,
+    --                 filetypes = { "norg" },
+    --             },
+    --         },
+    --         max_width = nil,
+    --         max_height = nil,
+    --         max_width_window_percentage = nil,
+    --         max_height_window_percentage = 50,
+    --         window_overlap_clear_enabled = true,                                      -- toggles images when windows are overlapped
+    --         window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+    --         editor_only_render_when_focused = true,                                   -- auto show/hide images when the editor gains/looses focus
+    --         tmux_show_only_in_active_window = true,                                   -- auto show/hide images in the correct Tmux window (needs visual-activity off)
+    --         hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" }, -- render image files as images when opened
+    --     },
+    -- },
 }, {})
 
 -- Setup
