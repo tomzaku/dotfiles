@@ -100,8 +100,7 @@ set -x GOPATH ~/Projects/golang/
 
 # Node manager
 
-# Option 1
-# status is-interactive && fnm env --use-on-cd | source
+fnm env --use-on-cd | source
 
 # Option 2
 # function find-up-node-version
