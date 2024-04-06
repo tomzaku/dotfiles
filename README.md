@@ -33,6 +33,7 @@ brew install fzf
 # NVIM Plugin
 brew install gnu-sed
 brew install fortune
+pip3 install neovim-remote # Install nvr (or pip3 install neovim-remote --break-system-packages)
 
 
 # fnm: node management

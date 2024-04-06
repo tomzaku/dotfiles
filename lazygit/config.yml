@@ -1,8 +1,11 @@
 os:
   # edit: 'nvr -O $(pwd)/{{filename}}'
   # editAtLine: 'nvr -O +{{line}} $(pwd)/{{filename}}'
-  edit: 'nvr --remote-send "<F1>:e $(pwd)/{{filename}}<cr>"'
-  editAtLine: 'nvr --remote-send "<F1>:e +{{line}} $(pwd)/{{filename}}<cr>"'
+  # edit: 'nvr --remote-send "<F1>:e $(pwd)/{{filename}}<cr>"'
+  # edit: 'nvr -c "FloatermHide" && nvr -c "e $(pwd)/{{filename}}"'
+  # edit: 'nvr -c "FloatermHide" && nvr --remote-send ":e {{filename}}<cr>"'
+  edit: 'nvr -c "FloatermHide" && nvr -c "e {{filename}}"'
+  editAtLine: 'nvr -c "FloatermHide" && nvr -c "e +{{line}} {{filename}}"'
 gui:
   theme:
     selectedLineBgColor:
