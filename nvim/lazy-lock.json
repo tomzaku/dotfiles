@@ -58,6 +58,7 @@
   "vista.vim": { "branch": "master", "commit": "f76cecc430003968e6174cae899c2cb2953219b7" },
   "vscode.nvim": { "branch": "main", "commit": "4fe3e696a90f183d4dbbb432ddb79155c6d4c99b" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" },
+  "witch": { "branch": "main", "commit": "7c5f2eb24fec4c399aabb8ae73302a6e148eb3ae" },
   "zenbones.nvim": { "branch": "main", "commit": "453ec69d82d644ee6998a3464da49d0261df9f80" },
   "zephyr-nvim": { "branch": "main", "commit": "7fd86b7164442d3b5ec2c81b2694d040e716b5cf" }
 }

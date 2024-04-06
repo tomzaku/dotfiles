@@ -1368,7 +1368,7 @@ map ctrl+f launch --type=overlay --stdin-source=@screen_scrollback /usr/local/bi
 
 
 # BEGIN_KITTY_THEME
-# Catppuccin-Macchiato
+# Atelier Sulphurpool
 include current-theme.conf
 # END_KITTY_THEME
 
@@ -1403,4 +1403,3 @@ window_border_width 0.5pt
 # active_border_color #00ff00
 # inactive_border_color #cccccc
 
-# include dark-theme.conf

@@ -206,6 +206,14 @@ require("lazy").setup({
             require("nvim-tree").setup {}
         end,
     },
+    {
+        "sontungexpt/witch",
+        priority = 1000,
+        lazy = false,
+        config = function(_, opts)
+            require("witch").setup(opts)
+        end,
+    },
 
     -- "christoomey/vim-tmux-navigator", use kitty instead
     {
