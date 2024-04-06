@@ -13,6 +13,6 @@ function! floaterm#show_or_new(bang, rangeargs, cmdargs)
     call floaterm#run('new', a:bang, a:rangeargs, "--autoclose=2 --title=".cmd." ".a:cmdargs)
 endfunction
 
-tnoremap   <silent>   <F1>   <C-\><C-n>:FloatermToggle!<CR>
-nnoremap   <silent>   <F1>   :FloatermToggle!<CR>
+nnoremap   <silent>   <C-1>   :FloatermToggle<CR>
+tnoremap   <silent>   <C-1>   <C-\><C-n>:FloatermToggle<CR>
 
