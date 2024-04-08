@@ -17,6 +17,11 @@ https://rubjo.github.io/victor-mono/
 
 ## Installation
 
+```
+defaults write -g ApplePressAndHoldEnabled -bool false
+
+```
+
 1. Install brew
 ```
 xcode-select --install
