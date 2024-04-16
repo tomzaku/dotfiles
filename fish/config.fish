@@ -3,7 +3,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 set home_directory '~/Projects/dotfiles'
 
-
 function shopee-tmux
     tmux new-session -d -s $argv[1] >/dev/null
 
@@ -38,9 +37,19 @@ function shopee-tmux
     tmux a -t $argv[1]
 end
 
+function ta-kitty-session
+    # nohub short for no hang up is a command in Linux systems that keep processes running even after exiting the shell or terminal. 
+    nohup kitty --session ~/Projects/dotfiles/kitty/ta-session.conf & disown && exit
+end
+
+function ka-kitty-session
+    # nohub short for no hang up is a command in Linux systems that keep processes running even after exiting the shell or terminal. 
+    nohup kitty --session ~/Projects/dotfiles/kitty/kaka-session.conf & disown && exit
+end
+
 function shopee-kitty-session
     # nohub short for no hang up is a command in Linux systems that keep processes running even after exiting the shell or terminal. 
-    nohup kitty --session ~/Projects/dotfiles/kitty/shopee-session.conf & disown
+    nohup kitty --session ~/Projects/dotfiles/kitty/shopee-session.conf & disown && exit
 end
 
 # Allow edit file for lazygit
@@ -100,7 +109,25 @@ set -x GOPATH ~/Projects/golang/
 
 # Node manager
 
-fnm env --use-on-cd | source
+# nvm
+function __check_nvm --on-variable PWD --description 'auto switch node version of nvm'
+  if test -f .nvmrc
+    set node_version (node -v)
+    set nvmrc_node_version (nvm list | grep (cat .nvmrc))
+
+    if set -q $nvmrc_node_version
+      nvm install
+    else if string match -q -- "*$node_version" $nvmrc_node_version
+      # already current node version
+    else
+      nvm use
+    end
+  end
+end
+__check_nvm
+
+# Option 1
+# fnm env --use-on-cd | source
 
 # Option 2
 # function find-up-node-version
@@ -166,3 +193,8 @@ set --export PATH $HOME/.cargo/bin $PATH
 
 # autojump
 [ -f /opt/homebrew/share/autojump/autojump.fish ]; and source /opt/homebrew/share/autojump/autojump.fish
+
+
+
+# TA
+source ~/.config/ta/ta-env.bash
