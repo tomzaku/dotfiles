@@ -34,6 +34,8 @@ sudo xcode-select -switch /Library/Developer/CommandLineTools
 brew install gnu-sed
 brew install ripgrep
 brew install fzf
+brew install watchman # for jest watch
+
 
 # NVIM Plugin
 brew install gnu-sed
@@ -109,9 +111,15 @@ brew install imagemagick
 luarocks --local install magick
 ```
 
-6. Install X11
+Install X11
 
 https://kb.thayer.dartmouth.edu/article/336-x11-for-windows-and-mac
+
+6. Install jest plugin
+
+```
+npm install -g jest-helper-cli
+```
 
 
 ## Feature

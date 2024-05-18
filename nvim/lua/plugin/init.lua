@@ -27,6 +27,41 @@ require("lazy").setup({
         opts = {},
     },
     {
+        "monkoose/neocodeium",
+        event = "VeryLazy",
+        config = function()
+            local neocodeium = require("neocodeium")
+            neocodeium.setup()
+            vim.keymap.set("i", "<c-g>", neocodeium.accept)
+            vim.keymap.set("i", "<c-r>", neocodeium.cycle)
+        end,
+    },
+    {
+        "Exafunction/codeium.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "hrsh7th/nvim-cmp",
+        },
+        config = function()
+            require("codeium").setup({
+                config_path = "/Users/zaku/.codeium/config.json"
+            })
+        end
+    },
+    -- {
+    --     'Exafunction/codeium.vim',
+    --     event = 'BufEnter',
+    --     config = function()
+    --         -- Change '<C-g>' here to any keycode you like.
+    --         vim.keymap.set('i', '<c-g>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+    --         vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end,
+    --             { expr = true, silent = true })
+    --         vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end,
+    --             { expr = true, silent = true })
+    --         vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
+    --     end
+    -- },
+    {
         -- LSP Configuration & Plugins
         "neovim/nvim-lspconfig",
         dependencies = {
@@ -288,6 +323,36 @@ require("lazy").setup({
     --         hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" }, -- render image files as images when opened
     --     },
     -- },
+    -- {
+    --     "nvim-neotest/neotest",
+    --     dependencies = {
+    --         "nvim-neotest/nvim-nio",
+    --         "nvim-lua/plenary.nvim",
+    --         "antoinemadec/FixCursorHold.nvim",
+    --         "nvim-treesitter/nvim-treesitter",
+    --         'nvim-neotest/neotest-jest',
+    --     },
+    --     config = function()
+    --         require("neotest").setup({
+    --             adapters = {
+    --                 require("neotest-jest")({
+    --                     jestCommand = "npm run integration-test --",
+    --                     jestConfigFile = function(file)
+    --                         -- if string.find(file, "/packages/") then
+    --                         --     return string.match(file, "(.-/[^/]+/)src") .. "jest.config.js"
+    --                         -- end
+    --
+    --                         return vim.fn.getcwd() .. "/jest.integration.js"
+    --                     end,
+    --                     env = { CI = true },
+    --                     cwd = function(path)
+    --                         return vim.fn.getcwd()
+    --                     end,
+    --                 }),
+    --             },
+    --         })
+    --     end,
+    -- }
 }, {})
 
 -- Setup
@@ -296,9 +361,9 @@ require("plugin.nvim-treesitter")
 require("plugin.lsp")
 require("plugin.nvim-tree")
 
--- The rest is not addtion plugin can remove for debug
+-- The rest is not additional plugin can remove for debug
 require("plugin.telescope")
-require("plugin.completion")
+-- require("plugin.completion")
 require("plugin.nvim-spectre")
 require("plugin.toggleterm")
 require("plugin.vim-floaterm")
