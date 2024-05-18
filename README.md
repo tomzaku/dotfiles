@@ -115,10 +115,11 @@ Install X11
 
 https://kb.thayer.dartmouth.edu/article/336-x11-for-windows-and-mac
 
-6. Install jest plugin
+6. Install npm global package
 
 ```
 npm install -g jest-helper-cli
+npm install --global find-up-cli
 ```
 
 
@@ -181,7 +182,7 @@ npm install -g jest-helper-cli
 
 ![https://raw.githubusercontent.com/tomzaku/dotfiles/master/showcase/editor.png](https://raw.githubusercontent.com/tomzaku/dotfiles/master/showcase/editor.png)
 
-**3. Window Managerment**
+**3. Window Management**
 
 - Yabai & skhd & limelight
 
