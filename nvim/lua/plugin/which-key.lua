@@ -35,7 +35,7 @@ function _RUN_JEST_TEST_ON_CURRENT_LINE(jestCli)
     local testNameCmd = "jest-helper-cli " .. currentPath .. " " .. currentLine
     local testName = os.capture(testNameCmd)
 
-    local integrationTestCmd = "yarn" .. jestCli .. " " .. currentPath .. " -t '" .. testName .. "'"
+    local integrationTestCmd = "yarn " .. jestCli .. " " .. currentPath .. " -t '" .. testName .. "'"
 
     -- Send to kitty terminal
     local cmd = 'kitty @ send-text -m neighbor:bottom "' .. integrationTestCmd .. '\n"'
@@ -225,7 +225,7 @@ local mappings = {
         v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
         -- c = { "<cmd>!tmux split-window -c %:p:h <cr>", "Directory here" },
         c = { "<cmd>!kitty @ new-window --cwd %:p:h <cr>", "Directory here" },
-        j = { "<cmd>!kitty @ send-text -m title:ta-server-open 'yarn integration-test %:p' <cr>", "Jest integration this file" },
+        j = { "<cmd>!kitty @ send-text -m neighbor:bottom 'yarn integration-test %:p' <cr>", "Jest integration this file" },
         i = { '<cmd>lua _RUN_JEST_TEST_ON_CURRENT_LINE("integration-test")<cr>', "Jest integration this test" },
     },
     p = {

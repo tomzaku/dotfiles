@@ -26,28 +26,28 @@ require("lazy").setup({
         "williamboman/mason.nvim",
         opts = {},
     },
-    {
-        "monkoose/neocodeium",
-        event = "VeryLazy",
-        config = function()
-            local neocodeium = require("neocodeium")
-            neocodeium.setup()
-            vim.keymap.set("i", "<c-g>", neocodeium.accept)
-            vim.keymap.set("i", "<c-r>", neocodeium.cycle)
-        end,
-    },
-    {
-        "Exafunction/codeium.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "hrsh7th/nvim-cmp",
-        },
-        config = function()
-            require("codeium").setup({
-                config_path = "/Users/zaku/.codeium/config.json"
-            })
-        end
-    },
+    -- {
+    --     "monkoose/neocodeium",
+    --     event = "VeryLazy",
+    --     config = function()
+    --         local neocodeium = require("neocodeium")
+    --         neocodeium.setup()
+    --         vim.keymap.set("i", "<c-g>", neocodeium.accept)
+    --         vim.keymap.set("i", "<c-r>", neocodeium.cycle)
+    --     end,
+    -- },
+    -- {
+    --     "Exafunction/codeium.nvim",
+    --     dependencies = {
+    --         "nvim-lua/plenary.nvim",
+    --         "hrsh7th/nvim-cmp",
+    --     },
+    --     config = function()
+    --         require("codeium").setup({
+    --             config_path = "/Users/zaku/.codeium/config.json"
+    --         })
+    --     end
+    -- },
     -- {
     --     'Exafunction/codeium.vim',
     --     event = 'BufEnter',
