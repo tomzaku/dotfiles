@@ -27,15 +27,46 @@ function _COPY_PACKAGE_NAME()
     end
 end
 
+function _RUN_JEST_TEST_ON_FILE()
+    local currentPath = vim.fn.expand("%:p")
 
-function _RUN_JEST_TEST_ON_CURRENT_LINE(jestCli)
+     -- Check the file name pattern to determine the test script
+    local testScript
+    if currentPath:match(".*%.integrationtest%.[jt]s$") then
+        testScript = "integration-test"
+    else
+        testScript = "test"
+    end
+
+
+    local integrationTestCmd = "yarn " .. testScript .. " " .. currentPath 
+    -- Send to kitty terminal
+    local cmd = 'kitty @ send-text -m neighbor:bottom "' .. integrationTestCmd .. '\n"'
+    os.capture(cmd)
+
+    -- Execute the command from the key sent from kitty
+
+     -- Make the cli is active
+     os.capture("kitty @ focus-window --m neighbor:bottom ")
+end
+
+function _RUN_JEST_TEST_ON_CURRENT_LINE()
     local currentPath = vim.fn.expand("%:p")
     local currentLine = vim.fn.line(".")
+
+     -- Check the file name pattern to determine the test script
+    local testScript
+    if currentPath:match(".*%.integrationtest%.[jt]s$") then
+        testScript = "integration-test"
+    else
+        testScript = "test"
+    end
+
 
     local testNameCmd = "jest-helper-cli " .. currentPath .. " " .. currentLine
     local testName = os.capture(testNameCmd)
 
-    local integrationTestCmd = "yarn " .. jestCli .. " " .. currentPath .. " -t '" .. testName .. "'"
+    local integrationTestCmd = "yarn " .. testScript .. " " .. currentPath .. " -t '" .. testName .. "'"
 
     -- Send to kitty terminal
     local cmd = 'kitty @ send-text -m neighbor:bottom "' .. integrationTestCmd .. '\n"'
@@ -207,7 +238,7 @@ local mappings = {
             "Workspace Symbols",
         },
         t = { "<cmd>Vista<cr>", "Tagbar" },
-        R = { '<cmd>require("telescope.builtin").lsp_references<cr>', "Tagbar" },
+        R = { '<cmd>lua require("telescope.builtin").lsp_references()<cr>', "Tagbar" },
     },
     s = {
         name = "Search",
@@ -218,15 +249,14 @@ local mappings = {
     t = {
         name = "Terminal",
         n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
-        t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
         p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
         f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
         h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
         v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
         -- c = { "<cmd>!tmux split-window -c %:p:h <cr>", "Directory here" },
         c = { "<cmd>!kitty @ new-window --cwd %:p:h <cr>", "Directory here" },
-        j = { "<cmd>!kitty @ send-text -m neighbor:bottom 'yarn integration-test %:p' <cr>", "Jest integration this file" },
-        i = { '<cmd>lua _RUN_JEST_TEST_ON_CURRENT_LINE("integration-test")<cr>', "Jest integration this test" },
+        t = { '<cmd>lua _RUN_JEST_TEST_ON_FILE()<cr>', "Jest this file" },
+        i = { '<cmd>lua _RUN_JEST_TEST_ON_CURRENT_LINE()<cr>', "Jest this test only" },
     },
     p = {
         name = "Windows",
