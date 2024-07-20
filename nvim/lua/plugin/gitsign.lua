@@ -5,17 +5,23 @@ end
 
 lib.setup({
     signs = {
-        add = { hl = "GitGutterAdd", text = "▋" },
-        change = { hl = "GitGutterChange", text = "▋" },
-        delete = { hl = "GitGutterDelete", text = "▋" },
-        topdelete = { hl = "GitGutterDeleteChange", text = "▔" },
-        changedelete = { hl = "GitGutterChange", text = "▎" },
+        add = { text = "┃" },
+        change = { text = "┃" },
+        delete = { text = "_" },
+        topdelete = { text = "‾" },
+        changedelete = { text = "~" },
+        untracked = { text = "┆" },
     },
     current_line_blame_opts = {
-        delay = 300,
+        delay = 500,
     },
-    current_line_blame_formatter_opts = {
-        relative_time = true,
+    preview_config = {
+        -- Options passed to nvim_open_win
+        border = 'single',
+        style = 'minimal',
+        relative = 'cursor',
+        row = 0,
+        col = 1
     },
     current_line_blame = true,
 })

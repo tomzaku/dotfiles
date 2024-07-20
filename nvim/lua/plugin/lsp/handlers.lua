@@ -2,23 +2,23 @@ local M = {}
 
 -- TODO: backfill this to template
 M.setup = function()
-    local signs = {
-        { name = "DiagnosticSignError", text = "" },
-        { name = "DiagnosticSignWarn", text = "" },
-        { name = "DiagnosticSignHint", text = "" },
-        { name = "DiagnosticSignInfo", text = "" },
-    }
-    for _, sign in ipairs(signs) do
-        vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-    end
+    -- local signs = {
+    --     { name = "DiagnosticSignError", text = "" },
+    --     { name = "DiagnosticSignWarn", text = "" },
+    --     { name = "DiagnosticSignHint", text = "" },
+    --     { name = "DiagnosticSignInfo", text = "" },
+    -- }
+    -- for _, sign in ipairs(signs) do
+    --     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+    -- end
 
     local config = {
         -- disable virtual text
         virtual_text = false,
         -- show signs
-        signs = {
-            active = signs,
-        },
+        -- signs = {
+        --     active = signs,
+        -- },
         update_in_insert = true,
         underline = true,
         severity_sort = true,
@@ -43,8 +43,7 @@ M.setup = function()
     })
 end
 
-local function lsp_keymaps(bufnr)
-    local opts = { noremap = true, silent = true }
+local function lsp_keymaps()
     local map = vim.api.nvim_buf_set_keymap
     map(0, "n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", { silent = true, noremap = true })
     map(0, "n", "gr", "<cmd>lua require'lspsaga.provider'.lsp_finder()<cr>", { silent = true, noremap = true })

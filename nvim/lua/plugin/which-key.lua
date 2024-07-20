@@ -39,7 +39,7 @@ function _RUN_JEST_TEST_ON_FILE()
     end
 
 
-    local integrationTestCmd = "yarn " .. testScript .. " " .. currentPath 
+    local integrationTestCmd = "\nyarn " .. testScript .. " " .. currentPath
     -- Send to kitty terminal
     local cmd = 'kitty @ send-text -m neighbor:bottom "' .. integrationTestCmd .. '\n"'
     os.capture(cmd)
@@ -185,7 +185,7 @@ local mappings = {
         name = "Finding",
         f = { "<cmd>Telescope find_files<cr>", "Find files" },
         h = { "<cmd>Telescope oldfiles cwd_only=v:true<cr>", "History files" },
-        w = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find words" },
+        w = { "<cmd>Telescope live_grep<cr>", "Find words" },
         s = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Search current world" },
         S = {
             "<cmd>lua require('spectre').open_visual({path = vim.fn.fnamemodify(vim.fn.expand('%:h').. '/**/*', ':~:.')})<CR>",

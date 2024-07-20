@@ -6,15 +6,15 @@ require("telescope").setup({
         layout_config = {
             horizontal = {
                 mirror = false,
-                preview_width = 0.75,
+                preview_width = 0.9,
             },
             vertical = {
                 mirror = true,
-                preview_width = 0.75,
+                preview_width = 0.9,
             },
             center = {
                 mirror = false,
-                preview_width = 0.75,
+                preview_width = 0.9,
             },
         },
         layout_strategy = "vertical",

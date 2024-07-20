@@ -49,14 +49,14 @@ customCommands:
         initialValue: ''
     description: 'Shortcut commit'
     command: "git commit -m '{{.Form.CommitName}}'"
-  - key: 'P'
-    description: 'Commit with prefix from last commit'
-    context: 'files'
-    command: >
-      bash -c '
-      PREFIX=$(git rev-parse --abbrev-ref HEAD | sed -E "s|^tom.levt/(feat/).*$|\1|" | sed -E "s|^(TA-[0-9]+).*$|\1|");
-      read -p "Enter commit message: " MSG;
-      git commit -m "$PREFIX $MSG"'
+  # - key: 'P'
+  #   description: 'Commit with prefix from last commit'
+  #   context: 'files'
+  #   command: >
+  #     bash -c '
+  #     PREFIX=$(git rev-parse --abbrev-ref HEAD | sed -E "s|^tom.levt/(feat/).*$|\1|" | sed -E "s|^(TA-[0-9]+).*$|\1|");
+  #     read -p "Enter commit message: " MSG;
+  #     git commit -m "$PREFIX $MSG"'
   - key: 'F'
     context: 'global'
     description: 'Pull the latest target branch to your branch'

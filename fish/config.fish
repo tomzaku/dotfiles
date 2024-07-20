@@ -24,12 +24,13 @@ alias vim='nvim --listen /tmp/nvimsocket'
 alias v='nvim --listen /tmp/nvimsocket'
 alias vi='nvim --listen /tmp/nvimsocket'
 alias l="lazygit"
-alias st="tmux attach -t base || tmux new -s base"
-alias sks="shopee-kitty-session"
+# alias st="tmux attach -t base || tmux new -s base"
+# alias sks="shopee-kitty-session"
 # Input is the index.
 # For example resetTab 0 will reset the tab 0
 # Without input it will set by default the tab 0
 alias rt='kitty @ send-text -t index:0 "\\x03!!\\n"'
+alias sft='kitty @ send-text -t index:0 "\\x03"'
 
 
 # Fish

@@ -78,8 +78,9 @@ require("lazy").setup({
             -- Additional lua configuration, makes nvim stuff amazing!
             "folke/neodev.nvim",
 
-            -- null-ls
-            "jose-elias-alvarez/null-ls.nvim",
+            -- Formatting
+            "nvimtools/none-ls.nvim",
+
         },
     },
     {
@@ -246,7 +247,12 @@ require("lazy").setup({
         priority = 1000,
         lazy = false,
         config = function(_, opts)
-            require("witch").setup(opts)
+            require("witch").setup({
+                dim_inactive = {
+                    enabled = true,
+                    level = 0.5,
+                }
+            })
         end,
     },
 

@@ -43,20 +43,11 @@ local servers = {
     lua_ls = {},
     volar = {}
     -- vuels = {},
-    --[[ sumneko_lua = { ]]
-    --[[ 	Lua = { ]]
-    --[[ 		workspace = { checkThirdParty = false }, ]]
-    --[[ 		telemetry = { enable = false }, ]]
-    --[[ 	}, ]]
-    --[[ }, ]]
 }
 
 -- Setup neovim lua configuration
 require("neodev").setup()
---
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
 
 -- Setup mason so it can manage external tooling
 require("mason").setup()
@@ -86,6 +77,9 @@ require("fidget").setup({
 })
 
 -- nvim-cmp setup
+-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
@@ -176,13 +170,16 @@ update_theme()
 
 local null_ls = require("null-ls")
 local formatting = null_ls.builtins.formatting
+local diagnostics = null_ls.builtins.diagnostics
 
 null_ls.setup({
     sources = {
+        -- formatting.eslint,
+        -- diagnostics.eslint,
         formatting.prettier,
+        -- formatting.prettierd,
         --[[ formatting.black, ]]
         formatting.stylua,
-        --[[ formatting.eslint, ]]
         --[[ formatting.stylelint, ]]
     },
 })

@@ -39,7 +39,7 @@
 
 ---------------------------------------------------------------
 ---DARK THEME witch
-vim.cmd("colorscheme witch") -- Dark
+-- vim.cmd("colorscheme witch") -- Dark
 vim.cmd("hi Normal guibg=NONE ctermbg=NONE")
 
 
