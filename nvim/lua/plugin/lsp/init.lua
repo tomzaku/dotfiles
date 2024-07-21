@@ -19,11 +19,6 @@ local on_attach = function(_, bufnr)
     nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
     nmap("gk", vim.diagnostic.goto_prev, "[G]oto Previous Diagnostic")
     nmap("gj", vim.diagnostic.goto_next, "[G]oto Next Diagnostic")
-
-    -- Create a command `:Format` local to the LSP buffer
-    vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-        vim.lsp.buf.format()
-    end, { desc = "Format current buffer with LSP" })
 end
 
 -- Enable the following language servers
@@ -36,18 +31,19 @@ local servers = {
     -- gopls = {},
     -- pyright = {},
     -- rust_analyzer = {},
-    tsserver = {},
+    -- since typescript-language-server is slow and no longer maintained, we will skip and use this plugin instead: typescript-tools.nvim
+    -- tsserver = {},
     jsonls = {},
     cssls = {},
     html = {},
     lua_ls = {},
-    volar = {}
+    volar = {},
+    eslint = {},
     -- vuels = {},
 }
 
 -- Setup neovim lua configuration
 require("neodev").setup()
-
 
 -- Setup mason so it can manage external tooling
 require("mason").setup()
@@ -58,6 +54,10 @@ local mason_lspconfig = require("mason-lspconfig")
 mason_lspconfig.setup({
     ensure_installed = vim.tbl_keys(servers),
 })
+
+-- Broadcast nvim-cmp capabilities to servers
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 mason_lspconfig.setup_handlers({
     function(server_name)
@@ -77,9 +77,6 @@ require("fidget").setup({
 })
 
 -- nvim-cmp setup
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
@@ -171,15 +168,18 @@ update_theme()
 local null_ls = require("null-ls")
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
+local code_actions = null_ls.builtins.code_actions
 
 null_ls.setup({
     sources = {
-        -- formatting.eslint,
+        -- formatting.eslint_d,
+        -- code_actions.eslint_d,
         -- diagnostics.eslint,
-        formatting.prettier,
+        -- formatting.prettier,
         -- formatting.prettierd,
-        --[[ formatting.black, ]]
-        formatting.stylua,
-        --[[ formatting.stylelint, ]]
+        -- formatting.black,
+        -- formatting.stylua,
+        -- formatting.stylelint,
     },
 })
+

@@ -83,6 +83,54 @@ require("lazy").setup({
 
         },
     },
+    -- for load ts faster
+    {
+        "pmizio/typescript-tools.nvim",
+        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+        opts = {},
+    },
+    {
+        'dense-analysis/ale',
+        config = function()
+            -- Configuration goes here.
+            local g = vim.g
+            -- g.ale_fix_on_save = 1
+            g.ale_linters_explicit = 1
+            g.ale_completion_autoimport = 0
+            g.ale_set_loclist = 0
+            g.ale_set_quickfix = 1
+            g.ale_javascript_prettier_use_local_config = 1
+            g.ale_fixers = {
+                typescript = { "prettier", "eslint" },
+                javascript = { "prettier", "eslint" },
+                typescriptreact = { "prettier", "eslint" },
+                javascriptreact = { "prettier", "eslint" },
+                python = { "autopep8", "yapf" },
+                svelte = { "prettier", "eslint", "stylelint" },
+            }
+        end
+    },
+    -- we comment because it is doesnt support import sort
+    -- {
+    --     "mfussenegger/nvim-lint",
+    --     event = {
+    --         "BufReadPre",
+    --         "BufNewFile"
+    --     },
+    --     config = function()
+    --         local lint = require("lint")
+    --         lint.linters_by_ft = {
+    --             javascript = { "eslint_d" },
+    --             typescript = { "eslint_d" },
+    --             javascriptreact = { "eslint_d" },
+    --             typescriptreact = { "eslint_d" },
+    --         }
+    --         vim.keymap.set("n", "gl", function()
+    --             lint.try_lint()
+    --         end, { desc = "Trigger lintting for current file"})
+    --     end
+    -- },
+    {'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async'},
     {
         -- Autocompletion
         "hrsh7th/nvim-cmp",
