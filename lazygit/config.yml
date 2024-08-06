@@ -44,11 +44,12 @@ customCommands:
     loadingText: 'Creating commit'
     prompts:
       - type: 'input'
-        title: 'What is the new commit'
+        title: "Enter the new commit message (the prefix 'TA-####' will be included by default)."
         key: 'CommitName'
-        initialValue: ''
+        initialValue: ""
     description: 'Shortcut commit'
-    command: "git commit -m '{{.Form.CommitName}}'"
+    command: >
+      sh -c "git commit -m \"$(git branch --show-current | cut -c 1-7): {{.Form.CommitName}}\""
   # - key: 'P'
   #   description: 'Commit with prefix from last commit'
   #   context: 'files'

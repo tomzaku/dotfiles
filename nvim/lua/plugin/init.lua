@@ -44,7 +44,8 @@ require("lazy").setup({
         },
         config = function()
             require("codeium").setup({
-                config_path = "/Users/zaku/.codeium/config.json"
+                config_path = "/Users/zaku/.codeium/config.json",
+                enable_chat = true,
             })
         end
     },
@@ -53,6 +54,7 @@ require("lazy").setup({
         event = 'BufEnter',
         config = function()
             -- Change '<C-g>' here to any keycode you like.
+            vim.keymap.set('n', '<c-g>', function() return vim.fn['codeium#Chat']() end, { expr = true, silent = true })
             vim.keymap.set('i', '<c-g>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
             vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end,
                 { expr = true, silent = true })
@@ -130,7 +132,24 @@ require("lazy").setup({
     --         end, { desc = "Trigger lintting for current file"})
     --     end
     -- },
-    {'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async'},
+    {
+        'kevinhwang91/nvim-ufo',
+        dependencies = 'kevinhwang91/promise-async',
+        config = function()
+            -- vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+            -- vim.o.foldcolumn = "1"
+            vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+            vim.o.foldlevelstart = 99
+            vim.o.foldenable = true
+        end
+    },
+    {
+        'hedyhli/outline.nvim',
+        config = function()
+            require("outline").setup {}
+        end,
+
+    },
     {
         -- Autocompletion
         "hrsh7th/nvim-cmp",
@@ -156,7 +175,7 @@ require("lazy").setup({
         opts = {},
     },
     {
-        -- Adds git releated signs to the gutter, as well as utilities for managing changes
+        -- Adds git related signs to the gutter, as well as utilities for managing changes
         "lewis6991/gitsigns.nvim",
         opts = {
             -- See `:help gitsigns.txt`
@@ -220,7 +239,7 @@ require("lazy").setup({
 
     "metakirby5/codi.vim",
 
-    -- Editting Support
+    -- Editing Support
     "windwp/nvim-autopairs",
     "windwp/nvim-ts-autotag",
     "norcalli/nvim-colorizer.lua",
@@ -236,7 +255,11 @@ require("lazy").setup({
 
     -- Utility
     "liuchengxu/vista.vim",
-    "folke/which-key.nvim", -- Key mapping
+    -- keymap
+    {
+        "folke/which-key.nvim",
+        version = "2.1.0"
+    },
     -- "kamykn/spelunker.vim", -- Grammar & spelling - Add word to spellfile: Zg
     {
         "AckslD/nvim-neoclip.lua",

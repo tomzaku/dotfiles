@@ -11,7 +11,11 @@ local on_attach = function(_, bufnr)
     nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
     nmap("gt", vim.lsp.buf.type_definition, "[G]oto [T]ype")
     nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
-    nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+    nmap("gr", function()
+        require("telescope.builtin").lsp_references({
+            show_line = false,
+        })
+    end, "[G]oto [R]eferences")
     nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
     -- See `:help K` for why this keymap
     nmap("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -57,7 +61,15 @@ mason_lspconfig.setup({
 
 -- Broadcast nvim-cmp capabilities to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+-- nvim-ufo
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+}
+
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
 
 mason_lspconfig.setup_handlers({
     function(server_name)
@@ -134,6 +146,7 @@ local update_theme = function()
     end
 
     local config = {
+        underline = true,
         -- disable virtual text
         virtual_text = false,
         -- show signs
@@ -141,7 +154,6 @@ local update_theme = function()
             active = signs,
         },
         update_in_insert = true,
-        underline = true,
         severity_sort = true,
         float = {
             focusable = false,
@@ -152,6 +164,13 @@ local update_theme = function()
             prefix = "",
         },
     }
+
+    -- vim.lsp.handlers["textDocument/publishDiagnostics"] =
+    --     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    --         -- Disable underline, it's very annoying
+    --         underline = false,
+    --         virtual_text = false,
+    --     })
 
     vim.diagnostic.config(config)
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -183,3 +202,24 @@ null_ls.setup({
     },
 })
 
+require('ufo').setup({
+    open_fold_hl_timeout = 150,
+    close_fold_kinds_for_ft = {
+        default = { 'imports', 'comment' },
+        json = { 'array' },
+        c = { 'comment', 'region' }
+    },
+    preview = {
+        win_config = {
+            border = { '', '─', '', '', '', '─', '', '' },
+            winhighlight = 'Normal:Folded',
+            winblend = 0
+        },
+        mappings = {
+            scrollU = '<C-u>',
+            scrollD = '<C-d>',
+            jumpTop = '[',
+            jumpBot = ']'
+        }
+    },
+})

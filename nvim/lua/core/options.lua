@@ -88,7 +88,8 @@ local function load_options()
         pumblend = 10,
         winblend = 10,
         -- foldmethod = "indent",
-        relativenumber = true,
+        -- relativenumber = true,
+        number = true,
         -- shell = "/bin/bash",
         -- guifont = "Hack Nerd Font,Fira Code Nerd Font, Hack Nerd Font mono:h12",
     }

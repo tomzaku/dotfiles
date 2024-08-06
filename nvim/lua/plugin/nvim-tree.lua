@@ -8,6 +8,9 @@ require("nvim-tree").setup({
             ".*node_modules.*"
         },
     },
+    view = {
+        side = "right"
+    }
 })
 -- vim.g.nvim_tree_git_hl = 0
 -- vim.g.nvim_tree_show_icons = {

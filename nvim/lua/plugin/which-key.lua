@@ -30,7 +30,7 @@ end
 function _RUN_JEST_TEST_ON_FILE()
     local currentPath = vim.fn.expand("%:p")
 
-     -- Check the file name pattern to determine the test script
+    -- Check the file name pattern to determine the test script
     local testScript
     if currentPath:match(".*%.integrationtest%.[jt]s$") then
         testScript = "integration-test"
@@ -46,15 +46,15 @@ function _RUN_JEST_TEST_ON_FILE()
 
     -- Execute the command from the key sent from kitty
 
-     -- Make the cli is active
-     os.capture("kitty @ focus-window --m neighbor:bottom ")
+    -- Make the cli is active
+    os.capture("kitty @ focus-window --m neighbor:bottom ")
 end
 
 function _RUN_JEST_TEST_ON_CURRENT_LINE()
     local currentPath = vim.fn.expand("%:p")
     local currentLine = vim.fn.line(".")
 
-     -- Check the file name pattern to determine the test script
+    -- Check the file name pattern to determine the test script
     local testScript
     if currentPath:match(".*%.integrationtest%.[jt]s$") then
         testScript = "integration-test"
@@ -74,29 +74,28 @@ function _RUN_JEST_TEST_ON_CURRENT_LINE()
 
     -- Execute the command from the key sent from kitty
 
-     -- Make the cli is active
-     os.capture("kitty @ focus-window --m neighbor:bottom ")
+    -- Make the cli is active
+    os.capture("kitty @ focus-window --m neighbor:bottom ")
 end
-
 
 local setup = {
     plugins = {
-        marks = true, -- shows a list of your marks on ' and `
-        registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+        marks = true,         -- shows a list of your marks on ' and `
+        registers = true,     -- shows your registers on " in NORMAL or <C-r> in INSERT mode
         spelling = {
-            enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+            enabled = true,   -- enabling this will show WhichKey when pressing z= to select spelling suggestions
             suggestions = 20, -- how many suggestions should be shown in the list?
         },
         -- the presets plugin, adds help for a bunch of default keybindings in Neovim
         -- No actual key bindings are created
         presets = {
-            operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-            motions = false, -- adds help for motions
+            operators = false,    -- adds help for operators like d, y, ... and registers them for motion / text object completion
+            motions = false,      -- adds help for motions
             text_objects = false, -- help for text objects triggered after entering an operator
-            windows = true, -- default bindings on <c-w>
-            nav = true, -- misc bindings to work with windows
-            z = true, -- bindings for folds, spelling and others prefixed with z
-            g = true, -- bindings for prefixed with g
+            windows = true,       -- default bindings on <c-w>
+            nav = true,           -- misc bindings to work with windows
+            z = true,             -- bindings for folds, spelling and others prefixed with z
+            g = true,             -- bindings for prefixed with g
         },
     },
     -- add operators that will trigger motion and text object completion
@@ -116,26 +115,26 @@ local setup = {
     },
     popup_mappings = {
         scroll_down = "<c-d>", -- binding to scroll down inside the popup
-        scroll_up = "<c-u>", -- binding to scroll up inside the popup
+        scroll_up = "<c-u>",   -- binding to scroll up inside the popup
     },
     window = {
-        border = "rounded", -- none, single, double, shadow
-        position = "bottom", -- bottom, top
-        margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
+        border = "rounded",       -- none, single, double, shadow
+        position = "bottom",      -- bottom, top
+        margin = { 1, 0, 1, 0 },  -- extra window margin [top, right, bottom, left]
         padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
         winblend = 0,
     },
     layout = {
-        height = { min = 4, max = 25 }, -- min and max height of the columns
-        width = { min = 20, max = 50 }, -- min and max width of the columns
-        spacing = 3, -- spacing between columns
-        align = "left", -- align columns left, center or right
+        height = { min = 4, max = 25 },                                           -- min and max height of the columns
+        width = { min = 20, max = 50 },                                           -- min and max width of the columns
+        spacing = 3,                                                              -- spacing between columns
+        align = "left",                                                           -- align columns left, center or right
     },
-    ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
+    ignore_missing = true,                                                        -- enable this to hide mappings for which you didn't specify a label
     hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-    show_help = true, -- show help message on the command line when the popup is visible
+    show_help = true,                                                             -- show help message on the command line when the popup is visible
     --[[ triggers = "auto", -- automatically setup triggers ]]
-    triggers = { "<leader>" }, -- or specify a list manually
+    triggers = { "<leader>" },                                                    -- or specify a list manually
     triggers_blacklist = {
         -- list of mode / prefixes that should never be hooked by WhichKey
         -- this is mostly relevant for key maps that start with a native binding
@@ -146,20 +145,20 @@ local setup = {
 }
 
 local opts = {
-    mode = "n", -- NORMAL mode
+    mode = "n",     -- NORMAL mode
     prefix = "<leader>",
-    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
+    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true,  -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
-    nowait = true, -- use `nowait` when creating keymaps
+    nowait = true,  -- use `nowait` when creating keymaps
 }
 
-local Terminal = require("toggleterm.terminal").Terminal
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
-
-function _lazygit_toggle()
-    lazygit:toggle()
-end
+-- local Terminal = require("toggleterm.terminal").Terminal
+-- local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
+--
+-- function _lazygit_toggle()
+--     lazygit:toggle()
+-- end
 
 local mappings = {
     ["b"] = {
@@ -183,9 +182,10 @@ local mappings = {
     ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
     f = {
         name = "Finding",
-        f = { "<cmd>Telescope find_files<cr>", "Find files" },
+        f = { "<cmd>lua require('telescope.builtin').find_files({layout_strategy='vertical',layout_config={width=0.99, height=0.99}}) <cr>", "Find files" },
+        r = {"<cmd>lua require('telescope.builtin').resume()<cr>", "Resumne the previous telescope picker"},
         h = { "<cmd>Telescope oldfiles cwd_only=v:true<cr>", "History files" },
-        w = { "<cmd>Telescope live_grep<cr>", "Find words" },
+        w = { "<cmd>lua require('telescope.builtin').live_grep({layout_strategy='vertical',layout_config={width=0.99, height=0.99}})<cr>", "Find words" },
         s = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Search current world" },
         S = {
             "<cmd>lua require('spectre').open_visual({path = vim.fn.fnamemodify(vim.fn.expand('%:h').. '/**/*', ':~:.')})<CR>",
@@ -264,6 +264,7 @@ local mappings = {
         v = { "<cmd>vsplit<cr>", "Split vertical" },
         h = { "<cmd>split<cr>", "Split horizontal" },
         t = { "<cmd>call ToggleWindowHorizontalVerticalSplit()<cr>", "Toggle pane" },
+        o = { "<cmd>Outline<CR>", "Outline" },
     },
     ["\\"] = { "<cmd>vsplit<cr>", "Split vertical" },
     ["|"] = { "<cmd>vsplit<cr>", "Split vertical" },
